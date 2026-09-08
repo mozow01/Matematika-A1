@@ -3,6 +3,16 @@
 Online előadásjegyzetek és interaktív bizonyítás-ellenőrzők a Matematika A1
 kurzushoz.
 
+## Online jegyzet
+
+A GitHub Pages-oldal címe:
+<https://mozow01.github.io/Matematika-A1/>
+
+A `.github/workflows/pages.yml` munkafolyamat a `main` ágra küldött minden
+változtatás után elkészíti a Sphinx-dokumentációt, majd publikálja az oldalt.
+A tároló GitHub-oldalán egyszer ki kell választani a **Settings → Pages →
+Build and deployment → Source → GitHub Actions** lehetőséget.
+
 ## Helyi ellenőrzés
 
 ```bash
