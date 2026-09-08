@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Sphinx és Rocq buildtermékek
+_build/
+*.vo
+*.vos
+*.vok
+*.glob
+*.aux
+.lia.cache
+
+# Szerkesztők és operációs rendszerek
+.DS_Store
+Thumbs.db
+.vscode/

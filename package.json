@@ -1,0 +1,13 @@
+{
+  "name": "matematika-a1-docs",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Interaktív Matematika A1 előadásjegyzetek",
+  "scripts": {
+    "docs:html": "sphinx-build -W --keep-going -b html docs _build/html && node scripts/stage-jscoq.mjs",
+    "proofs:check": "bash scripts/check-proofs.sh"
+  },
+  "devDependencies": {
+    "jscoq": "0.17.1"
+  }
+}

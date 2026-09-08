@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matematikai logika – interaktív bizonyítás-ellenőrző</title>
+  <style>
+    html, body, #ide-wrapper { height: 100%; margin: 0; }
+    #document { padding: 0.75rem 1rem 2rem; }
+    #document h1 { font: 600 1.15rem/1.4 system-ui, sans-serif; }
+    #document p { font: 0.95rem/1.5 system-ui, sans-serif; }
+    [hidden] { display: none !important; }
+    #launcher {
+      box-sizing: border-box;
+      min-height: 148px;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      color: #2f2435;
+      background: linear-gradient(135deg, #faf7fc, #f2e8f6);
+      font-family: system-ui, sans-serif;
+      text-align: center;
+    }
+    #launcher strong { display: block; margin-bottom: 0.65rem; }
+    #launcher button {
+      border: 0;
+      border-radius: 4px;
+      padding: 0.65rem 1rem;
+      color: #fff;
+      background: #54136f;
+      font: 600 0.95rem/1.2 system-ui, sans-serif;
+      cursor: pointer;
+    }
+    #launcher button:hover { background: #752098; }
+    #launcher button:disabled { cursor: wait; opacity: 0.7; }
+    #launcher-status { min-height: 1.25rem; margin: 0.5rem 0 0; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div id="launcher">
+    <div>
+      <strong id="launcher-title">Interaktív bizonyítás</strong>
+      <button id="start-proof" type="button">Interaktív ablak indítása</button>
+      <p id="launcher-status">A motor csak kattintás után töltődik be.</p>
+    </div>
+  </div>
+
+  <div id="ide-wrapper" class="toggled" hidden>
+    <div id="code-wrapper">
+      <div id="document">
+        <h1>Az első előadás bizonyításai</h1>
+        <p>
+          A jobb felső nyíllal lépésenként követhető, hogyan változik a cél.
+          A bizonyítás szabadon módosítható.
+        </p>
+        <textarea id="coq-code">(* A bizonyítás betöltése... *)</textarea>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    const proofLabels = {
+      and_comm: 'A konjunkció kommutativitása',
+      or_comm: 'A diszjunkció kommutativitása',
+      and_or_distributive: 'A disztributivitás egyik iránya',
+      chain_rule: 'Láncszabály',
+      weakening: 'Gyengítés',
+      or_to_imp: 'Diszjunkcióból implikáció',
+      imp_to_or_classical: 'Implikációból diszjunkció, LEM-mel',
+      de_morgan: 'De Morgan egyik iránya',
+      speaker_choice: 'Egy felszólaló kiválasztása',
+      nobody_drinks: 'Senki sem iszik',
+      pisti_pub: 'Pisti a kocsmában',
+      set_distributive: 'A metszet disztributivitása',
+      set_de_morgan_inclusion: 'Halmazos De Morgan-tartalmazás',
+      empty_subset: 'Az üres halmaz részhalmaz',
+      set_subset_intersection: 'Feltételes halmazegyenlőség',
+      set_inter_difference_empty: 'Metszet és különbség',
+      set_difference_equation: 'Halmazegyenlet megoldása',
+      set_difference_identity: 'Egymásba ágyazott különbségek',
+      set_inclusion_counterexample: 'Tartalmazás és ellenpélda',
+    };
+
+    const proofFiles = Object.keys(proofLabels);
+    const setProofs = new Set([
+      'set_distributive',
+      'set_de_morgan_inclusion',
+      'empty_subset',
+      'set_subset_intersection',
+      'set_inter_difference_empty',
+      'set_difference_equation',
+      'set_difference_identity',
+      'set_inclusion_counterexample',
+    ]);
+    const sourcesFor = proof => setProofs.has(proof)
+      ? ['set_algebra_definitions', proof]
+      : [proof];
+
+    const requestedProof = new URLSearchParams(window.location.search).get('proof');
+    const selectedFiles = proofFiles.includes(requestedProof)
+      ? sourcesFor(requestedProof)
+      : [...new Set(proofFiles.flatMap(sourcesFor))];
+
+    const launcher = document.getElementById('launcher');
+    const startButton = document.getElementById('start-proof');
+    const status = document.getElementById('launcher-status');
+    const ide = document.getElementById('ide-wrapper');
+
+    if (requestedProof && proofLabels[requestedProof]) {
+      document.getElementById('launcher-title').textContent = proofLabels[requestedProof];
+    }
+
+    async function loadStylesheet(href) {
+      await new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        link.addEventListener('load', resolve, { once: true });
+        link.addEventListener('error', reject, { once: true });
+        document.head.appendChild(link);
+      });
+    }
+
+    async function startProof() {
+      startButton.disabled = true;
+      status.textContent = 'A bizonyítás és az ellenőrzőmotor betöltése…';
+
+      try {
+        const sources = await Promise.all(selectedFiles.map(async proof => {
+          const response = await fetch(`./examples/eloadas_01/${proof}.v`);
+          if (!response.ok) {
+            throw new Error(`Nem sikerült betölteni: ${proof}.v`);
+          }
+          return response.text();
+        }));
+
+        document.getElementById('coq-code').value = sources.join('\n\n');
+        await loadStylesheet('../vendor/jscoq/dist/frontend/index.css');
+        const { JsCoq } = await import('../vendor/jscoq/jscoq.js');
+
+        document.body.classList.add('jscoq-main');
+        window.matA1Coq = await JsCoq.start(['coq-code'], {
+          prelude: true,
+          implicit_libs: true,
+          focus: false,
+          editor: { mode: { 'company-coq': true }, keyMap: 'default' },
+          init_pkgs: ['init'],
+          all_pkgs: ['coq'],
+        });
+        await window.matA1Coq.when_ready.promise;
+
+        launcher.hidden = true;
+        ide.hidden = false;
+        for (const snippet of window.matA1Coq.provider.snippets) {
+          snippet.editor.refresh();
+        }
+        window.parent.postMessage({
+          type: 'mat-a1-rocq-resize',
+          height: 650,
+        }, window.location.origin);
+      } catch (error) {
+        startButton.disabled = false;
+        status.textContent = `Hiba: ${error.message}`;
+      }
+    }
+
+    startButton.addEventListener('click', startProof);
+  </script>
+</body>
+</html>
