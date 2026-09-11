@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img"
+     aria-labelledby="title description">
+  <title id="title">A kételemű halmaz hatványhalmazának részhalmazgráfja</title>
+  <desc id="description">
+    TikZ-CD elrendezésű irányított gráf. A csúcsok az üres halmaz, az a
+    egyelemű halmaz, a b egyelemű halmaz és az a, b kételemű halmaz. Nyíl
+    vezet X-ből Y-ba, ha X részhalmaza Y-nak. Mindegyik csúcson hurokél van.
+  </desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5"
+            markerUnits="userSpaceOnUse" markerWidth="7.5" markerHeight="7.5"
+            orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 L 2.4 5 z" fill="#27232a"/>
+    </marker>
+  </defs>
+
+  <g fill="none" stroke="#27232a" stroke-width="1.75"
+     stroke-linecap="round" stroke-linejoin="round"
+     vector-effect="non-scaling-stroke" marker-end="url(#arrow)">
+    <!-- {a} -> {a,b}, {b} -> {a,b}. -->
+    <path d="M 166 184 L 292 91"/>
+    <path d="M 474 184 L 348 91"/>
+
+    <!-- Üres halmaz -> {a}, {b}, {a,b}. -->
+    <path d="M 292 329 L 166 236"/>
+    <path d="M 348 329 L 474 236"/>
+    <path d="M 320 326 L 320 94"/>
+
+    <!-- Reflexív hurokélek. -->
+    <path d="M 296 57 C 278 18, 362 18, 344 57"/>
+    <path d="M 112 190 C 70 168, 70 252, 112 230"/>
+    <path d="M 528 190 C 570 168, 570 252, 528 230"/>
+    <path d="M 296 363 C 278 402, 362 402, 344 363"/>
+  </g>
+
+  <g fill="#111111" font-family="STIX Two Math, Latin Modern Math, Cambria Math, serif"
+     font-size="25" text-anchor="middle" dominant-baseline="middle">
+    <text x="320" y="72">{a,b}</text>
+    <text x="132" y="210">{a}</text>
+    <text x="508" y="210">{b}</text>
+    <text x="320" y="348">∅</text>
+  </g>
+</svg>

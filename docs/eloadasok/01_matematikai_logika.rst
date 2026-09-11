@@ -880,6 +880,29 @@ implikáció igaz.
 Halmazalgebra
 ------------------------------
 
+Halmazok bevezetési és kiküszöbölési szabálya
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ha adott a :math:`A(x)` tulajdonság, akkor gondolhatunk azon dolgok összességére, amelyekre igaz :math:`A(x)`. Ezt az össességet így jelöljük:
+
+.. math::
+
+   \{x\mid A(x)\}
+
+Ha az :math:`a` dolog a :math:`H` összességnek ennek eleme, akkor azt így jelöljük:
+
+.. math::
+
+   a\in H
+
+A halmazos kifejezésektől gyorsan megszabadulhatunk, vagy felírhatjuk újra, ha akarjuk, a következő szabályokkal:
+
+.. math::
+
+   a\in \{x\mid A(x)\} \leftrightarrow A(a)
+
+vagyis :math:`a` eleme :math:`\{x\mid A(x)\}` se többet, de kevesebbet nem jelent, mint hogy az :math:`a` dolog  :math:`A` tulajdonságú.
+
 Halmazok közötti relációk
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -961,20 +984,83 @@ amelyek :math:`A`-nak elemei, :math:`B`-nek azonban nem:
 
       A\cap(B\cup C)=(A\cap B)\cup(A\cap C).
 
-**Megoldás, balról jobbra.** Legyen
-:math:`x\in A\cap(B\cup C)`. Ekkor :math:`x\in A` és
-:math:`x\in B\cup C`. Az utóbbi miatt két eset van:
+Az egyenlőséget a két irányú tartalmazással igazoljuk.
 
-* ha :math:`x\in B`, akkor :math:`x\in A\cap B`;
-* ha :math:`x\in C`, akkor :math:`x\in A\cap C`.
+.. rubric:: 1. irány: balról jobbra
 
-Mindkét esetben :math:`x\in(A\cap B)\cup(A\cap C)`.
+Igazoljuk, hogy
 
-**Megoldás, jobbról balra.** Legyen
-:math:`x\in(A\cap B)\cup(A\cap C)`. Ha :math:`x\in A\cap B`, akkor
-:math:`x\in A` és :math:`x\in B\subseteq B\cup C`. A másik esetben
-:math:`x\in A` és :math:`x\in C\subseteq B\cup C`. Tehát mindkét esetben
-:math:`x\in A\cap(B\cup C)`.
+.. math::
+
+   A\cap(B\cup C)\subseteq(A\cap B)\cup(A\cap C).
+
+Legyen :math:`x\in A\cap(B\cup C)`. A metszet definíciója szerint
+
+.. math::
+
+   x\in A
+   \qquad\text{és}\qquad
+   x\in B\cup C.
+
+Az uniótagság miatt **esetszétválasztást végzünk**:
+
+1. **Első eset:** :math:`x\in B`.
+
+   Mivel :math:`x\in A` is igaz, ezért :math:`x\in A\cap B`, következésképpen
+
+   .. math::
+
+      x\in(A\cap B)\cup(A\cap C).
+
+2. **Második eset:** :math:`x\in C`.
+
+   Mivel :math:`x\in A` is igaz, ezért :math:`x\in A\cap C`, következésképpen
+
+   .. math::
+
+      x\in(A\cap B)\cup(A\cap C).
+
+Mindkét eset ugyanarra a következtetésre vezet, tehát az első irányú
+tartalmazás igaz.
+
+.. rubric:: 2. irány: jobbról balra
+
+Igazoljuk, hogy
+
+.. math::
+
+   (A\cap B)\cup(A\cap C)\subseteq A\cap(B\cup C).
+
+Legyen :math:`x\in(A\cap B)\cup(A\cap C)`. Az uniótagság miatt ismét
+**esetszétválasztást végzünk**:
+
+1. **Első eset:** :math:`x\in A\cap B`.
+
+   Ekkor :math:`x\in A` és :math:`x\in B`. Az utóbbiból
+   :math:`x\in B\cup C`, ezért
+
+   .. math::
+
+      x\in A\cap(B\cup C).
+
+2. **Második eset:** :math:`x\in A\cap C`.
+
+   Ekkor :math:`x\in A` és :math:`x\in C`. Az utóbbiból
+   :math:`x\in B\cup C`, ezért
+
+   .. math::
+
+      x\in A\cap(B\cup C).
+
+Mindkét esetben megkaptuk a kívánt elemtartalmazást, tehát a második irányú
+tartalmazás is igaz. A két tartalmazásból következik, hogy
+
+.. math::
+
+   A\cap(B\cup C)=(A\cap B)\cup(A\cap C).
+
+Az elemenkénti bizonyítás logikai alakban egyetlen ekvivalencialánccal is
+összefoglalható:
 
 .. math::
 
@@ -1012,8 +1098,8 @@ Ugyanígy logikai okokból igaz a kommutativitás, asszociativitás, másik disz
    \overline{A\cup B}
    =\overline{A}\cap\overline B,
 
-2. feladat: az üres halmaz részhalmaz
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2. feladat: az üres halmaz minden halmaz részhalmaza
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. admonition:: Feladat
 
@@ -1023,7 +1109,7 @@ Ugyanígy logikai okokból igaz a kommutativitás, asszociativitás, másik disz
 
       \varnothing\subseteq A.
 
-**Megoldás.** A tartalmazás elemenkénti alakja
+**Megoldás.** A részhalmaztartalmazás definíciószerint erre az esetre:
 
 .. math::
 
@@ -1031,7 +1117,8 @@ Ugyanígy logikai okokból igaz a kommutativitás, asszociativitás, másik disz
 
 Az implikáció előtagja egyetlen :math:`x` esetén sem lehet igaz, hiszen az
 üres halmaznak nincs eleme. Ezért az implikáció minden :math:`x`-re igaz.
-Ekvivalens indirekt érvelésben a
+
+Másként, indirekten bizonyítva:
 :math:`\varnothing\not\subseteq A` feltevésből olyan
 :math:`x\in\varnothing` elem létezése következne, ami ellentmondás.
 
@@ -1096,11 +1183,10 @@ Fordítva, legyen :math:`x\in A`. Az :math:`A\subseteq B` feltételből
      loading="lazy" allow="clipboard-write"></iframe>
 
 
-4. feladat: különbségek
-~~~~~~~~~~~~~~~~~~~~~~~
+4. feladat: Boole-halmazalgebrai átalakítások
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nagyon fontos azonosság: :math:`A\setminus B=A\cap\overline B`.
-
 
 .. admonition:: Feladat
 
@@ -1108,29 +1194,48 @@ Nagyon fontos azonosság: :math:`A\setminus B=A\cap\overline B`.
 
    .. math::
 
-      A\cap(B\setminus A)
-      =\emptyset.
+      A\cap(\overline A\cup B)=A\cap B,
 
-**Megoldás.** Legyen :math:`x\in A\cap(B\setminus A)`. Ekkor
-:math:`x\in A`, továbbá :math:`x\in B\setminus A`. A különbség definíciója
-szerint az utóbbiból egyszerre következik :math:`x\in B` és
-:math:`x\notin A`. Ez ellentmond az :math:`x\in A` állításnak, ezért az
-:math:`A\cap(B\setminus A)` halmaznak nincs eleme.
+   valamint
 
-Az üres halmaz minden halmaznak részhalmaza, tehát a két tartalmazásból
+   .. math::
+
+      A\cup(B\setminus A)=A\cup B.
+
+**Megoldás.** Mindkét bizonyításban a bal oldalból indulunk ki. Az első
+azonosságnál a metszet unióra vonatkozó disztributivitását, majd a
+komplementertörvényt és az üres halmaz azonosságtörvényét használjuk:
 
 .. math::
 
-   A\cap(B\setminus A)=\varnothing.
+   \begin{aligned}
+   A\cap(\overline A\cup B)
+   &=(A\cap\overline A)\cup(A\cap B)\\
+   &=\varnothing\cup(A\cap B)\\
+   &=A\cap B.
+   \end{aligned}
+
+A második azonosságban először a különbséget írjuk át metszetté, majd az
+unió metszetre vonatkozó disztributivitását alkalmazzuk:
+
+.. math::
+
+   \begin{aligned}
+   A\cup(B\setminus A)
+   &=A\cup(B\cap\overline A)\\
+   &=(A\cup B)\cap(A\cup\overline A)\\
+   &=(A\cup B)\cap H\\
+   &=A\cup B.
+   \end{aligned}
 
 **Interaktív ellenőrzés.**
 
 .. raw:: html
 
    <iframe class="rocq-frame rocq-frame--proof"
-     data-proof="set_inter_difference_empty"
-     src="../_static/rocq/logika-playground.html?proof=set_inter_difference_empty"
-     title="A metszet és különbség azonosságának interaktív ellenőrzése"
+     data-proof="set_boolean_transformations"
+     src="../_static/rocq/logika-playground.html?proof=set_boolean_transformations"
+     title="A Boole-halmazalgebrai átalakítások interaktív ellenőrzése"
      loading="lazy" allow="clipboard-write"></iframe>
 
 
@@ -1151,26 +1256,52 @@ Az üres halmaz minden halmaznak részhalmaza, tehát a két tartalmazásból
 
    X=A.
 
-Először a szükségességet igazoljuk. Tegyük fel, hogy
-:math:`X\setminus A=A\setminus X`.
-
-Az :math:`X\subseteq A` tartalmazáshoz legyen :math:`x\in X`. Ha
-:math:`x\notin A` volna, akkor :math:`x\in X\setminus A`. A feltételezett
-egyenlőség miatt ekkor :math:`x\in A\setminus X`, amiből :math:`x\notin X`
-következne. Ez ellentmond :math:`x\in X`-nek, tehát :math:`x\in A`.
-
-Hasonlóan, az :math:`A\subseteq X` tartalmazáshoz legyen :math:`x\in A`.
-Ha :math:`x\notin X` volna, akkor :math:`x\in A\setminus X`, az egyenlőség
-miatt pedig :math:`x\in X\setminus A`, vagyis :math:`x\notin A`. Ez
-ellentmond :math:`x\in A`-nak. Így :math:`A\subseteq X`, tehát
-:math:`X=A`.
-
-Az elégségesség közvetlen: ha :math:`X=A`, akkor
+Először ellenőrizzük, hogy :math:`X=A` valóban megoldás. Ekkor
 
 .. math::
 
    X\setminus A=A\setminus A=\varnothing
    =A\setminus X.
+
+Fordítva tegyük fel, hogy :math:`X\setminus A=A\setminus X`. Az egyenlőség
+mindkét oldalát :math:`X`-szel metszve
+
+.. math::
+
+   X\cap(X\setminus A)=X\cap(A\setminus X).
+
+A két oldalt a különbség definíciójával egyszerűsítve
+
+.. math::
+
+   \begin{aligned}
+   X\cap(X\setminus A)&=X\cap(X\cap\overline A)
+      =X\cap\overline A,\\
+   X\cap(A\setminus X)&=X\cap(A\cap\overline X)
+      =\varnothing.
+   \end{aligned}
+
+Ezért
+
+.. math::
+
+   X\cap\overline A=\varnothing,
+
+ami pontosan azt jelenti, hogy :math:`X\subseteq A`. Az eredeti egyenlet
+:math:`X` és :math:`A` felcserélésére szimmetrikus, ezért ugyanezzel a
+gondolatmenettel
+
+.. math::
+
+   A\cap\overline X=\varnothing,
+
+vagyis :math:`A\subseteq X`. A két tartalmazásból :math:`X=A` következik.
+
+.. note::
+
+   A mindkét oldal :math:`X`-szel történő metszése nem ekvivalens
+   átalakítás. Itt csak a feltételezett egyenlőség egy következményét
+   vezetjük le, ebben az irányban tehát a lépés helyes.
 
 **Interaktív ellenőrzés.**
 
@@ -1181,6 +1312,147 @@ Az elégségesség közvetlen: ha :math:`X=A`, akkor
      src="../_static/rocq/logika-playground.html?proof=set_difference_equation"
      title="A halmazegyenlet megoldásának interaktív ellenőrzése"
      loading="lazy" allow="clipboard-write"></iframe>
+
+Hatványhalmaz és részhalmazrendezés
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Hatványhalmaz
+^^^^^^^^^^^^^
+
+Az :math:`A` halmaz **hatványhalmaza** az :math:`A` összes részhalmazának
+halmaza:
+
+.. math::
+
+   \mathcal P(A)
+   \mathrel{:=}
+   \{X\mid X\subseteq A\}.
+
+Megjegyzés. Ha :math:`A`-nak :math:`n` eleme van, akkor minden eleméről egymástól
+függetlenül eldönthetjük, hogy bekerüljön-e egy részhalmazba. Ezért
+
+.. math::
+
+   |\mathcal P(A)|=2^n.
+
+Egy- és kételemű halmazok logikai definíciója
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Legyen :math:`a,b\in H`. Az :math:`a` elemet tartalmazó **egyelemű
+halmazt** a következő logikai tulajdonság definiálja:
+
+.. math::
+
+   \{a\}
+   \mathrel{:=}
+   \{x\in H\mid x=a\}.
+
+Az :math:`a` és :math:`b` elemekből álló rendezetlen pár definíciója:
+
+.. math::
+
+   \{a,b\}
+   \mathrel{:=}
+   \{x\in H\mid x=a\lor x=b\}.
+
+Ha :math:`a\ne b`, akkor ez valóban kételemű halmaz. Ekkor
+
+.. math::
+
+   \mathcal P(\{a,b\})
+   =\{\varnothing,\{a\},\{b\},\{a,b\}\}.
+
+A részhalmazreláció irányított gráfja
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Az alábbi irányított gráf csúcsai
+:math:`\mathcal P(\{a,b\})` elemei. Egy :math:`x` csúcsból pontosan akkor
+vezet nyíl egy :math:`y` csúcsba, ha :math:`x\subseteq y`. Az ábra a teljes
+részhalmazrelációt mutatja: a reflexivitás miatt minden csúcson van hurokél,
+és a tranzitív :math:`\varnothing\to\{a,b\}` él is szerepel.
+
+.. image:: ../_static/images/powerset-ab-directed.svg
+   :alt: A kételemű halmaz hatványhalmazának irányított részhalmazgráfja, mind a négy hurokéllel
+   :align: center
+   :class: powerset-graph
+
+A részhalmazreláció mint részbenrendezés
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Legyen :math:`P` egy halmaz, :math:`\leq` pedig egy reláció :math:`P`
+elemei között. Az :math:`(P,\leq)` pár **részbenrendezett halmaz**, angolul
+*partially ordered set*, röviden **poset**, ha a reláció teljesíti a
+következő három szabályt:
+
+* **Reflexivitás:** minden :math:`x\in P` esetén :math:`x\leq x`.
+* **Antiszimmetria:** minden :math:`x,y\in P` esetén
+  :math:`x\leq y` és :math:`y\leq x` együtt maga után vonja, hogy
+  :math:`x=y`.
+* **Tranzitivitás:** minden :math:`x,y,z\in P` esetén
+  :math:`x\leq y` és :math:`y\leq z` együtt maga után vonja, hogy
+  :math:`x\leq z`.
+
+A hatványhalmazon a :math:`\subseteq` reláció mindhárom szabályt teljesíti,
+ezért
+
+.. math::
+
+   (\mathcal P(H),\subseteq)
+
+poset.
+
+Összehasonlíthatóság, lineáris rendezés és lánc
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Egy :math:`(P,\leq)` posetben az :math:`x` és :math:`y` elemek
+**összehasonlíthatók**, ha
+
+.. math::
+
+   x\leq y\ \lor\ y\leq x.
+
+A részbenrendezés **lineáris rendezés**, ha bármely két eleme
+összehasonlítható:
+
+.. math::
+
+   \forall x,y\in P\;(x\leq y\lor y\leq x).
+
+Egy :math:`L\subseteq P` részhalmazt **láncnak** nevezünk, ha :math:`L`
+bármely két eleme összehasonlítható, azaz
+
+.. math::
+
+   \forall x,y\in L\;(x\leq y\lor y\leq x).
+
+A teljes :math:`P` halmaz pontosan akkor lánc, ha a rajta adott rendezés
+lineáris.
+
+Tegyük fel, hogy :math:`a\ne b`. Ekkor
+
+.. math::
+
+   \{a\}\nsubseteq\{b\},
+   \qquad
+   \{b\}\nsubseteq\{a\},
+
+hiszen :math:`a\in\{a\}`, de :math:`a\notin\{b\}`, és hasonlóan
+:math:`b\in\{b\}`, de :math:`b\notin\{a\}`. Tehát :math:`\{a\}` és
+:math:`\{b\}` nem összehasonlítható a részhalmazreláció szerint. Emiatt
+:math:`(\mathcal P(\{a,b\}),\subseteq)` nem lineárisan rendezett, vagyis a
+teljes hatványhalmaz nem lánc. Például azonban
+
+.. math::
+
+   \varnothing\subseteq\{a\}\subseteq\{a,b\}
+
+és
+
+.. math::
+
+   \varnothing\subseteq\{b\}\subseteq\{a,b\}
+
+két külön láncot alkot.
 
 Összefoglalás
 -------------
@@ -1194,4 +1466,6 @@ Az elégségesség közvetlen: ha :math:`X=A`, akkor
 * A halmazműveletek a logikai műveletek elemenkénti megfelelői.
 * Halmazegyenlőség két tartalmazással, egy általános állítás hamissága pedig
   megfelelő ellenpéldával igazolható.
+* A hatványhalmaz a részhalmazrelációval részbenrendezett, de általában nem
+  lineárisan rendezett struktúra.
 * Az interaktív ablakban ugyanezek a lépések egyenként is megfigyelhetők.

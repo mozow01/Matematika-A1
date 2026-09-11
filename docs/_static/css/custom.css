@@ -34,6 +34,13 @@
   font-size: 82% !important;
 }
 
+.powerset-graph {
+  display: block;
+  width: min(100%, 680px);
+  height: auto;
+  margin: 1.5rem auto 2rem;
+}
+
 .rocq-frame {
   width: 100%;
   min-height: 650px;
