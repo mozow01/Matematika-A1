@@ -23,8 +23,8 @@ html_theme = "sphinx_rtd_theme"
 html_title = project
 html_baseurl = "https://mozow01.github.io/Matematika-A1/"
 html_static_path = ["_static"]
-html_css_files = ["css/custom.css"]
-html_js_files = ["js/interactive-frames.js"]
+html_css_files = ["css/custom.css", "css/vector-algebra.css"]
+html_js_files = ["js/interactive-frames.js", "js/vector-algebra.js"]
 
 mathjax3_config = {
     "loader": {"load": ["[tex]/bussproofs"]},

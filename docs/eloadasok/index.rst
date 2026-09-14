@@ -5,4 +5,4 @@ Előadások
    :maxdepth: 2
 
    01_matematikai_logika
-
+   02_vektoralgebra

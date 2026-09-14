@@ -1,0 +1,314 @@
+.vector-algebra-page {
+  --vector-paper: #f6f0e4;
+  --vector-paper-soft: #fbf8f1;
+  --vector-ink: #26343a;
+  --vector-muted: #627077;
+  --vector-slate: #42677c;
+  --vector-green: #426b5a;
+  --vector-red: #a85e46;
+  --vector-line: #c9c1b2;
+  --vector-white: #fffefa;
+}
+
+.vector-algebra-page .wy-side-nav-search,
+.vector-algebra-page .wy-nav-top {
+  background: #36594c;
+}
+
+.vector-algebra-page .rst-content a,
+.vector-algebra-page .rst-content a:visited {
+  color: var(--vector-green);
+}
+
+.vector-algebra-page .rst-content h1,
+.vector-algebra-page .rst-content h2,
+.vector-algebra-page .rst-content h3 {
+  color: var(--vector-ink);
+  letter-spacing: 0;
+}
+
+.vector-algebra-page .rst-content h1 {
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--vector-line);
+}
+
+.vector-algebra-page .rst-content .topic {
+  border: 1px solid var(--vector-line);
+  border-radius: 4px;
+  background: var(--vector-paper);
+}
+
+.vector-algebra-page .rst-content .admonition {
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.vector-algebra-page .rst-content .admonition-title {
+  background: var(--vector-slate);
+}
+
+.vector-algebra-page .rst-content .note .admonition-title,
+.vector-algebra-page .rst-content .important .admonition-title {
+  background: var(--vector-green);
+}
+
+.vector-algebra-page .rst-content .imsc-task {
+  border: 1px solid var(--vector-red);
+}
+
+.vector-algebra-page .rst-content .imsc-task .admonition-title {
+  background: var(--vector-red);
+}
+
+.vector-figure {
+  overflow: hidden;
+  width: min(100%, 940px);
+  margin: 1.25rem auto 2rem;
+  border: 1px solid var(--vector-line);
+  border-radius: 5px;
+  background: var(--vector-white);
+  box-shadow: 0 7px 20px rgba(38, 52, 58, 0.08);
+}
+
+.vector-figure--compact {
+  width: min(100%, 760px);
+}
+
+.vector-diagram {
+  display: block;
+  width: 100%;
+  min-height: 300px;
+  max-height: 520px;
+  background: var(--vector-white);
+  touch-action: none;
+  user-select: none;
+}
+
+.vector-diagram--tall {
+  min-height: 340px;
+}
+
+.vector-diagram .grid-line {
+  stroke: #e8e1d5;
+  stroke-width: 1;
+}
+
+.vector-diagram .axis-line {
+  stroke: #c8c0b2;
+  stroke-width: 1.1;
+}
+
+.vector-diagram .guide-line {
+  fill: none;
+  stroke: #8a979b;
+  stroke-dasharray: 6 7;
+  stroke-width: 1.2;
+}
+
+.vector-diagram .shape-line {
+  fill: none;
+  stroke: var(--vector-ink);
+  stroke-width: 1.35;
+}
+
+.vector-diagram .vector-a,
+.vector-diagram .vector-b,
+.vector-diagram .vector-result {
+  fill: none;
+  stroke-width: 2;
+}
+
+.vector-diagram .vector-a { stroke: var(--vector-slate); }
+.vector-diagram .vector-b { stroke: var(--vector-green); }
+.vector-diagram .vector-result { stroke: var(--vector-red); }
+
+.vector-diagram .fill-paper {
+  fill: var(--vector-paper);
+  stroke: none;
+}
+
+.vector-diagram .fill-green {
+  fill: rgba(66, 107, 90, 0.13);
+  stroke: none;
+}
+
+.vector-diagram .fill-red {
+  fill: rgba(168, 94, 70, 0.11);
+  stroke: none;
+}
+
+.vector-diagram text {
+  fill: var(--vector-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  pointer-events: none;
+}
+
+.vector-diagram .small-label {
+  fill: var(--vector-muted);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.vector-diagram .math-label {
+  font-size: 21px;
+  font-style: italic;
+}
+
+.vector-diagram .handle {
+  fill: var(--vector-white);
+  stroke-width: 2;
+  cursor: grab;
+}
+
+.vector-diagram .handle:active {
+  cursor: grabbing;
+}
+
+.vector-diagram .handle-a { stroke: var(--vector-slate); }
+.vector-diagram .handle-b { stroke: var(--vector-green); }
+.vector-diagram .handle-result { stroke: var(--vector-red); }
+
+.vector-caption {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--vector-line);
+  background: var(--vector-paper-soft);
+}
+
+.vector-caption > span {
+  display: flex;
+  flex-direction: column;
+}
+
+.vector-formula {
+  color: var(--vector-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.vector-reading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem 1rem;
+  color: var(--vector-muted);
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.vector-caption--control {
+  align-items: end;
+}
+
+.vector-range {
+  display: grid;
+  min-width: min(280px, 42vw);
+  gap: 0.3rem;
+  color: var(--vector-muted);
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+}
+
+.vector-range input[type="range"],
+.vector-compact-range input[type="range"] {
+  width: 100%;
+  accent-color: var(--vector-green);
+}
+
+.vector-mode-switch {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0.6rem 0 0.1rem;
+  padding: 3px;
+  border: 1px solid var(--vector-line);
+  border-radius: 5px;
+  background: var(--vector-white);
+}
+
+.vector-mode-button {
+  min-width: 76px;
+  padding: 0.4rem 0.8rem;
+  border: 0;
+  border-radius: 3px;
+  color: var(--vector-muted);
+  background: transparent;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.vector-mode-button.is-active {
+  color: #fff;
+  background: var(--vector-green);
+}
+
+.vector-mode-button:focus-visible,
+.vector-range input:focus-visible,
+.vector-compact-range input:focus-visible {
+  outline: 2px solid var(--vector-red);
+  outline-offset: 2px;
+}
+
+.vector-basis-controls {
+  display: grid;
+  width: min(400px, 50vw);
+  grid-template-columns: repeat(3, minmax(86px, 1fr));
+  gap: 0.7rem;
+}
+
+.vector-compact-range {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--vector-muted);
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 700px) {
+  .vector-figure {
+    margin: 1rem auto 1.5rem;
+  }
+
+  .vector-diagram,
+  .vector-diagram--tall {
+    min-height: 235px;
+  }
+
+  .vector-caption,
+  .vector-caption--control {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .vector-reading {
+    justify-content: flex-start;
+  }
+
+  .vector-range,
+  .vector-basis-controls {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 430px) {
+  .vector-formula {
+    white-space: normal;
+  }
+
+  .vector-basis-controls {
+    grid-template-columns: 1fr;
+  }
+}
