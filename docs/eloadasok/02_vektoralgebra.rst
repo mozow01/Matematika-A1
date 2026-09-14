@@ -8,7 +8,7 @@ ekvivalenciaosztályaként építjük fel. Ezután a geometriai műveleteket úg
 fogalmazzuk meg, hogy a vetület, a merőlegesség, a terület és a térfogat
 algebrai számításokkal is kezelhető legyen.
 
-.. topic:: Az előadás két 90 perces része
+.. topic:: A két előadás:
 
    **Első rész:** irányított szakaszok, relációk, setoidok, vektorösszeadás,
    számmal való szorzás és lineáris kombináció.
@@ -17,32 +17,38 @@ algebrai számításokkal is kezelhető legyen.
    a tér kifeszítési tétele.
 
 
-Első 90 perc: a vektor fogalma és műveletei
+Vektor és műveletei
 --------------------------------------------
 
 Irányított egyenes szakaszok
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Egy **irányított egyenes szakasz** két pont rendezett párja. Az
-:math:`(A,B)` pár jele :math:`\overrightarrow{AB}`; kezdőpontja :math:`A`,
-végpontja :math:`B`, hossza pedig az :math:`AB` távolság. Az irányítás miatt
-általában :math:`\overrightarrow{AB}` és :math:`\overrightarrow{BA}` nem
-ugyanaz.
+Ha egy **irányított egyenes szakasz** kezdőpontja :math:`A`,
+végpontja :math:`B`, akkor jele :math:`\overrightarrow{AB}`. Hossza az :math:`AB` szakasz hossza, iránya az egyenesének iránya, irányítása, hogy a két pont közül melyik a kezdő és melyik a végpont. Irányított szakasz egyenlősége az azonosság: :math:`\overrightarrow{AB}` egyenlő :math:`\overrightarrow{CD}`-vel, ha :math:`A=C` és :math:`B=D`.
 
-Két irányított szakaszt akkor tekintünk azonosnak, ha az egyik egy eltolással
-a másikba vihető:
+Ezek fölött azonban értelmezni fogunk egy vektoregyenlőségnek nevezett
+relációt: két irányított szakaszt akkor tekintünk egyenlőnek
+(ekvivalensnek), ha az egyik eltolással a másikba vihető. Azaz
+:math:`\overrightarrow{AB}\sim\overrightarrow{CD}` pontosan akkor, ha
+
+* a két szakasz hossza egyenlő:
 
 .. math::
 
-   \overrightarrow{AB}\sim\overrightarrow{CD}
-   \quad\Longleftrightarrow\quad
-   \text{van olyan }T\text{ eltolás, hogy }T(A)=C\text{ és }T(B)=D.
+   |\overrightarrow{AB}|=|\overrightarrow{CD}|
 
-Nem nulla szakaszok esetén ez pontosan azt jelenti, hogy
+* egyeneseik párhuzamosak:
 
-* a két szakasz hossza egyenlő;
-* a tartóegyeneseik párhuzamosak;
-* az irányításuk azonos.
+.. math::
+
+   \overrightarrow{AB}\parallel\overrightarrow{CD}
+
+* az irányításuk azonos:
+
+.. math::
+
+   \overrightarrow{AB}\uparrow\uparrow\overrightarrow{CD}
+
 
 A nulla hosszúságú irányított szakaszokat mind azonosnak tekintjük.
 
