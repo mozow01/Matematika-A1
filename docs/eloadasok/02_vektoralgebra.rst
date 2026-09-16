@@ -28,8 +28,8 @@ végpontja :math:`B`, akkor jele :math:`\overrightarrow{AB}`. Hossza az :math:`A
 
 Ezek fölött azonban értelmezni fogunk egy vektoregyenlőségnek nevezett
 relációt: két irányított szakaszt akkor tekintünk egyenlőnek
-(ekvivalensnek), ha az egyik eltolással a másikba vihető. Azaz
-:math:`\overrightarrow{AB}\sim\overrightarrow{CD}` pontosan akkor, ha
+(ekvivalensnek), ha ugyanakkora hosszúságúak, egyeneseik párhuzamosak és irányításuk megegyezik. Azaz
+:math:`\overrightarrow{AB}\approx\overrightarrow{CD}` pontosan akkor, ha
 
 * a két szakasz hossza egyenlő:
 
@@ -77,27 +77,27 @@ típusú dolog, amely minden :math:`x,y:U` párhoz egy állítást rendel. Péld
 
 .. math::
 
-   \operatorname{rágja}(x,y)
+   \operatorname{r\'agja}(x,y)
    \mathrel{:=}
    \text{„}x\text{ rágja az }y\text{ gittet”.}
 
-Ez reláció, de nincs okunk azt várni tőle, hogy ekvivalenciareláció legyen.
+Ez reláció, de nincs okunk azt várni tőle, hogy ekvivalenciareláció legyen. (Pl. mert  gitt nem rágja a pál utcai fiúkat.)
 
 .. admonition:: Definíció: ekvivalenciareláció és setoid
 
-   Az :math:`X` halmazon értelmezett :math:`\sim` reláció
+   Az :math:`X` halmazon értelmezett :math:`\approx` reláció
    **ekvivalenciareláció**, ha minden :math:`x,y,z\in X` esetén
 
    .. math::
 
       \begin{array}{lll}
-      x\sim x, &
-      x\sim y\Rightarrow y\sim x, &
-      x\sim y\text{ és }y\sim z\Rightarrow x\sim z.
+      x\approx x, &
+      x\approx y\Rightarrow y\approx x, &
+      x\approx y\text{ és }y\approx z\Rightarrow x\sim z.
       \end{array}
 
    Ezek rendre a reflexivitás, a szimmetria és a tranzitivitás.
-   Az :math:`(X,\sim)` párt **setoidnak** nevezzük. Röviden azt is mondjuk,
+   Az :math:`(X,\approx)` párt **setoidnak** nevezzük. Röviden azt is mondjuk,
    hogy :math:`X` setoid, ha egy rögzített ekvivalenciarelációval együtt
    tekintjük.
 
@@ -105,25 +105,25 @@ Az :math:`x\in X` elem **ekvivalenciaosztálya**
 
 .. math::
 
-   [x]=\{y\in X:y\sim x\}.
+   [x]=\{y\in X\mid y\approx x\}.
 
-Az összes ekvivalenciaosztály halmaza az :math:`X/{\sim}` faktorhalmaz.
+Az összes ekvivalenciaosztály halmaza az hányadoshalmaz vagy faktorhalmazm, jelölése: :math:`X/{\approx}` .
 
 .. admonition:: Tétel
 
-   Egy setoidban
+   Egy :math:`(X,\approx)` setoidban
 
    .. math::
 
-      x\sim y\quad\Longleftrightarrow\quad[x]=[y].
+      x\approx y\quad\Longleftrightarrow\quad[x]=[y].
 
-**Bizonyítás.** Tegyük fel, hogy :math:`x\sim y`. Ha :math:`z\in[x]`, akkor
-:math:`z\sim x`, így a tranzitivitás miatt :math:`z\sim y`, tehát
+**Bizonyítás.** Tegyük fel, hogy :math:`x\approx y`. Ha :math:`z\in[x]`, akkor
+:math:`z\approx x`, így a tranzitivitás miatt :math:`z\approx y`, tehát
 :math:`z\in[y]`. Szimmetrikusan :math:`[y]\subseteq[x]`, ezért a két osztály
 egyenlő.
 
 Megfordítva: :math:`x\in[x]` a reflexivitás miatt. Ha :math:`[x]=[y]`, akkor
-:math:`x\in[y]`, vagyis :math:`x\sim y`. :math:`\square`
+:math:`x\in[y]`, vagyis :math:`x\approx y`. :math:`\square`
 
 Két halmaz **diszjunkt**, ha nincs közös elemük, azaz
 :math:`A\cap B=\varnothing`.
@@ -138,7 +138,15 @@ Két halmaz **diszjunkt**, ha nincs közös elemük, azaz
 .. note::
 
    Az osztályok lefedik :math:`X`-et, hiszen minden :math:`x\in X` benne van
-   a saját :math:`[x]` osztályában. Az IMSc-feladattal együtt ez azt mondja,
+   a saját :math:`[x]` osztályában. Ezt úgy is megfogalmazhatjuk, hogy :math:`X` előáll az ekvivalenciaosztályok uniójaként. Ehhez persze definilnunk kell mit jelent több, akár végtelen sok halmaz uniója:
+
+   .. math::
+
+      \bigcup\limits_{i\in I} A_i
+      \overset{\text{def}}{=}
+      \{x\mid \exists i\in I\, x\in A_i\}
+
+   Az IMSc-feladattal együtt ez azt mondja,
    hogy az ekvivalenciaosztályok részekre bontják :math:`X`-et.
 
 
@@ -178,10 +186,13 @@ reprezentánsának hossza. A nulla hosszúságú vektor a **nullvektor**, jele
    :math:`P`-ből a szemközti csúcsba mutató átló reprezentálja az
    :math:`\mathbf a+\mathbf b` összeget.
 
-Ugyanezt a fej-láb szabállyal is megfogalmazhatjuk: ha
+Ugyanezt a vektorfűzéssel szabállyal is megfogalmazhatjuk: ha
 :math:`\overrightarrow{PA}` a :math:`\mathbf a`, és
 :math:`\overrightarrow{AB}` a :math:`\mathbf b` reprezentánsa, akkor
-:math:`\overrightarrow{PB}` az :math:`\mathbf a+\mathbf b` reprezentánsa.
+:math:`\overrightarrow{PB}` az :math:`\mathbf a+\mathbf b` reprezentánsa, vagy a közös kezdőpontos módon: ha
+:math:`\overrightarrow{PA}` a :math:`\mathbf a`, és
+:math:`\overrightarrow{PB}` a :math:`\mathbf b` reprezentánsa, akkor
+:math:`\overrightarrow{PC}` az :math:`\mathbf a+\mathbf b` , ahol C a paralelogramma P -vel szemközti csúcsa.
 
 .. admonition:: Definíció: számmal való szorzás
 
@@ -191,7 +202,7 @@ Ugyanezt a fej-láb szabállyal is megfogalmazhatjuk: ha
    :math:`\lambda<0` esetén ellentétes irányú vele. Ha :math:`\lambda=0`,
    akkor :math:`\lambda\mathbf a=\mathbf0`.
 
-   Ezt szemléletesen **nyúzsorításnak** is hívhatjuk.
+   Ezt szemléletesen **nyuzsorításnak** is hívhatjuk.
 
 .. raw:: html
 
