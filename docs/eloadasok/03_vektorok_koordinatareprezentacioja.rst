@@ -9,10 +9,12 @@ az előző előadás műveleteit, majd bevezetjük a bázist és a koordináták
 
 .. topic:: A két 90 perces rész
 
-   **Első rész:** két ismétlő feladat, majd a paralelepipedon térfogata és
-   a vegyes szorzat. **Második rész:** bázis, egyértelmű koordináták,
-   standard bázis, valamint a skaláris és vektoriális szorzat
-   koordinátaképlete.
+   **Első előadás:** három bevezető feladat, bázis és koordináták, a
+   skaláris és vektoriális szorzat koordinátaképlete, végül az egyenes
+   paraméteres vektoregyenlete. **Második előadás:** Levi--Civita-szimbólum,
+   egyenesfeladatok, majd a sík egyenlete és a hozzá tartozó feladatok.
+
+.. rubric:: Első előadás — 90 perc
 
 .. important:: A vektornégyzet jelentése
 
@@ -373,18 +375,62 @@ olvasható:
 A vektoriális szorzat koordinátaképlete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A disztributivitás és a standard bázis szorzási táblája alapján
+A levezetés alapja a standard bázis vektoriális szorzási táblája:
+
+.. math::
+
+   \begin{array}{c|ccc}
+   \times&\mathbf i&\mathbf j&\mathbf k\\ \hline
+   \mathbf i&\mathbf0&\mathbf k&-\mathbf j\\
+   \mathbf j&-\mathbf k&\mathbf0&\mathbf i\\
+   \mathbf k&\mathbf j&-\mathbf i&\mathbf0
+   \end{array}
+
+Legyen
+
+.. math::
+
+   \mathbf a=a_1\mathbf i+a_2\mathbf j+a_3\mathbf k,
+   \qquad
+   \mathbf b=b_1\mathbf i+b_2\mathbf j+b_3\mathbf k.
+
+A disztributivitás először kilenc tagot ad:
 
 .. math::
 
    \begin{aligned}
    \mathbf a\times\mathbf b
-   &=(a_1\mathbf i+a_2\mathbf j+a_3\mathbf k)
-     \times(b_1\mathbf i+b_2\mathbf j+b_3\mathbf k)\\
-   &=(a_2b_3-a_3b_2)\mathbf i
-     +(a_3b_1-a_1b_3)\mathbf j
-     +(a_1b_2-a_2b_1)\mathbf k.
+   ={}&a_1b_1(\mathbf i\times\mathbf i)
+      +a_1b_2(\mathbf i\times\mathbf j)
+      +a_1b_3(\mathbf i\times\mathbf k)\\
+     &+a_2b_1(\mathbf j\times\mathbf i)
+      +a_2b_2(\mathbf j\times\mathbf j)
+      +a_2b_3(\mathbf j\times\mathbf k)\\
+     &+a_3b_1(\mathbf k\times\mathbf i)
+      +a_3b_2(\mathbf k\times\mathbf j)
+      +a_3b_3(\mathbf k\times\mathbf k).
    \end{aligned}
+
+A három átlóbeli tag nulla. A táblázatból a megmaradó hat tag:
+
+.. math::
+
+   \begin{aligned}
+   \mathbf a\times\mathbf b
+   ={}&a_1b_2\mathbf k-a_1b_3\mathbf j
+      -a_2b_1\mathbf k+a_2b_3\mathbf i\\
+     &+a_3b_1\mathbf j-a_3b_2\mathbf i.
+   \end{aligned}
+
+A bázisvektorok szerint csoportosítva:
+
+.. math::
+
+   \boxed{
+   \mathbf a\times\mathbf b
+   =(a_2b_3-a_3b_2)\mathbf i
+    +(a_3b_1-a_1b_3)\mathbf j
+    +(a_1b_2-a_2b_1)\mathbf k.}
 
 .. raw:: html
 
@@ -397,7 +443,14 @@ A disztributivitás és a standard bázis szorzási táblája alapján
      </figcaption>
    </figure>
 
-Összevonva:
+Az első koordináta, :math:`a_2b_3-a_3b_2`, az :math:`yz`-síkra vetített
+paralelogramma előjeles területe. A második és harmadik koordináta
+ugyanígy a :math:`zx`-, illetve az :math:`xy`-síkra vetített
+paralelogramma előjeles területe. Így a három koordináta nem önkényes
+képlet: a vektoriális szorzat három koordinátasík szerinti orientált
+területét tartalmazza.
+
+Koordinátaoszlopként:
 
 .. math::
 
@@ -429,8 +482,8 @@ A szokásos determinánsos írásmód ennek tömör emlékeztetője:
      loading="lazy" allow="clipboard-write"></iframe>
 
 
-Egyenes és sík koordinátákkal
------------------------------
+Az egyenes paraméteres vektoregyenlete
+--------------------------------------
 
 A :math:`\mathbf r_0` helyvektorú ponton átmenő, :math:`\mathbf v`
 irányvektorú egyenes vektoregyenlete
@@ -439,21 +492,180 @@ irányvektorú egyenes vektoregyenlete
 
    \mathbf r=\mathbf r_0+t\mathbf v\qquad(t\in\mathbb R).
 
-Ha :math:`\mathbf r_0=(x_0,y_0,z_0)^{\mathsf T}` és
-:math:`\mathbf v=(v_1,v_2,v_3)^{\mathsf T}`, akkor
+Valóban, :math:`\mathbf r-\mathbf r_0` az egyenessel párhuzamos, ezért az
+irányvektor skalárszorosa. Ezt az egyenes **paraméteres
+vektoregyenletének** nevezzük.
+
+.. raw:: html
+
+   <div class="lecture-boundary" role="separator" aria-label="A második előadás kezdete">
+     <span>Második előadás — 90 perc</span>
+   </div>
+
+
+Levi--Civita-szimbólum
+----------------------
+
+Legyen :math:`i,j,k\in\{1,2,3\}`. A háromdimenziós
+**Levi--Civita-szimbólum**
 
 .. math::
 
-   x=x_0+tv_1,\qquad y=y_0+tv_2,\qquad z=z_0+tv_3.
+   \varepsilon_{ijk}=
+   \begin{cases}
+   +1,&(i,j,k)=(1,2,3),(2,3,1),(3,1,2),\\
+   -1,&(i,j,k)=(1,3,2),(3,2,1),(2,1,3),\\
+   0,&\text{ha két index megegyezik.}
+   \end{cases}
 
-A :math:`\mathbf r_0` helyvektorú ponton átmenő, :math:`\mathbf n`
+Az első sor a :math:`(1,2,3)` páros, a második sor a páratlan
+permutációit tartalmazza. Ha
+:math:`\mathbf e_1=\mathbf i`, :math:`\mathbf e_2=\mathbf j` és
+:math:`\mathbf e_3=\mathbf k`, akkor a teljes szorzótábla egyetlen
+képletben:
+
+.. math::
+
+   \mathbf e_i\times\mathbf e_j
+   =\sum_{k=1}^3\varepsilon_{ijk}\mathbf e_k.
+
+**1. példa.** :math:`\varepsilon_{231}=1`, mert a :math:`(2,3,1)` ciklikus
+permutáció; :math:`\varepsilon_{132}=-1`, mert egyetlen felcseréléssel
+kapjuk; :math:`\varepsilon_{223}=0`, mert két index megegyezik. Ezért
+
+.. math::
+
+   \mathbf e_2\times\mathbf e_3=\mathbf e_1,
+   \qquad
+   \mathbf e_3\times\mathbf e_2=-\mathbf e_1.
+
+**2. példa.** A vektoriális szorzat :math:`i`-edik koordinátája
+
+.. math::
+
+   (\mathbf a\times\mathbf b)_i
+   =\sum_{j=1}^3\sum_{k=1}^3
+      \varepsilon_{ijk}a_jb_k.
+
+Például :math:`i=2` esetén csak két nem nulla tag marad:
+
+.. math::
+
+   (\mathbf a\times\mathbf b)_2
+   =\varepsilon_{231}a_3b_1+\varepsilon_{213}a_1b_3
+   =a_3b_1-a_1b_3.
+
+Ugyanígy a vegyes szorzat rövid indexjelölése
+
+.. math::
+
+   \mathbf{abc}
+   =\sum_{i,j,k=1}^3\varepsilon_{ijk}a_ib_jc_k.
+
+
+Az egyenes paraméteres egyenletrendszere
+-----------------------------------------
+
+Ha :math:`\mathbf r_0=(x_0,y_0,z_0)^{\mathsf T}` és
+:math:`\mathbf v=(v_1,v_2,v_3)^{\mathsf T}`, akkor a paraméteres
+vektoregyenlet koordinátánként
+
+.. math::
+
+   \begin{cases}
+   x=x_0+tv_1,\\
+   y=y_0+tv_2,\\
+   z=z_0+tv_3.
+   \end{cases}
+
+
+1. egyenesfeladat: közös merőleges irány
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Írjuk fel annak a :math:`g` egyenesnek a paraméteres egyenletrendszerét,
+amely merőleges mind az :math:`e`, mind az :math:`f` egyenesre, és áthalad
+a :math:`P_0=(1,2,0)` ponton, ahol
+
+.. math::
+
+   e:\begin{cases}
+   x=2+3t,\\ y=1-2t,\\ z=8,
+   \end{cases}
+   \qquad
+   f:\begin{cases}
+   x=-3+2u,\\ y=4,\\ z=2-u.
+   \end{cases}
+
+**Megoldás.** Az irányvektorok
+:math:`\mathbf v_e=(3,-2,0)^{\mathsf T}` és
+:math:`\mathbf v_f=(2,0,-1)^{\mathsf T}`. Mindkettőre merőleges irányt a
+vektoriális szorzat ad:
+
+.. math::
+
+   \mathbf v_g=\mathbf v_e\times\mathbf v_f
+   =\begin{pmatrix}2\\3\\4\end{pmatrix}.
+
+A keresett egyenes tehát
+
+.. math::
+
+   g:\begin{cases}
+   x=1+2s,\\
+   y=2+3s,\\
+   z=4s.
+   \end{cases}
+
+
+2. egyenesfeladat: két egyenes kölcsönös helyzete
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Határozzuk meg az
+
+.. math::
+
+   e:\begin{cases}
+   x=3t+2,\\ y=-t,\\ z=1-2t,
+   \end{cases}
+   \qquad
+   f:\begin{cases}
+   x=2u-3,\\ y=-1,\\ z=3u+9
+   \end{cases}
+
+egyenesek kölcsönös helyzetét.
+
+**Megoldás.** Irányvektoraik
+:math:`(3,-1,-2)^{\mathsf T}` és :math:`(2,0,3)^{\mathsf T}`, ezért nem
+párhuzamosak. Metszéspont esetén
+
+.. math::
+
+   \begin{cases}
+   3t+2=2u-3,\\
+   -t=-1,\\
+   1-2t=3u+9
+   \end{cases}
+
+teljesülne. A második egyenletből :math:`t=1`. Az elsőből ekkor
+:math:`u=4`, a harmadikból viszont :math:`u=-10/3`. Nincs közös pontjuk,
+tehát az egyenesek **kitérők**.
+
+Általában két térbeli egyenes párhuzamos irányvektorok esetén egybeeső
+vagy különböző párhuzamos; nem párhuzamos irányvektorok esetén metsző
+vagy kitérő lehet.
+
+
+A sík egyenlete
+---------------
+
+A :math:`\mathbf r_0` helyvektorú ponton átmenő, :math:`\mathbf n\ne0`
 normálvektorú sík vektoregyenlete
 
 .. math::
 
    (\mathbf r-\mathbf r_0)\cdot\mathbf n=0.
 
-:math:`\mathbf n=(A,B,C)^{\mathsf T}` esetén ez
+Ha :math:`\mathbf n=(A,B,C)^{\mathsf T}`, akkor
 
 .. math::
 
@@ -461,6 +673,154 @@ normálvektorú sík vektoregyenlete
 
 vagyis :math:`Ax+By+Cz=D`, ahol
 :math:`D=Ax_0+By_0+Cz_0`.
+
+
+3. síkfeladat: két párhuzamos egyenes síkja
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Írjuk fel annak a :math:`P=(3,0,1)` ponton átmenő síknak az egyenletét,
+amely párhuzamos az :math:`e` és :math:`f` egyenesek által kifeszített
+síkkal, ahol
+
+.. math::
+
+   e:\begin{cases}
+   x=1-2t,\\ y=2+t,\\ z=-2t,
+   \end{cases}
+   \qquad
+   f:\begin{cases}
+   x=-2+2u,\\ y=-u,\\ z=2u.
+   \end{cases}
+
+**Megoldás.** Az irányvektorok
+:math:`\mathbf v_e=(-2,1,-2)^{\mathsf T}` és
+:math:`\mathbf v_f=(2,-1,2)^{\mathsf T}=-\mathbf v_e`, ezért szorzatuk
+nullvektor: önmagukban nem feszítenek ki síkot. Vegyük az
+:math:`A=(1,2,0)` és :math:`B=(-2,0,0)` pontokat a két egyenesen. Ekkor
+
+.. math::
+
+   \overrightarrow{AB}=(-3,-2,0)^{\mathsf T},
+   \qquad
+   \mathbf n=\mathbf v_e\times\overrightarrow{AB}
+   =(-4,6,7)^{\mathsf T}.
+
+A keresett sík:
+
+.. math::
+
+   -4(x-3)+6y+7(z-1)=0,
+
+azaz :math:`-4x+6y+7z+5=0`.
+
+
+4. síkfeladat: két sík metszésvonala
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Írjuk fel az
+
+.. math::
+
+   s_1:\ x-y-4z-5=0,
+   \qquad
+   s_2:\ 2x+y-2z-4=0
+
+síkok metszésvonalának egyenletét.
+
+**Megoldás.** A metszésvonal pontjai mindkét egyenletet, ezért az
+összegüket is kielégítik:
+
+.. math::
+
+   3x-6z-9=0,
+   \qquad x=2z+3.
+
+Válasszuk paraméternek :math:`z=t`-t. Az :math:`s_1` egyenletből ekkor
+:math:`y=-2t-2`, tehát
+
+.. math::
+
+   \ell:\begin{cases}
+   x=3+2t,\\
+   y=-2-2t,\\
+   z=t.
+   \end{cases}
+
+Az irányvektor :math:`(2,-2,1)^{\mathsf T}`; valóban merőleges mindkét
+sík normálvektorára.
+
+
+5. síkfeladat: pont tükrözése síkra
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tükrözzük a :math:`P=(4,-3,5)` pontot az
+:math:`s:\ x-y+z-6=0` síkra.
+
+**Megoldás.** A sík normálvektora :math:`\mathbf n=(1,-1,1)^{\mathsf T}`.
+A :math:`P` pontból a síkra állított merőleges:
+
+.. math::
+
+   e:\begin{cases}
+   x=4+t,\\
+   y=-3-t,\\
+   z=5+t.
+   \end{cases}
+
+A síkegyenletbe helyettesítve :math:`3t+6=0`, tehát :math:`t=-2`. A
+döféspont :math:`D=(2,-1,3)`. A tükörkép helyvektora
+
+.. math::
+
+   \mathbf p'=\mathbf p+2(\mathbf d-\mathbf p)
+   =\begin{pmatrix}0\\1\\1\end{pmatrix},
+
+vagyis :math:`P'=(0,1,1)`.
+
+
+6. síkfeladat: ponton átmenő, adott vektorra merőleges egyenes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Határozzuk meg annak az :math:`e` egyenesnek az egyenletét, amely
+illeszkedik a :math:`P=(-1,2,3)` pontra, merőleges az
+:math:`\mathbf a=(6,-2,-3)^{\mathsf T}` vektorra, és metszi az
+
+.. math::
+
+   f:\begin{cases}
+   x=2t+1,\\
+   y=2t-2,\\
+   z=-4t+3
+   \end{cases}
+
+egyenest.
+
+**Megoldás.** Az :math:`e` egyenes az :math:`\mathbf a` normálvektorú,
+:math:`P`-n átmenő
+
+.. math::
+
+   s:\ 6(x+1)-2(y-2)-3(z-3)=0
+
+síkban fekszik. Az :math:`f` egyenes és :math:`s` döféspontját az
+:math:`f` koordinátáinak behelyettesítésével kapjuk:
+
+.. math::
+
+   6(2t+2)-2(2t-4)-3(-4t)=0,
+   \qquad t=-1.
+
+Így :math:`D=(-1,-4,7)`, és
+:math:`\overrightarrow{PD}=(0,-6,4)^{\mathsf T}`, amely egyszerűsíthető
+:math:`(0,-3,2)^{\mathsf T}`-re. A keresett egyenes:
+
+.. math::
+
+   e:\begin{cases}
+   x=-1,\\
+   y=2-3s,\\
+   z=3+2s.
+   \end{cases}
 
 
 Gépi ellenőrzés

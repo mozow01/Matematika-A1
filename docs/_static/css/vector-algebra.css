@@ -166,6 +166,26 @@
   stroke-width: 1.45;
 }
 
+.lecture-boundary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3.5rem 0 2.5rem;
+  color: var(--vector-muted);
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lecture-boundary::before,
+.lecture-boundary::after {
+  flex: 1;
+  border-top: 1px solid var(--vector-line);
+  content: "";
+}
+
 .vector-diagram text {
   fill: var(--vector-ink);
   font-family: Georgia, "Times New Roman", serif;
