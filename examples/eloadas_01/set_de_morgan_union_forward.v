@@ -1,5 +1,5 @@
 (** Az unió komplementere részhalmaza a komplementerek metszetének.
-    A bizonyítás intuicionista: nincs szükség klasszikus elvre. *)
+    Nem használunk LEM-et vagy eldönthetőségi feltevést. *)
 
 Section DeMorganUnionForward.
 

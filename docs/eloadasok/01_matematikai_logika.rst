@@ -1480,11 +1480,17 @@ Legyen :math:`A,B\subseteq H`. Minden komplementert ugyanahhoz a rögzített
 :math:`x\in H`. A két De Morgan-azonosságot négy részhalmaztartalmazásra
 bontjuk, és ezeket közvetlenül, a halmazműveletek definíciójából igazoljuk.
 
-Az első három tartalmazás **intuicionista módon** bizonyítható. A negyedik
-irányban először a kívánt elemtartalmazás **kettős negációját** vezetjük le
-intuicionista módon, és csak utána alkalmazzuk a kettős negáció törlését.
-Külön megvizsgáljuk az :math:`A`-tagság eldönthetőségét feltevő, illetve a
-kizárt harmadik elvére (LEM) hivatkozó bizonyítást is.
+A bizonyításokban arra törekszünk, hogy **ne használjuk a kizárt harmadik
+elvét (LEM), és ne tegyünk fel külön eldönthetőséget**. Az első három
+tartalmazást így is igazolni tudjuk. A negyedik tartalmazás általános
+igazolásához azonban **elengedhetetlen valamilyen további elv vagy
+feltevés**, ezért itt külön jelezzük, hol és mit használunk.
+
+Először a kívánt elemtartalmazás **kettős negációját** bizonyítjuk be
+LEM és eldönthetőségi feltevés nélkül. Ezután a klasszikus logikában
+érvényes kettősnegáció-törléssel fejezzük be a bizonyítást. Külön
+megmutatjuk azt is, hogyan jutunk közvetlenül célhoz az :math:`A`-tagság
+eldönthetőségének feltevésével, illetve a LEM alkalmazásával.
 
 Minden bizonyítás alatt futtatható jsCoq-ablak található. A kódban
 :math:`\overline A` megfelelője ``∁ A``. A ``Print Assumptions`` parancs
@@ -1513,7 +1519,7 @@ szerepel. A két klasszikus változatnál a ``classic`` axióma jelenik meg.
 
 Így :math:`x\in\overline A\cap\overline B`. Mindkét részben egy tagadást
 igazoltunk azzal, hogy a tagadott elemtartalmazásból ellentmondást vezettünk
-le; ehhez nem kellett klasszikus elv.
+le; ehhez nem kellett sem LEM, sem eldönthetőségi feltevés.
 
 **Interaktív ellenőrzés.**
 
@@ -1574,8 +1580,8 @@ igazoljuk, hogy :math:`x\notin A\cap B`.
    Ha :math:`x\in A\cap B` volna, akkor különösen :math:`x\in B` lenne,
    ami ismét ellentmondás. Ezért :math:`x\notin A\cap B`.
 
-Mindkét esetben :math:`x\in\overline{A\cap B}` adódott. Ez a bizonyítás
-is teljesen intuicionista.
+Mindkét esetben :math:`x\in\overline{A\cap B}` adódott. Ebben a
+bizonyításban sem használtunk LEM-et vagy eldönthetőségi feltevést.
 
 **Interaktív ellenőrzés.**
 
@@ -1594,13 +1600,15 @@ is teljesen intuicionista.
 
    \overline{A\cap B}\subseteq\overline A\cup\overline B.
 
-Ez a tartalmazás általánosan nem bizonyítható pusztán intuicionista
-szabályokkal. Legyen :math:`x\in\overline{A\cap B}`, azaz
-:math:`x\notin A\cap B`.
+Ennél a tartalmazásnál az eddig használt szabályok önmagukban nem
+elegendők az általános bizonyításhoz. A befejezéshez a kettős negáció
+törlését, egy eldönthetőségi feltevést vagy a LEM-et használjuk majd;
+ezeket a lépéseket külön kiemeljük. Legyen
+:math:`x\in\overline{A\cap B}`, azaz :math:`x\notin A\cap B`.
 
 .. rubric:: 4/a. Először a kettős negáció, azután annak törlése
 
-**Az intuicionista rész célja:**
+**Először LEM és eldönthetőségi feltevés nélkül igazoljuk:**
 
 .. math::
 
@@ -1620,13 +1628,15 @@ feltevés tehát ellentmondásra vezetett, így :math:`x\notin A`.
 **Ezzel megkapjuk a keresett ellentmondást:** :math:`x\notin A` miatt
 :math:`x\in\overline A`, ezért :math:`x\in\overline A\cup\overline B`,
 holott éppen ennek ellenkezőjét tettük fel. Ezzel igazoltuk a fenti kettős
-negációt. **Eddig egyetlen klasszikus elvet sem használtunk.**
+negációt. **Eddig sem LEM-et, sem eldönthetőségi feltevést, sem a kettős
+negáció törlését nem használtuk.**
 
 **A klasszikus befejezés:** a már bizonyított
 :math:`\neg\neg\bigl(x\in\overline A\cup\overline B\bigr)` állításból
 a **kettős negáció törlésével** kapjuk, hogy
-:math:`x\in\overline A\cup\overline B`. Ez az egyetlen lépés, amelyhez
-ebben a bizonyításban klasszikus elvre van szükség.
+:math:`x\in\overline A\cup\overline B`. **Itt használunk először
+klasszikus elvet:** a kettős negáció törlése a LEM segítségével
+igazolható.
 
 A kódban az első lemma csak a kettős negációt bizonyítja. A következő
 tétel előbb ezt a lemmát használja, majd az ``NNPP`` tétellel törli a
@@ -1640,7 +1650,7 @@ axiómából bizonyított tétel.
    <iframe class="rocq-frame rocq-frame--proof"
      data-proof="set_de_morgan_intersection_dne"
      src="../_static/rocq/logika-playground.html?proof=set_de_morgan_intersection_dne"
-     title="Intuicionista kettős negációs bizonyítás és klasszikus befejezése"
+     title="Kettős negáció bizonyítása LEM nélkül, majd klasszikus befejezés"
      loading="lazy" allow="clipboard-write"></iframe>
 
 .. rubric:: 4/b. Bizonyítás az A-tagság eldönthetőségének feltevésével
@@ -1648,8 +1658,9 @@ axiómából bizonyított tétel.
 Tegyük fel az adott :math:`x` elemre, hogy
 :math:`x\in A\lor x\notin A`. Ez az :math:`A\lor\neg A` alakú séma
 halmaztagságra alkalmazott esete: az állítás itt az, hogy :math:`x\in A`.
-**Ebből a többletfeltevésből már intuicionista módon is bizonyítható** a
-kívánt elemtartalmazás.
+**Ez az eldönthetőségi feltevés már elegendő** a kívánt elemtartalmazás
+igazolásához; mellette nem kell a LEM-re vagy a kettős negáció törlésére
+hivatkozni.
 
 **Esetszétválasztás a többletfeltevés alapján:**
 
@@ -1689,8 +1700,8 @@ szolgáltatja.
 2. **Ha** :math:`x\notin A`, akkor :math:`x\in\overline A`, tehát
    :math:`x\in\overline A\cup\overline B`.
 
-Mindkét esetben elértük a célt. Ez közvetlen, LEM-et használó bizonyítás;
-a kódban a ``classic (x ∈ A)`` adja a két esetet.
+Mindkét esetben elértük a célt. Ez a klasszikus logikában adott közvetlen,
+LEM-et használó bizonyítás; a kódban a ``classic (x ∈ A)`` adja a két esetet.
 
 **Interaktív ellenőrzés.**
 

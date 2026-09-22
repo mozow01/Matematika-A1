@@ -1,5 +1,6 @@
 (** A kritikus irány: először csak a kettős negációt bizonyítjuk.
-    Ez a lemma nem használ klasszikus elvet. *)
+    Itt még nem használunk LEM-et, eldönthetőségi feltevést vagy
+    kettősnegáció-törlést. *)
 
 Section DeMorganDoubleNegation.
 
