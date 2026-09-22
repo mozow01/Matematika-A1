@@ -15,6 +15,7 @@ _build/
 *.glob
 *.aux
 .lia.cache
+.nra.cache
 
 # Szerkesztők és operációs rendszerek
 .DS_Store

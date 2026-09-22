@@ -24,7 +24,11 @@ html_title = project
 html_baseurl = "https://mozow01.github.io/Matematika-A1/"
 html_static_path = ["_static"]
 html_css_files = ["css/custom.css", "css/vector-algebra.css"]
-html_js_files = ["js/interactive-frames.js", "js/vector-algebra.js"]
+html_js_files = [
+    "js/interactive-frames.js",
+    "js/vector-algebra.js",
+    "js/vector-coordinates.js",
+]
 
 mathjax3_config = {
     "loader": {"load": ["[tex]/bussproofs"]},

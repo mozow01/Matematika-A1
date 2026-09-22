@@ -137,6 +137,35 @@
   stroke: none;
 }
 
+.vector-diagram .triangle-fill {
+  fill: rgba(66, 103, 124, 0.055);
+  stroke: none;
+}
+
+.vector-diagram .circumcircle {
+  fill: none;
+  stroke: #b7afa1;
+  stroke-width: 1.25;
+}
+
+.vector-diagram .point-dot {
+  fill: var(--vector-ink);
+  stroke: var(--vector-white);
+  stroke-width: 1.5;
+}
+
+.vector-diagram .angle-arc {
+  fill: none;
+  stroke: var(--vector-red);
+  stroke-width: 1.8;
+}
+
+.vector-diagram .component-line {
+  fill: none;
+  stroke: var(--vector-ink);
+  stroke-width: 1.45;
+}
+
 .vector-diagram text {
   fill: var(--vector-ink);
   font-family: Georgia, "Times New Roman", serif;

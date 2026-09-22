@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vektorkoordináták – interaktív bizonyítás-ellenőrző</title>
+  <style>
+    html, body, #ide-wrapper { height: 100%; margin: 0; }
+    #document { padding: 0.75rem 1rem 2rem; }
+    #document h1 { font: 600 1.15rem/1.4 system-ui, sans-serif; }
+    #document p { font: 0.95rem/1.5 system-ui, sans-serif; }
+    [hidden] { display: none !important; }
+    #launcher {
+      box-sizing: border-box;
+      min-height: 148px;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      color: #26343a;
+      background: linear-gradient(135deg, #fbf8f1, #edf3ef);
+      font-family: system-ui, sans-serif;
+      text-align: center;
+    }
+    #launcher strong { display: block; margin-bottom: 0.65rem; }
+    #launcher button {
+      border: 0;
+      border-radius: 4px;
+      padding: 0.65rem 1rem;
+      color: #fff;
+      background: #36594c;
+      font: 600 0.95rem/1.2 system-ui, sans-serif;
+      cursor: pointer;
+    }
+    #launcher button:hover { background: #426b5a; }
+    #launcher button:disabled { cursor: wait; opacity: 0.7; }
+    #launcher-status { min-height: 1.25rem; margin: 0.5rem 0 0; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div id="launcher">
+    <div>
+      <strong id="launcher-title">Interaktív vektorszámítás</strong>
+      <button id="start-proof" type="button">Interaktív ablak indítása</button>
+      <p id="launcher-status">A motor csak kattintás után töltődik be.</p>
+    </div>
+  </div>
+
+  <div id="ide-wrapper" class="toggled" hidden>
+    <div id="code-wrapper">
+      <div id="document">
+        <h1>A harmadik előadás számításai</h1>
+        <p>
+          A jobb felső nyíllal lépésenként követhető, hogyan változik a cél.
+          A bizonyítás szabadon módosítható.
+        </p>
+        <textarea id="coq-code">(* A bizonyítás betöltése... *)</textarea>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    const proofLabels = {
+      orthocenter: 'A háromszög magasságpontja',
+      cosine_theorem: 'A koszinusztétel algebrai magja',
+      triple_product: 'A vegyes szorzat koordinátaképlete',
+      standard_coordinates: 'A standard koordináták egyértelműsége',
+      coordinate_products: 'A skaláris és vektoriális szorzat koordinátái',
+    };
+
+    const proofFiles = Object.keys(proofLabels);
+    const sourcesFor = proof => ['vector_coordinates_definitions', proof];
+    const query = new URLSearchParams(window.location.search);
+    const requestedProof = query.get('proof');
+    const selectedFiles = proofFiles.includes(requestedProof)
+      ? sourcesFor(requestedProof)
+      : [...new Set(proofFiles.flatMap(sourcesFor))];
+
+    const launcher = document.getElementById('launcher');
+    const startButton = document.getElementById('start-proof');
+    const status = document.getElementById('launcher-status');
+    const ide = document.getElementById('ide-wrapper');
+
+    if (requestedProof && proofLabels[requestedProof]) {
+      document.getElementById('launcher-title').textContent = proofLabels[requestedProof];
+    }
+
+    async function loadStylesheet(href) {
+      await new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        link.addEventListener('load', resolve, { once: true });
+        link.addEventListener('error', reject, { once: true });
+        document.head.appendChild(link);
+      });
+    }
+
+    async function startProof() {
+      startButton.disabled = true;
+      status.textContent = 'A bizonyítás és az ellenőrzőmotor betöltése…';
+
+      try {
+        const sources = await Promise.all(selectedFiles.map(async proof => {
+          const response = await fetch(`./examples/eloadas_03/${proof}.v`);
+          if (!response.ok) {
+            throw new Error(`Nem sikerült betölteni: ${proof}.v`);
+          }
+          return response.text();
+        }));
+
+        document.getElementById('coq-code').value = sources.join('\n\n');
+        await loadStylesheet('../vendor/jscoq/dist/frontend/index.css');
+        const { JsCoq } = await import('../vendor/jscoq/jscoq.js');
+
+        document.body.classList.add('jscoq-main');
+        window.matA1Coq = await JsCoq.start(['coq-code'], {
+          prelude: true,
+          implicit_libs: true,
+          focus: false,
+          editor: { mode: { 'company-coq': true }, keyMap: 'default' },
+          init_pkgs: ['init'],
+          all_pkgs: ['coq'],
+        });
+        await window.matA1Coq.when_ready.promise;
+
+        launcher.hidden = true;
+        ide.hidden = false;
+        for (const snippet of window.matA1Coq.provider.snippets) {
+          snippet.editor.refresh();
+        }
+        window.parent.postMessage({
+          type: 'mat-a1-rocq-resize',
+          height: 650,
+        }, window.location.origin);
+      } catch (error) {
+        startButton.disabled = false;
+        status.textContent = `Hiba: ${error.message}`;
+      }
+    }
+
+    startButton.addEventListener('click', startProof);
+    if (query.get('autostart') === '1') startProof();
+  </script>
+</body>
+</html>

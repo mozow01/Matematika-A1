@@ -20,3 +20,18 @@ for proof in "$proof_dir"/*.v; do
       ;;
   esac
 done
+
+coordinate_dir="examples/eloadas_03"
+coordinate_definitions="$coordinate_dir/vector_coordinates_definitions.v"
+
+coqc "$coordinate_definitions"
+
+for proof in "$coordinate_dir"/*.v; do
+  case "$(basename "$proof")" in
+    vector_coordinates_definitions.v)
+      ;;
+    *)
+      coqc -l "$coordinate_definitions" "$proof"
+      ;;
+  esac
+done
