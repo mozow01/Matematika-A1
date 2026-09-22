@@ -1469,3 +1469,235 @@ két külön láncot alkot.
 * A hatványhalmaz a részhalmazrelációval részbenrendezett, de általában nem
   lineárisan rendezett struktúra.
 * Az interaktív ablakban ugyanezek a lépések egyenként is megfigyelhetők.
+
+.. _halmazos-de-morgan-fuggelek:
+
+Függelék: a halmazos De Morgan-azonosságok négy tartalmazása
+----------------------------------------------------------------
+
+Legyen :math:`A,B\subseteq H`. Minden komplementert ugyanahhoz a rögzített
+:math:`H` alaphalmazhoz viszonyítunk, és a bizonyításokban végig
+:math:`x\in H`. A két De Morgan-azonosságot négy részhalmaztartalmazásra
+bontjuk, és ezeket közvetlenül, a halmazműveletek definíciójából igazoljuk.
+
+Az első három tartalmazás **intuicionista módon** bizonyítható. A negyedik
+irányban először a kívánt elemtartalmazás **kettős negációját** vezetjük le
+intuicionista módon, és csak utána alkalmazzuk a kettős negáció törlését.
+Külön megvizsgáljuk az :math:`A`-tagság eldönthetőségét feltevő, illetve a
+kizárt harmadik elvére (LEM) hivatkozó bizonyítást is.
+
+Minden bizonyítás alatt futtatható jsCoq-ablak található. A kódban
+:math:`\overline A` megfelelője ``∁ A``. A ``Print Assumptions`` parancs
+megmutatja a bizonyítás axiómafüggéseit: a ``Closed under the global
+context`` üzenet azt jelzi, hogy a tétel nem támaszkodik axiómára. A
+dönthetőséget feltevő tételnél ez a feltevés magában a tétel állításában
+szerepel. A két klasszikus változatnál a ``classic`` axióma jelenik meg.
+
+1. Az unió komplementere részhalmaza a komplementerek metszetének
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math::
+
+   \overline{A\cup B}\subseteq\overline A\cap\overline B.
+
+**Bizonyítás.** Legyen :math:`x\in\overline{A\cup B}`, vagyis
+:math:`x\notin A\cup B`. Azt kell megmutatni, hogy :math:`x\notin A` és
+:math:`x\notin B`.
+
+* Ha :math:`x\in A` volna, akkor az unió definíciója szerint
+  :math:`x\in A\cup B` lenne, ami ellentmond a feltevésnek. Tehát
+  :math:`x\notin A`, azaz :math:`x\in\overline A`.
+* Ha :math:`x\in B` volna, akkor ugyancsak :math:`x\in A\cup B` lenne.
+  Ez is ellentmondás, ezért :math:`x\notin B`, azaz
+  :math:`x\in\overline B`.
+
+Így :math:`x\in\overline A\cap\overline B`. Mindkét részben egy tagadást
+igazoltunk azzal, hogy a tagadott elemtartalmazásból ellentmondást vezettünk
+le; ehhez nem kellett klasszikus elv.
+
+**Interaktív ellenőrzés.**
+
+.. raw:: html
+
+   <iframe class="rocq-frame rocq-frame--proof"
+     data-proof="set_de_morgan_union_forward"
+     src="../_static/rocq/logika-playground.html?proof=set_de_morgan_union_forward"
+     title="Az unió komplementeréből induló De Morgan-tartalmazás"
+     loading="lazy" allow="clipboard-write"></iframe>
+
+2. A komplementerek metszete részhalmaza az unió komplementerének
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math::
+
+   \overline A\cap\overline B\subseteq\overline{A\cup B}.
+
+**Bizonyítás.** Legyen :math:`x\in\overline A\cap\overline B`. Ekkor
+:math:`x\notin A` és :math:`x\notin B`. Az :math:`x\notin A\cup B`
+állítás igazolásához tegyük fel, hogy :math:`x\in A\cup B`.
+
+**Esetszétválasztás az uniótagság alapján:**
+
+1. **Ha** :math:`x\in A`, akkor ez ellentmond :math:`x\notin A`-nak.
+2. **Ha** :math:`x\in B`, akkor ez ellentmond :math:`x\notin B`-nek.
+
+Mindkét esetben ellentmondást kaptunk, tehát :math:`x\notin A\cup B`,
+vagyis :math:`x\in\overline{A\cup B}`. Az esetszétválasztást a feltételezett
+uniótagság tette lehetővé, nem a kizárt harmadik elve.
+
+**Interaktív ellenőrzés.**
+
+.. raw:: html
+
+   <iframe class="rocq-frame rocq-frame--proof"
+     data-proof="set_de_morgan_inclusion"
+     src="../_static/rocq/logika-playground.html?proof=set_de_morgan_inclusion"
+     title="A komplementerek metszetéből induló De Morgan-tartalmazás"
+     loading="lazy" allow="clipboard-write"></iframe>
+
+3. A komplementerek uniója részhalmaza a metszet komplementerének
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math::
+
+   \overline A\cup\overline B\subseteq\overline{A\cap B}.
+
+**Bizonyítás.** Legyen :math:`x\in\overline A\cup\overline B`. Azt
+igazoljuk, hogy :math:`x\notin A\cap B`.
+
+**Esetszétválasztás az uniótagság alapján:**
+
+1. **Első eset:** :math:`x\in\overline A`, vagyis :math:`x\notin A`.
+   Ha :math:`x\in A\cap B` volna, akkor különösen :math:`x\in A` lenne,
+   ami ellentmondás. Ezért :math:`x\notin A\cap B`.
+2. **Második eset:** :math:`x\in\overline B`, vagyis :math:`x\notin B`.
+   Ha :math:`x\in A\cap B` volna, akkor különösen :math:`x\in B` lenne,
+   ami ismét ellentmondás. Ezért :math:`x\notin A\cap B`.
+
+Mindkét esetben :math:`x\in\overline{A\cap B}` adódott. Ez a bizonyítás
+is teljesen intuicionista.
+
+**Interaktív ellenőrzés.**
+
+.. raw:: html
+
+   <iframe class="rocq-frame rocq-frame--proof"
+     data-proof="set_de_morgan_intersection_reverse"
+     src="../_static/rocq/logika-playground.html?proof=set_de_morgan_intersection_reverse"
+     title="A komplementerek uniójából induló De Morgan-tartalmazás"
+     loading="lazy" allow="clipboard-write"></iframe>
+
+4. A kritikus irány: a metszet komplementeréből a komplementerek uniójába
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math::
+
+   \overline{A\cap B}\subseteq\overline A\cup\overline B.
+
+Ez a tartalmazás általánosan nem bizonyítható pusztán intuicionista
+szabályokkal. Legyen :math:`x\in\overline{A\cap B}`, azaz
+:math:`x\notin A\cap B`.
+
+.. rubric:: 4/a. Először a kettős negáció, azután annak törlése
+
+**Az intuicionista rész célja:**
+
+.. math::
+
+   \neg\neg\bigl(x\in\overline A\cup\overline B\bigr).
+
+Tegyük fel, hogy :math:`x\notin\overline A\cup\overline B`, és vezessünk
+le ebből ellentmondást.
+
+**Először megmutatjuk, hogy** :math:`x\notin A`. Tegyük fel ehhez, hogy
+:math:`x\in A`. Ekkor :math:`x\notin B`: ha ugyanis :math:`x\in B`
+volna, akkor :math:`x\in A\cap B` lenne, ami ellentmond az eredeti
+feltevésnek. Az :math:`x\notin B` állításból viszont
+:math:`x\in\overline B`, így :math:`x\in\overline A\cup\overline B`
+következik. Ez ellentmond a mostani feltevésnek. Az :math:`x\in A`
+feltevés tehát ellentmondásra vezetett, így :math:`x\notin A`.
+
+**Ezzel megkapjuk a keresett ellentmondást:** :math:`x\notin A` miatt
+:math:`x\in\overline A`, ezért :math:`x\in\overline A\cup\overline B`,
+holott éppen ennek ellenkezőjét tettük fel. Ezzel igazoltuk a fenti kettős
+negációt. **Eddig egyetlen klasszikus elvet sem használtunk.**
+
+**A klasszikus befejezés:** a már bizonyított
+:math:`\neg\neg\bigl(x\in\overline A\cup\overline B\bigr)` állításból
+a **kettős negáció törlésével** kapjuk, hogy
+:math:`x\in\overline A\cup\overline B`. Ez az egyetlen lépés, amelyhez
+ebben a bizonyításban klasszikus elvre van szükség.
+
+A kódban az első lemma csak a kettős negációt bizonyítja. A következő
+tétel előbb ezt a lemmát használja, majd az ``NNPP`` tétellel törli a
+kettős negációt. Az ``NNPP`` a klasszikus könyvtárban a ``classic``
+axiómából bizonyított tétel.
+
+**Interaktív ellenőrzés.**
+
+.. raw:: html
+
+   <iframe class="rocq-frame rocq-frame--proof"
+     data-proof="set_de_morgan_intersection_dne"
+     src="../_static/rocq/logika-playground.html?proof=set_de_morgan_intersection_dne"
+     title="Intuicionista kettős negációs bizonyítás és klasszikus befejezése"
+     loading="lazy" allow="clipboard-write"></iframe>
+
+.. rubric:: 4/b. Bizonyítás az A-tagság eldönthetőségének feltevésével
+
+Tegyük fel az adott :math:`x` elemre, hogy
+:math:`x\in A\lor x\notin A`. Ez az :math:`A\lor\neg A` alakú séma
+halmaztagságra alkalmazott esete: az állítás itt az, hogy :math:`x\in A`.
+**Ebből a többletfeltevésből már intuicionista módon is bizonyítható** a
+kívánt elemtartalmazás.
+
+**Esetszétválasztás a többletfeltevés alapján:**
+
+1. **Első eset:** :math:`x\in A`. Ekkor :math:`x\notin B`, mert
+   :math:`x\in B` esetén :math:`x\in A\cap B` volna, ami ellentmond
+   :math:`x\notin A\cap B`-nek. Tehát :math:`x\in\overline B`, és így
+   :math:`x\in\overline A\cup\overline B`.
+2. **Második eset:** :math:`x\notin A`. Ekkor :math:`x\in\overline A`,
+   ezért közvetlenül :math:`x\in\overline A\cup\overline B`.
+
+A teljes részhalmaztartalmazás igazolásához elegendő, ha a többletfeltevés
+minden :math:`x\in H` elemre teljesül, vagyis
+:math:`\forall x\in H\,(x\in A\lor x\notin A)`. A :math:`B`-tagság
+eldönthetőségét nem kell külön feltenni. A kód ezt a feltevést paraméterként
+kapja; nem importál klasszikus elvet, és nem töröl kettős negációt.
+
+**Interaktív ellenőrzés.**
+
+.. raw:: html
+
+   <iframe class="rocq-frame rocq-frame--proof"
+     data-proof="set_de_morgan_intersection_decidable"
+     src="../_static/rocq/logika-playground.html?proof=set_de_morgan_intersection_decidable"
+     title="A kritikus De Morgan-irány eldönthető A-tagság feltevésével"
+     loading="lazy" allow="clipboard-write"></iframe>
+
+.. rubric:: 4/c. Közvetlen bizonyítás a kizárt harmadik elvével (LEM)
+
+Legyen ismét :math:`x\in\overline{A\cap B}`. A **kizárt harmadik elvét
+az** :math:`x\in A` **állításra alkalmazva** kapjuk, hogy
+:math:`x\in A\lor x\notin A`. Itt ezt az esetszétválasztást maga a LEM
+szolgáltatja.
+
+1. **Ha** :math:`x\in A`, akkor :math:`x\notin B`, hiszen
+   :math:`x\in B` esetén :math:`x\in A\cap B` következne. Így
+   :math:`x\in\overline B`, tehát :math:`x\in\overline A\cup\overline B`.
+2. **Ha** :math:`x\notin A`, akkor :math:`x\in\overline A`, tehát
+   :math:`x\in\overline A\cup\overline B`.
+
+Mindkét esetben elértük a célt. Ez közvetlen, LEM-et használó bizonyítás;
+a kódban a ``classic (x ∈ A)`` adja a két esetet.
+
+**Interaktív ellenőrzés.**
+
+.. raw:: html
+
+   <iframe class="rocq-frame rocq-frame--proof"
+     data-proof="set_de_morgan_intersection_lem"
+     src="../_static/rocq/logika-playground.html?proof=set_de_morgan_intersection_lem"
+     title="A kritikus De Morgan-irány közvetlen bizonyítása LEM-mel"
+     loading="lazy" allow="clipboard-write"></iframe>
