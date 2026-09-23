@@ -9,10 +9,12 @@ az előző előadás műveleteit, majd bevezetjük a bázist és a koordináták
 
 .. topic:: A két 90 perces rész
 
-   **Első előadás:** három bevezető feladat, bázis és koordináták, a
-   skaláris és vektoriális szorzat koordinátaképlete, végül az egyenes
-   paraméteres vektoregyenlete. **Második előadás:** Levi--Civita-szimbólum,
-   egyenesfeladatok, majd a sík egyenlete és a hozzá tartozó feladatok.
+   **Első előadás:** bevezető vektorfeladatok, bázis és koordináták, a
+   műveletek koordinátaképlete, Levi--Civita-szimbólum, majd az egyenes
+   egyenlete és két egyenes kölcsönös helyzete. **Második előadás:** egy
+   közös merőleges irányú egyenes felírása, majd a sík egyenlete és a
+   hozzá tartozó feladatok. A koszinusztételes levezetés a függelékbe
+   kerül.
 
 .. rubric:: Első előadás — 90 perc
 
@@ -100,52 +102,6 @@ merőlegességet és a :math:`t=1` helyettesítés algebrai részét ellenőrzi.
      data-proof="orthocenter"
      src="../_static/rocq/vektor-playground.html?proof=orthocenter"
      title="A magasságpont vektoros bizonyításának interaktív ellenőrzése"
-     loading="lazy" allow="clipboard-write"></iframe>
-
-
-2. feladat: a koszinusztétel vektoros bizonyítása
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A háromszög két, közös kezdőpontú oldalának vektora legyen
-:math:`\mathbf u` és :math:`\mathbf v`, közbezárt szögük
-:math:`\gamma`. A harmadik oldal vektora
-:math:`\mathbf w=\mathbf v-\mathbf u`. Jelölje
-
-.. math::
-
-   a=|\mathbf w|,\qquad b=|\mathbf v|,\qquad c=|\mathbf u|.
-
-.. raw:: html
-
-   <figure class="vector-figure vector-figure--compact" id="koordinata-koszinusztetel">
-     <svg id="coordinate-cosine-svg" class="vector-diagram" viewBox="0 0 760 400"
-          role="img" aria-label="Háromszög a koszinusztétel vektoros jelöléseivel"></svg>
-     <figcaption class="vector-caption">
-       <span class="vector-formula">w = v − u</span>
-       <span class="vector-reading"><span>a = |w|</span><span>b = |v|</span><span>c = |u|</span></span>
-     </figcaption>
-   </figure>
-
-**Megoldás.** Az előzőleg rögzített négyzetjelölést és a skaláris szorzat
-disztributivitását használva
-
-.. math::
-
-   \begin{aligned}
-   a^2
-   &=\mathbf w^2=(\mathbf v-\mathbf u)^2\\
-   &=\mathbf v^2-2\mathbf u\cdot\mathbf v+\mathbf u^2\\
-   &=b^2+c^2-2bc\cos\gamma.
-   \end{aligned}
-
-Ez a koszinusztétel.
-
-.. raw:: html
-
-   <iframe class="rocq-frame rocq-frame--proof"
-     data-proof="cosine_theorem"
-     src="../_static/rocq/vektor-playground.html?proof=cosine_theorem"
-     title="A koszinusztétel algebrai magjának interaktív ellenőrzése"
      loading="lazy" allow="clipboard-write"></iframe>
 
 
@@ -276,26 +232,30 @@ Minden :math:`\mathbf v` vektor egyértelműen írható
    [\mathbf v]_{\mathrm{std}}=
    \begin{pmatrix}x\\y\\z\end{pmatrix}.
 
-A standard bázis skaláris szorzási táblája
+A standard bázis teljes skaláris szorzási táblája
 
 .. math::
 
-   \mathbf i^2=\mathbf j^2=\mathbf k^2=1,
-   \qquad
-   \mathbf i\cdot\mathbf j=
-   \mathbf j\cdot\mathbf k=
-   \mathbf k\cdot\mathbf i=0,
+   \begin{array}{c|ccc}
+   \cdot&\mathbf i&\mathbf j&\mathbf k\\ \hline
+   \mathbf i&1&0&0\\
+   \mathbf j&0&1&0\\
+   \mathbf k&0&0&1
+   \end{array}
 
-vektoriális szorzási táblája pedig
+A teljes vektoriális szorzási tábla:
 
 .. math::
 
-   \mathbf i\times\mathbf j=\mathbf k,\qquad
-   \mathbf j\times\mathbf k=\mathbf i,\qquad
-   \mathbf k\times\mathbf i=\mathbf j.
+   \begin{array}{c|ccc}
+   \times&\mathbf i&\mathbf j&\mathbf k\\ \hline
+   \mathbf i&\mathbf0&\mathbf k&-\mathbf j\\
+   \mathbf j&-\mathbf k&\mathbf0&\mathbf i\\
+   \mathbf k&\mathbf j&-\mathbf i&\mathbf0
+   \end{array}
 
-A fordított sorrendű szorzatok ezek ellentettjei, egy bázisvektor
-önmagával vett vektoriális szorzata pedig :math:`\mathbf0`.
+A skaláris szorzat táblája az ortonormáltságot, a vektoriális szorzat
+táblája pedig a jobbkezességet és az antiszimmetriát foglalja össze.
 
 .. raw:: html
 
@@ -313,16 +273,40 @@ Ha
 
 .. math::
 
-   \mathbf a=\begin{pmatrix}a_1\\a_2\\a_3\end{pmatrix},\qquad
-   \mathbf b=\begin{pmatrix}b_1\\b_2\\b_3\end{pmatrix},
+   \mathbf a=a_1\mathbf i+a_2\mathbf j+a_3\mathbf k,
+   \qquad
+   \mathbf b=b_1\mathbf i+b_2\mathbf j+b_3\mathbf k,
 
-akkor az összeadás és a skalárral való szorzás koordinátánként történik:
+akkor a vektorösszeadás disztributivitása miatt
+
+.. math::
+
+   \begin{aligned}
+   \mathbf a+\mathbf b
+   &=(a_1\mathbf i+a_2\mathbf j+a_3\mathbf k)
+     +(b_1\mathbf i+b_2\mathbf j+b_3\mathbf k)\\
+   &=(a_1+b_1)\mathbf i+(a_2+b_2)\mathbf j+(a_3+b_3)\mathbf k.
+   \end{aligned}
+
+A koordináták egyértelműségéből ezért
 
 .. math::
 
    \mathbf a+\mathbf b=
-   \begin{pmatrix}a_1+b_1\\a_2+b_2\\a_3+b_3\end{pmatrix},
-   \qquad
+   \begin{pmatrix}a_1+b_1\\a_2+b_2\\a_3+b_3\end{pmatrix}.
+
+Hasonlóan
+
+.. math::
+
+   \lambda\mathbf a
+   =(\lambda a_1)\mathbf i+(\lambda a_2)\mathbf j
+     +(\lambda a_3)\mathbf k,
+
+tehát
+
+.. math::
+
    \lambda\mathbf a=
    \begin{pmatrix}\lambda a_1\\\lambda a_2\\\lambda a_3\end{pmatrix}.
 
@@ -330,40 +314,30 @@ akkor az összeadás és a skalárral való szorzás koordinátánként történ
 A skaláris szorzat koordinátaképlete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Az ortonormált standard koordinátákban a Pitagorasz-tétel kétszeri
-alkalmazása adja
-
-.. math::
-
-   |\mathbf a|^2=a_1^2+a_2^2+a_3^2,
-   \qquad
-   |\mathbf b|^2=b_1^2+b_2^2+b_3^2.
-
-Alkalmazzuk a koszinusztételt arra a háromszögre, amelynek oldalai
-:math:`\mathbf a`, :math:`\mathbf b` és :math:`\mathbf a-\mathbf b`.
-Ha :math:`\gamma` az első két vektor szöge, akkor
-
-.. math::
-
-   |\mathbf a-\mathbf b|^2
-   =|\mathbf a|^2+|\mathbf b|^2
-    -2|\mathbf a|\,|\mathbf b|\cos\gamma.
-
-Mivel
-:math:`\mathbf a\cdot\mathbf b=|\mathbf a|\,|\mathbf b|\cos\gamma`, ezért
+A bilinearitással először kilenc tagra bontunk:
 
 .. math::
 
    \begin{aligned}
    \mathbf a\cdot\mathbf b
-   &=\frac{|\mathbf a|^2+|\mathbf b|^2-|\mathbf a-\mathbf b|^2}{2}\\
-   &=\frac{\sum_{i=1}^3a_i^2+\sum_{i=1}^3b_i^2
-      -\sum_{i=1}^3(a_i-b_i)^2}{2}\\
-   &=\boxed{a_1b_1+a_2b_2+a_3b_3}.
+   ={}&a_1b_1(\mathbf i\cdot\mathbf i)
+      +a_1b_2(\mathbf i\cdot\mathbf j)
+      +a_1b_3(\mathbf i\cdot\mathbf k)\\
+     &+a_2b_1(\mathbf j\cdot\mathbf i)
+      +a_2b_2(\mathbf j\cdot\mathbf j)
+      +a_2b_3(\mathbf j\cdot\mathbf k)\\
+     &+a_3b_1(\mathbf k\cdot\mathbf i)
+      +a_3b_2(\mathbf k\cdot\mathbf j)
+      +a_3b_3(\mathbf k\cdot\mathbf k).
    \end{aligned}
 
-Tehát a skaláris szorzat sorvektor és oszlopvektor szorzataként is
-olvasható:
+A skaláris szorzási táblában csak a három átlóbeli tag nem nulla, ezért
+
+.. math::
+
+   \boxed{\mathbf a\cdot\mathbf b=a_1b_1+a_2b_2+a_3b_3}.
+
+Ez pontosan egy sorvektor és egy oszlopvektor mátrixszorzata:
 
 .. math::
 
@@ -375,26 +349,8 @@ olvasható:
 A vektoriális szorzat koordinátaképlete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A levezetés alapja a standard bázis vektoriális szorzási táblája:
-
-.. math::
-
-   \begin{array}{c|ccc}
-   \times&\mathbf i&\mathbf j&\mathbf k\\ \hline
-   \mathbf i&\mathbf0&\mathbf k&-\mathbf j\\
-   \mathbf j&-\mathbf k&\mathbf0&\mathbf i\\
-   \mathbf k&\mathbf j&-\mathbf i&\mathbf0
-   \end{array}
-
-Legyen
-
-.. math::
-
-   \mathbf a=a_1\mathbf i+a_2\mathbf j+a_3\mathbf k,
-   \qquad
-   \mathbf b=b_1\mathbf i+b_2\mathbf j+b_3\mathbf k.
-
-A disztributivitás először kilenc tagot ad:
+Ugyanezeket a bázisfelbontásokat a vektoriális szorzás
+disztributivitásával ismét kilenc tagra bontjuk:
 
 .. math::
 
@@ -482,27 +438,6 @@ A szokásos determinánsos írásmód ennek tömör emlékeztetője:
      loading="lazy" allow="clipboard-write"></iframe>
 
 
-Az egyenes paraméteres vektoregyenlete
---------------------------------------
-
-A :math:`\mathbf r_0` helyvektorú ponton átmenő, :math:`\mathbf v`
-irányvektorú egyenes vektoregyenlete
-
-.. math::
-
-   \mathbf r=\mathbf r_0+t\mathbf v\qquad(t\in\mathbb R).
-
-Valóban, :math:`\mathbf r-\mathbf r_0` az egyenessel párhuzamos, ezért az
-irányvektor skalárszorosa. Ezt az egyenes **paraméteres
-vektoregyenletének** nevezzük.
-
-.. raw:: html
-
-   <div class="lecture-boundary" role="separator" aria-label="A második előadás kezdete">
-     <span>Második előadás — 90 perc</span>
-   </div>
-
-
 Levi--Civita-szimbólum
 ----------------------
 
@@ -555,20 +490,60 @@ Például :math:`i=2` esetén csak két nem nulla tag marad:
    =\varepsilon_{231}a_3b_1+\varepsilon_{213}a_1b_3
    =a_3b_1-a_1b_3.
 
-Ugyanígy a vegyes szorzat rövid indexjelölése
+Ugyanígy a vegyes szorzat indexjelölése
 
 .. math::
 
    \mathbf{abc}
    =\sum_{i,j,k=1}^3\varepsilon_{ijk}a_ib_jc_k.
 
+**3. példa: a vegyes szorzat ciklikus cseréje.** A skalárok szorzásának
+kommutativitása és :math:`\varepsilon_{ijk}=\varepsilon_{jki}` alapján
 
-Az egyenes paraméteres egyenletrendszere
------------------------------------------
+.. math::
+
+   \begin{aligned}
+   \mathbf{abc}
+   &=\sum_{i,j,k=1}^3\varepsilon_{ijk}a_ib_jc_k\\
+   &=\sum_{i,j,k=1}^3\varepsilon_{jki}b_jc_ka_i\\
+   &=\mathbf{bca}.
+   \end{aligned}
+
+Az indexek néma összegzési indexek: a második sorban a
+:math:`(j,k,i)` nevek rendre az új :math:`(i,j,k)` szerepét töltik be.
+Ugyanezzel a ciklikus cserével
+:math:`\mathbf{abc}=\mathbf{bca}=\mathbf{cab}`.
+
+.. admonition:: iMSc-házi feladat
+   :class: imsc-task
+
+   A :math:`\varepsilon_{ikj}=-\varepsilon_{ijk}` azonosságból közvetlen
+   indexszámolással igazolja, hogy
+
+   .. math::
+
+      \mathbf{acb}=-\mathbf{abc}.
+
+   Vezesse le ebből azt is, hogy a vegyes szorzat nulla, ha két tényezője
+   megegyezik.
+
+
+Az egyenes paraméteres egyenlete
+--------------------------------
+
+A :math:`\mathbf r_0` helyvektorú ponton átmenő, :math:`\mathbf v`
+irányvektorú egyenes vektoregyenlete
+
+.. math::
+
+   \mathbf r=\mathbf r_0+t\mathbf v\qquad(t\in\mathbb R).
+
+Valóban, :math:`\mathbf r-\mathbf r_0` az egyenessel párhuzamos, ezért az
+irányvektor skalárszorosa. Ezt az egyenes **paraméteres
+vektoregyenletének** nevezzük.
 
 Ha :math:`\mathbf r_0=(x_0,y_0,z_0)^{\mathsf T}` és
-:math:`\mathbf v=(v_1,v_2,v_3)^{\mathsf T}`, akkor a paraméteres
-vektoregyenlet koordinátánként
+:math:`\mathbf v=(v_1,v_2,v_3)^{\mathsf T}`, akkor koordinátánként
 
 .. math::
 
@@ -579,46 +554,8 @@ vektoregyenlet koordinátánként
    \end{cases}
 
 
-1. egyenesfeladat: közös merőleges irány
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Írjuk fel annak a :math:`g` egyenesnek a paraméteres egyenletrendszerét,
-amely merőleges mind az :math:`e`, mind az :math:`f` egyenesre, és áthalad
-a :math:`P_0=(1,2,0)` ponton, ahol
-
-.. math::
-
-   e:\begin{cases}
-   x=2+3t,\\ y=1-2t,\\ z=8,
-   \end{cases}
-   \qquad
-   f:\begin{cases}
-   x=-3+2u,\\ y=4,\\ z=2-u.
-   \end{cases}
-
-**Megoldás.** Az irányvektorok
-:math:`\mathbf v_e=(3,-2,0)^{\mathsf T}` és
-:math:`\mathbf v_f=(2,0,-1)^{\mathsf T}`. Mindkettőre merőleges irányt a
-vektoriális szorzat ad:
-
-.. math::
-
-   \mathbf v_g=\mathbf v_e\times\mathbf v_f
-   =\begin{pmatrix}2\\3\\4\end{pmatrix}.
-
-A keresett egyenes tehát
-
-.. math::
-
-   g:\begin{cases}
-   x=1+2s,\\
-   y=2+3s,\\
-   z=4s.
-   \end{cases}
-
-
-2. egyenesfeladat: két egyenes kölcsönös helyzete
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Feladat: két egyenes kölcsönös helyzete
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Határozzuk meg az
 
@@ -653,6 +590,50 @@ tehát az egyenesek **kitérők**.
 Általában két térbeli egyenes párhuzamos irányvektorok esetén egybeeső
 vagy különböző párhuzamos; nem párhuzamos irányvektorok esetén metsző
 vagy kitérő lehet.
+
+.. raw:: html
+
+   <div class="lecture-boundary" role="separator" aria-label="A második előadás kezdete">
+     <span>Második előadás — 90 perc</span>
+   </div>
+
+
+Feladat: közös merőleges irány
+------------------------------
+
+Írjuk fel annak a :math:`g` egyenesnek a paraméteres egyenletrendszerét,
+amely merőleges mind az :math:`e`, mind az :math:`f` egyenesre, és áthalad
+a :math:`P_0=(1,2,0)` ponton, ahol
+
+.. math::
+
+   e:\begin{cases}
+   x=2+3t,\\ y=1-2t,\\ z=8,
+   \end{cases}
+   \qquad
+   f:\begin{cases}
+   x=-3+2u,\\ y=4,\\ z=2-u.
+   \end{cases}
+
+**Megoldás.** Az irányvektorok
+:math:`\mathbf v_e=(3,-2,0)^{\mathsf T}` és
+:math:`\mathbf v_f=(2,0,-1)^{\mathsf T}`. Mindkettőre merőleges irányt a
+vektoriális szorzat ad:
+
+.. math::
+
+   \mathbf v_g=\mathbf v_e\times\mathbf v_f
+   =\begin{pmatrix}2\\3\\4\end{pmatrix}.
+
+A keresett egyenes tehát
+
+.. math::
+
+   g:\begin{cases}
+   x=1+2s,\\
+   y=2+3s,\\
+   z=4s.
+   \end{cases}
 
 
 A sík egyenlete
@@ -836,3 +817,97 @@ Egyelőre azért maradunk jsCoq-nál, mert már közvetlenül be van építve az
 oldalba, és ezekhez a polinomiális azonosságokhoz elegendő. Lean és a
 ``mathlib`` akkor ad majd érdemi többletet, amikor teljes euklideszi
 geometriai tételeket akarunk könyvtári fogalmakra építve formalizálni.
+
+
+Függelék: a koszinusztétel és a skaláris szorzat
+-------------------------------------------------
+
+A koszinusztétel vektoros bizonyítása
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A háromszög két, közös kezdőpontú oldalának vektora legyen
+:math:`\mathbf u` és :math:`\mathbf v`, közbezárt szögük
+:math:`\gamma`. A harmadik oldal vektora
+:math:`\mathbf w=\mathbf v-\mathbf u`. Jelölje
+
+.. math::
+
+   a=|\mathbf w|,\qquad b=|\mathbf v|,\qquad c=|\mathbf u|.
+
+.. raw:: html
+
+   <figure class="vector-figure vector-figure--compact" id="koordinata-koszinusztetel">
+     <svg id="coordinate-cosine-svg" class="vector-diagram" viewBox="0 0 760 400"
+          role="img" aria-label="Háromszög a koszinusztétel vektoros jelöléseivel"></svg>
+     <figcaption class="vector-caption">
+       <span class="vector-formula">w = v − u</span>
+       <span class="vector-reading"><span>a = |w|</span><span>b = |v|</span><span>c = |u|</span></span>
+     </figcaption>
+   </figure>
+
+Az előzőleg rögzített négyzetjelölést és a skaláris szorzat
+disztributivitását használva
+
+.. math::
+
+   \begin{aligned}
+   a^2
+   &=\mathbf w^2=(\mathbf v-\mathbf u)^2\\
+   &=\mathbf v^2-2\mathbf u\cdot\mathbf v+\mathbf u^2\\
+   &=b^2+c^2-2bc\cos\gamma.
+   \end{aligned}
+
+Ez a koszinusztétel.
+
+.. raw:: html
+
+   <iframe class="rocq-frame rocq-frame--proof"
+     data-proof="cosine_theorem"
+     src="../_static/rocq/vektor-playground.html?proof=cosine_theorem"
+     title="A koszinusztétel algebrai magjának interaktív ellenőrzése"
+     loading="lazy" allow="clipboard-write"></iframe>
+
+
+A skaláris szorzat koordinátaképlete a koszinusztételből
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Legyen
+:math:`\mathbf a=(a_1,a_2,a_3)^{\mathsf T}` és
+:math:`\mathbf b=(b_1,b_2,b_3)^{\mathsf T}`. Az ortonormált koordináta-
+rendszerben a Pitagorasz-tétel adja
+
+.. math::
+
+   |\mathbf a|^2=\sum_{i=1}^3a_i^2,
+   \qquad
+   |\mathbf b|^2=\sum_{i=1}^3b_i^2,
+   \qquad
+   |\mathbf a-\mathbf b|^2=\sum_{i=1}^3(a_i-b_i)^2.
+
+Alkalmazzuk a koszinusztételt arra a háromszögre, amelynek két oldalát
+:math:`\mathbf a` és :math:`\mathbf b`, harmadik oldalát pedig
+:math:`\mathbf a-\mathbf b` adja. Ha :math:`\gamma` az első két vektor
+szöge, akkor
+
+.. math::
+
+   |\mathbf a-\mathbf b|^2
+   =|\mathbf a|^2+|\mathbf b|^2
+    -2|\mathbf a|\,|\mathbf b|\cos\gamma.
+
+Mivel
+:math:`\mathbf a\cdot\mathbf b=|\mathbf a|\,|\mathbf b|\cos\gamma`, ezért
+
+.. math::
+
+   \begin{aligned}
+   \mathbf a\cdot\mathbf b
+   &=\frac{|\mathbf a|^2+|\mathbf b|^2-|\mathbf a-\mathbf b|^2}{2}\\
+   &=\frac{\sum_{i=1}^3a_i^2+
+      \sum_{i=1}^3b_i^2-
+      \sum_{i=1}^3(a_i-b_i)^2}{2}\\
+   &=a_1b_1+a_2b_2+a_3b_3.
+   \end{aligned}
+
+Ez ugyanaz a koordinátaképlet, amelyet a főszövegben közvetlenül a
+standard bázis skaláris szorzási táblájából vezettünk le.
