@@ -1,0 +1,302 @@
+.complex-numbers-page {
+  --complex-ink: #26343a;
+  --complex-muted: #66747a;
+  --complex-real: #42677c;
+  --complex-imaginary: #8b4d73;
+  --complex-green: #426b5a;
+  --complex-paper: #f7f2e9;
+  --complex-paper-soft: #fcfaf5;
+  --complex-line: #cbc3b5;
+  --complex-white: #fffefa;
+}
+
+.complex-numbers-page .rst-content h1,
+.complex-numbers-page .rst-content h2,
+.complex-numbers-page .rst-content h3 {
+  color: var(--complex-ink);
+}
+
+.complex-numbers-page .rst-content h1 {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--complex-line);
+}
+
+.complex-numbers-page .rst-content .topic {
+  border: 1px solid var(--complex-line);
+  border-radius: 0.35rem;
+  background: var(--complex-paper);
+}
+
+.complex-numbers-page .rst-content .admonition {
+  border-radius: 0.25rem;
+  box-shadow: none;
+}
+
+.complex-numbers-page .rst-content .admonition-title {
+  background: var(--complex-real);
+}
+
+.complex-numbers-page .rst-content .important .admonition-title {
+  background: var(--complex-green);
+}
+
+.complex-numbers-page .rst-content table.docutils {
+  width: 100%;
+  border-color: var(--complex-line);
+}
+
+.complex-numbers-page .rst-content table.docutils thead {
+  background: var(--complex-paper);
+}
+
+.complex-quotient {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(12rem, 0.72fr);
+  align-items: center;
+  gap: 1rem;
+  max-width: 50rem;
+  margin: 1.4rem auto;
+  padding: 1rem;
+  border: 1px solid var(--complex-line);
+  border-radius: 0.45rem;
+  background: var(--complex-paper-soft);
+}
+
+.complex-quotient__representatives,
+.complex-quotient__class {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.complex-quotient__representatives span {
+  padding: 0.35rem 0.55rem;
+  border-left: 3px solid var(--complex-real);
+  background: var(--complex-white);
+  font-family: "STIX Two Math", "Cambria Math", serif;
+}
+
+.complex-quotient__arrow {
+  color: var(--complex-green);
+  font-size: 2rem;
+}
+
+.complex-quotient__class {
+  justify-items: center;
+  padding: 0.85rem;
+  border: 2px solid var(--complex-green);
+  border-radius: 999px;
+  color: var(--complex-ink);
+  background: var(--complex-white);
+  text-align: center;
+}
+
+.complex-quotient__class strong {
+  font: 700 1.45rem/1 "STIX Two Math", "Cambria Math", serif;
+}
+
+.complex-quotient__class span {
+  color: var(--complex-muted);
+  font-size: 0.85rem;
+}
+
+.complex-figure {
+  max-width: 48rem;
+  margin: 1.5rem auto;
+  overflow: hidden;
+  border: 1px solid var(--complex-line);
+  border-radius: 0.45rem;
+  background: var(--complex-white);
+}
+
+.complex-plane {
+  display: block;
+  width: 100%;
+  min-height: 22rem;
+  background: var(--complex-white);
+  touch-action: none;
+}
+
+.complex-plane .complex-grid {
+  stroke: #e5dfd4;
+  stroke-width: 1;
+}
+
+.complex-plane .complex-axis {
+  stroke: var(--complex-ink);
+  stroke-width: 1.8;
+}
+
+.complex-plane .complex-circle {
+  fill: none;
+  stroke: var(--complex-line);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+
+.complex-plane .complex-z,
+.complex-plane .complex-conjugate {
+  fill: none;
+  stroke-width: 3.4;
+}
+
+.complex-plane .complex-z {
+  stroke: var(--complex-real);
+}
+
+.complex-plane .complex-conjugate {
+  stroke: var(--complex-imaginary);
+}
+
+.complex-plane .complex-guide {
+  stroke: var(--complex-muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+
+.complex-plane .complex-angle {
+  fill: none;
+  stroke: var(--complex-green);
+  stroke-width: 2.4;
+}
+
+.complex-plane .complex-point {
+  stroke: var(--complex-white);
+  stroke-width: 2;
+}
+
+.complex-plane .complex-point--z {
+  fill: var(--complex-real);
+}
+
+.complex-plane .complex-point--conjugate {
+  fill: var(--complex-imaginary);
+}
+
+.complex-plane text {
+  fill: var(--complex-ink);
+  font: 16px/1.2 system-ui, sans-serif;
+}
+
+.complex-plane .complex-label-muted {
+  fill: var(--complex-muted);
+  font-size: 13px;
+}
+
+.complex-plane .complex-label-z {
+  fill: var(--complex-real);
+  font-weight: 700;
+}
+
+.complex-plane .complex-label-conjugate {
+  fill: var(--complex-imaginary);
+  font-weight: 700;
+}
+
+.complex-controls {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.7fr) minmax(9rem, 0.7fr) minmax(15rem, 1.6fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-top: 1px solid var(--complex-line);
+  background: var(--complex-paper-soft);
+}
+
+.complex-controls label {
+  display: grid;
+  grid-template-columns: 1.2rem 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  color: var(--complex-ink);
+  font-weight: 700;
+}
+
+.complex-controls input[type="range"] {
+  width: 100%;
+  accent-color: var(--complex-green);
+}
+
+.complex-readout {
+  color: var(--complex-muted);
+  font-family: "STIX Two Math", "Cambria Math", serif;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .complex-quotient {
+    grid-template-columns: 1fr;
+  }
+
+  .complex-quotient__arrow {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+
+  .complex-plane {
+    min-height: 17rem;
+  }
+
+  .complex-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .complex-readout {
+    text-align: left;
+  }
+}
+
+
+.complex-numbers-page .lecture-boundary {
+  color: var(--complex-muted);
+}
+
+.complex-numbers-page .lecture-boundary::before,
+.complex-numbers-page .lecture-boundary::after {
+  border-top-color: var(--complex-line);
+}
+
+.complex-root-plane .complex-root-circle {
+  fill: none;
+  stroke: var(--complex-line);
+  stroke-width: 1.6;
+}
+
+.complex-root-plane .complex-root-polygon {
+  fill: color-mix(in srgb, var(--complex-real) 9%, transparent);
+  stroke: var(--complex-real);
+  stroke-width: 2.4;
+}
+
+.complex-root-plane .complex-root-spoke {
+  stroke: var(--complex-line);
+  stroke-width: 1.1;
+}
+
+.complex-root-plane .complex-root-point {
+  fill: var(--complex-real);
+  stroke: var(--complex-white);
+  stroke-width: 2;
+}
+
+.complex-root-plane .complex-root-label {
+  fill: var(--complex-real);
+  font-weight: 700;
+}
+
+.complex-root-plane .complex-target {
+  stroke: var(--complex-imaginary);
+  stroke-width: 2.6;
+  stroke-dasharray: 7 5;
+}
+
+.complex-root-plane .complex-target-point {
+  fill: var(--complex-imaginary);
+  stroke: var(--complex-white);
+  stroke-width: 2;
+}
+
+.complex-root-plane .complex-target-label {
+  fill: var(--complex-imaginary);
+  font-weight: 700;
+}
