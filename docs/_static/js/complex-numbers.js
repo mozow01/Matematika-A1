@@ -301,9 +301,163 @@
     render();
   };
 
+  const initComplexMultiplication = () => {
+    const figure = document.querySelector("[data-complex-multiplication]");
+    if (!figure) return;
+
+    document.body.classList.add("complex-numbers-page");
+
+    const svg = figure.querySelector("svg");
+    const modeSelect = figure.querySelector("[data-comp-mult-mode]");
+    const zAInput = figure.querySelector("[data-comp-mult-z-a]");
+    const zBInput = figure.querySelector("[data-comp-mult-z-b]");
+    const wAngleSlider = figure.querySelector("[data-comp-mult-w-angle]");
+    const wModulusSlider = figure.querySelector("[data-comp-mult-w-modulus]");
+    const angleControl = figure.querySelector("[data-comp-mult-angle-control]");
+    const modulusControl = figure.querySelector("[data-comp-mult-modulus-control]");
+    const readout = figure.querySelector("[data-comp-mult-readout]");
+
+    if (![svg, modeSelect, zAInput, zBInput, wAngleSlider, wModulusSlider, readout].every(Boolean)) return;
+
+    const NS = "http://www.w3.org/2000/svg";
+    const origin = { x: 380, y: 230 };
+    const scale = 50;
+
+    const el = (name, attrs = {}, text = "") => {
+      const node = document.createElementNS(NS, name);
+      Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+      if (text) node.textContent = text;
+      return node;
+    };
+
+    const pointAtCoords = (a, b) => ({ x: origin.x + scale * a, y: origin.y - scale * b });
+    const pointAtPolar = (modulus, angle) => ({ x: origin.x + scale * modulus * Math.cos(angle), y: origin.y - scale * modulus * Math.sin(angle) });
+    const number = (value) => { const r = Math.round(value * 100) / 100; return Object.is(r, -0) ? "0" : String(r); };
+    const complexText = (a, b) => { const sign = b < 0 ? "−" : "+"; return `${number(a)} ${sign} ${number(Math.abs(b))}i`; };
+    const polarText = (mod, angle) => `${Number(mod.toFixed(2))} ⋅ cis(${Math.round(angle)}°)`;
+    const addLine = (g, from, to, cls, mk, op = 1) => { const a = { x1: from.x, y1: from.y, x2: to.x, y2: to.y, class: cls, style: op < 1 ? `opacity:${op}` : "" }; if (mk) a["marker-end"] = `url(#${mk})`; g.appendChild(el("line", a)); };
+
+    const render = () => {
+      const allowedModes = new Set(["rotation", "scaling", "combined"]);
+      const mode = allowedModes.has(modeSelect.value) ? modeSelect.value : "rotation";
+      const angleEnabled = mode !== "scaling";
+      const modulusEnabled = mode !== "rotation";
+      const clamp = (value, min, max, fallback) =>
+        Number.isFinite(value) ? Math.min(max, Math.max(min, value)) : fallback;
+
+      wAngleSlider.disabled = !angleEnabled;
+      wModulusSlider.disabled = !modulusEnabled;
+      angleControl?.classList.toggle("is-disabled", !angleEnabled);
+      modulusControl?.classList.toggle("is-disabled", !modulusEnabled);
+
+      const zA = clamp(Number(zAInput.value), -2, 2, 1);
+      const zB = clamp(Number(zBInput.value), -2, 2, 0);
+      const wAngleDeg = angleEnabled
+        ? clamp(Number(wAngleSlider.value), -180, 180, 0)
+        : 0;
+      const wMod = modulusEnabled
+        ? clamp(Number(wModulusSlider.value), 0, 1.5, 1)
+        : 1;
+      const wAngleRad = wAngleDeg * Math.PI / 180;
+
+      zAInput.value = String(zA);
+      zBInput.value = String(zB);
+
+      const wA = wMod * Math.cos(wAngleRad);
+      const wB = wMod * Math.sin(wAngleRad);
+      const resultA = zA * wA - zB * wB;
+      const resultB = zA * wB + zB * wA;
+      const zAngle = Math.atan2(zB, zA);
+      const resultAngle = zAngle + wAngleRad;
+
+      const z = pointAtCoords(zA, zB);
+      const w = pointAtCoords(wA, wB);
+      const result = pointAtCoords(resultA, resultB);
+
+      svg.replaceChildren();
+
+      // Markers
+      const defs = el("defs");
+      const arrowZ = el("marker", { id: "arrow-z", viewBox: "0 0 10 10", refX: "8.5", refY: "5", markerWidth: "6", markerHeight: "6", orient: "auto-start-reverse" });
+      arrowZ.appendChild(el("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: "#42677c" }));
+      const arrowW = el("marker", { id: "arrow-w", viewBox: "0 0 10 10", refX: "8.5", refY: "5", markerWidth: "6", markerHeight: "6", orient: "auto-start-reverse" });
+      arrowW.appendChild(el("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: "#8b4d73" }));
+      const arrowResult = el("marker", { id: "arrow-result", viewBox: "0 0 10 10", refX: "8.5", refY: "5", markerWidth: "5", markerHeight: "5", orient: "auto-start-reverse" });
+      arrowResult.appendChild(el("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: "#2e7d32" }));
+      defs.append(arrowZ, arrowW, arrowResult);
+      svg.appendChild(defs);
+
+      // Grid
+      for (let x = -4.5; x <= 4.5; x += 1) {
+        const px = pointAtCoords(x, 0);
+        addLine(svg, { x: px.x, y: 30 }, { x: px.x, y: 430 }, "complex-grid");
+        if (x !== 0) svg.appendChild(el("text", { x: px.x, y: origin.y + 20, "text-anchor": "middle", class: "complex-label-muted" }, String(x)));
+      }
+      for (let y = -3; y <= 3; y += 1) {
+        const py = pointAtCoords(0, y);
+        addLine(svg, { x: 30, y: py.y }, { x: 730, y: py.y }, "complex-grid");
+        if (y !== 0) svg.appendChild(el("text", { x: origin.x - 12, y: py.y + 5, "text-anchor": "end", class: "complex-label-muted" }, String(y)));
+      }
+
+      // Axes
+      svg.appendChild(el("line", { x1: origin.x - 370, y1: origin.y, x2: origin.x + 370, y2: origin.y, class: "complex-axis" }));
+      svg.appendChild(el("line", { x1: origin.x, y1: origin.y - 210, x2: origin.x, y2: origin.y + 210, class: "complex-axis" }));
+      svg.appendChild(el("text", { x: origin.x + 365, y: origin.y - 15, "text-anchor": "end", class: "complex-label-axis" }, "Re"));
+      svg.appendChild(el("text", { x: origin.x + 15, y: origin.y - 195, class: "complex-label-axis" }, "Im"));
+
+      // Unit circle for rotation mode
+      if (mode === "rotation") {
+        svg.appendChild(el("circle", { cx: origin.x, cy: origin.y, r: scale, class: "complex-unit-circle" }));
+      }
+
+      // Z vector
+      addLine(svg, origin, z, "complex-z", "arrow-z");
+      svg.appendChild(el("circle", { cx: z.x, cy: z.y, r: 5, style: "fill:#42677c;stroke:white;stroke-width:2;" }));
+      svg.appendChild(el("text", { x: z.x + 22, y: z.y - 8, class: "complex-label-z" }, "z"));
+
+      // W vector
+      addLine(svg, origin, w, "complex-w", "arrow-w");
+      svg.appendChild(el("circle", { cx: w.x, cy: w.y, r: 5, style: "fill:#8b4d73;stroke:white;stroke-width:2;" }));
+      const wL = pointAtPolar(wMod + 0.35, wAngleRad);
+      svg.appendChild(el("text", { x: wL.x, y: wL.y + 5, class: "complex-label-w" }, "w"));
+
+      // Result vector
+      addLine(svg, origin, result, "complex-result", "arrow-result", 0.8);
+      svg.appendChild(el("circle", { cx: result.x, cy: result.y, r: 5, style: "fill:#2e7d32;stroke:white;stroke-width:2;" }));
+      svg.appendChild(el("text", { x: result.x + 22, y: result.y - 8, class: "complex-label-result" }, "z·w"));
+
+      // Rotation arc
+      if (mode === "rotation" || mode === "combined") {
+        if (Math.abs(wAngleRad) > 0.1) {
+          const arcRad = 80;
+          const la = Math.abs(resultAngle - zAngle) > Math.PI ? 1 : 0;
+          const sw = wAngleRad > 0 ? 0 : 1;
+          const sx = origin.x + arcRad * Math.cos(zAngle);
+          const sy = origin.y - arcRad * Math.sin(zAngle);
+          const ex = origin.x + arcRad * Math.cos(resultAngle);
+          const ey = origin.y - arcRad * Math.sin(resultAngle);
+          const rArc = el("path", { d: `M ${sx} ${sy} A ${arcRad} ${arcRad} 0 ${la} ${sw} ${ex} ${ey}`, fill: "none", stroke: "#8b4d73", "stroke-width": 2.5, "stroke-dasharray": "6 4" });
+          svg.appendChild(rArc);
+        }
+      }
+
+      readout.textContent =
+        `z = ${complexText(zA, zB)} | w = ${complexText(wA, wB)} = ${polarText(wMod, wAngleDeg)} | ` +
+        `z·w = ${complexText(resultA, resultB)}`;
+    };
+
+    if (modeSelect) modeSelect.addEventListener("change", render);
+    if (zAInput) zAInput.addEventListener("input", render);
+    if (zBInput) zBInput.addEventListener("input", render);
+    if (wAngleSlider) wAngleSlider.addEventListener("input", render);
+    if (wModulusSlider) wModulusSlider.addEventListener("input", render);
+    render();
+  };
+
   const initComplexNumbers = () => {
     initComplexPlane();
     initRootPolygon();
+    initComplexMultiplication();
   };
 
   if (document.readyState === "loading") {

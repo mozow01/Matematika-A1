@@ -300,3 +300,141 @@
   fill: var(--complex-imaginary);
   font-weight: 700;
 }
+
+.complex-multiplication-plane .complex-grid {
+  stroke: #e5dfd4;
+  stroke-width: 1;
+}
+
+.complex-multiplication-plane .complex-axis {
+  stroke: var(--complex-ink);
+  stroke-width: 1.8;
+}
+
+.complex-multiplication-plane .complex-unit-circle {
+  fill: none;
+  stroke: var(--complex-line);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+
+.complex-multiplication-plane .complex-z {
+  stroke: var(--complex-real);
+  stroke-width: 3.4;
+  fill: none;
+}
+
+.complex-multiplication-plane .complex-w {
+  stroke: var(--complex-imaginary);
+  stroke-width: 3.2;
+  fill: none;
+}
+
+.complex-multiplication-plane .complex-result {
+  stroke: var(--complex-green);
+  stroke-width: 3;
+  fill: none;
+}
+
+.complex-multiplication-plane .complex-point {
+  stroke: var(--complex-white);
+  stroke-width: 2;
+}
+
+.complex-multiplication-plane .complex-label-z {
+  fill: var(--complex-real);
+  font-weight: 700;
+}
+
+.complex-multiplication-plane .complex-label-w {
+  fill: var(--complex-imaginary);
+  font-weight: 700;
+}
+
+.complex-multiplication-plane .complex-label-result {
+  fill: var(--complex-green);
+  font-weight: 700;
+}
+
+.complex-multiplication-plane .complex-label-axis {
+  fill: var(--complex-ink);
+  font-size: 14px;
+}
+
+.complex-multiplication-plane .complex-label-muted {
+  fill: var(--complex-muted);
+  font-size: 13px;
+}
+
+.complex-multiplication-plane text {
+  fill: var(--complex-ink);
+  font: 16px/1.2 system-ui, sans-serif;
+}
+
+
+.complex-multiplication-controls {
+  border-top: 1px solid var(--complex-line);
+  background: var(--complex-paper-soft);
+}
+
+.complex-multiplication-fields {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(7.5rem, 1fr));
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.complex-multiplication-fields label {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  margin: 0;
+  color: var(--complex-ink);
+  font-size: 0.86rem;
+  font-weight: 700;
+  transition: opacity 150ms ease;
+}
+
+.complex-multiplication-fields select,
+.complex-multiplication-fields input[type="number"] {
+  width: 100%;
+  min-height: 2.25rem;
+  padding: 0.3rem 0.45rem;
+  border: 1px solid var(--complex-line);
+  border-radius: 0.25rem;
+  color: var(--complex-ink);
+  background: var(--complex-white);
+}
+
+.complex-multiplication-fields input[type="range"] {
+  width: 100%;
+  accent-color: var(--complex-green);
+}
+
+.complex-multiplication-fields .is-disabled {
+  opacity: 0.42;
+}
+
+.complex-multiplication-fields .is-disabled input {
+  cursor: not-allowed;
+}
+
+.complex-multiplication-readout {
+  display: block;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--complex-line);
+  color: var(--complex-ink);
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .complex-multiplication-fields {
+    grid-template-columns: repeat(2, minmax(8rem, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .complex-multiplication-fields {
+    grid-template-columns: 1fr;
+  }
+}

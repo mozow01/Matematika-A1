@@ -10,7 +10,7 @@ számot két valós koordináta ír le, és a polinomokat valóban elfelejthetj�
 .. topic:: A két 90 perces rész
 
    **Első előadás:** polinomok és maradékos osztás; a komplex számok
-   konstrukciója; algebrai alak és műveletek; koordinátareprezentáció;
+   konstrukciója; algebrai alak, műveletek és geometriai jelentés;
    konjugálás, abszolútérték és trigonometrikus alak. **Második előadás:**
    az n-edik gyökök, a konjugált gyökpárok tétele, az algebra alaptétele
    és a gyökök multiplicitása.
@@ -161,8 +161,8 @@ Itt :math:`\operatorname{Re}z=a` a valós rész és
 :math:`x,y` jelöli, ugyanez az alak :math:`z=x+iy`.
 
 
-Műveletek és koordinátareprezentáció
-------------------------------------
+Műveletek és geometriai jelentés
+---------------------------------
 
 Legyen :math:`z=a+bi`, :math:`w=c+di` és :math:`\lambda\in\mathbb R`.
 Az összeadás és a valós számmal való szorzás koordinátánként történik:
@@ -180,36 +180,53 @@ A szorzásnál csak :math:`i^2=-1`-et kell használni:
    zw=(a+bi)(c+di)
      =(ac-bd)+(ad+bc)i.
 
-A koordinátaleképezés
+Geometriailag az :math:`a+bi` komplex számot a sík :math:`(a,b)`
+pontjával azonosítjuk. Ekkor az összeadás a síkvektorok összeadása, a
+valós számmal való szorzás pedig nyújtás; negatív skalár esetén ehhez
+egy origóra való tükrözés is társul.
 
-.. math::
+Egy nem nulla :math:`w` komplex számmal való szorzás
+:math:`\arg w` szögű forgatás és :math:`|w|` arányú nyújtás. Az alábbi
+ábrán :math:`z` a kiinduló szám, :math:`w` a szorzó, a zöld vektor pedig
+:math:`zw`.
 
-   \Phi:\mathbb C\longrightarrow\mathbb R^2,
-   \qquad
-   a+bi\longmapsto
-   \begin{pmatrix}a\\b\end{pmatrix}
+.. raw:: html
 
-az összeadást és a valós skalárral való szorzást a sík szokásos
-műveleteivé alakítja:
-
-.. math::
-
-   [z+w]=
-   \begin{pmatrix}a+c\\b+d\end{pmatrix},
-   \qquad
-   [\lambda z]=
-   \begin{pmatrix}\lambda a\\\lambda b\end{pmatrix}.
-
-A :math:`z=a+bi` számmal való szorzás koordinátamátrixa
-
-.. math::
-
-   [zw]
-   =\begin{pmatrix}a&-b\\b&a\end{pmatrix}
-    \begin{pmatrix}c\\d\end{pmatrix}.
-
-Ez a mátrix később megmutatja, hogy egy nem nulla komplex számmal való
-szorzás egy forgatás és egy nyújtás együttese.
+   <figure class="complex-figure complex-multiplication-figure"
+           data-complex-multiplication>
+     <svg class="complex-plane complex-multiplication-plane"
+          viewBox="0 0 760 460" role="img"
+          aria-label="Komplex számmal való szorzás mint forgatás és nyújtás"></svg>
+     <figcaption class="complex-multiplication-controls">
+       <div class="complex-multiplication-fields">
+         <label>Hatás
+           <select data-comp-mult-mode>
+             <option value="rotation">Forgatás</option>
+             <option value="scaling">Nyújtás</option>
+             <option value="combined">Forgatás és nyújtás</option>
+           </select>
+         </label>
+         <label>Re(z)
+           <input type="number" min="-2" max="2" step="0.25" value="2"
+                  data-comp-mult-z-a>
+         </label>
+         <label>Im(z)
+           <input type="number" min="-2" max="2" step="0.25" value="1"
+                  data-comp-mult-z-b>
+         </label>
+         <label data-comp-mult-angle-control>arg(w)
+           <input type="range" min="-180" max="180" step="5" value="60"
+                  data-comp-mult-w-angle>
+         </label>
+         <label data-comp-mult-modulus-control>|w|
+           <input type="range" min="0" max="1.5" step="0.05" value="1.25"
+                  data-comp-mult-w-modulus>
+         </label>
+       </div>
+       <div class="complex-readout complex-multiplication-readout"
+            data-comp-mult-readout aria-live="polite"></div>
+     </figcaption>
+   </figure>
 
 
 Konjugálás, abszolútérték és osztás
