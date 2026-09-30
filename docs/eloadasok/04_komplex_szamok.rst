@@ -325,6 +325,28 @@ tehát
 többszörösétől eltekintve egyértelmű. Röviden
 :math:`z=re^{i\varphi}` is írható.
 
+**Példák.**
+
+Az :math:`1+i` abszolútértéke :math:`\sqrt2`, argumentuma pedig
+:math:`\pi/4`, ezért
+
+.. math::
+
+   1+i=\sqrt2\left(\cos\frac\pi4+i\sin\frac\pi4\right)
+      =\sqrt2e^{i\pi/4}.
+
+A :math:`\sqrt2+i` abszolútértéke :math:`\sqrt3`, argumentuma viszont
+nem :math:`\pi/4`, hanem
+:math:`\alpha=\arctan(1/\sqrt2)`. Így
+
+.. math::
+
+   \sqrt2+i
+   =\sqrt3\bigl(\cos\alpha+i\sin\alpha\bigr)
+   =\sqrt3e^{i\alpha},
+   \qquad
+   \alpha=\arctan\frac1{\sqrt2}.
+
 Legyen
 
 .. math::
