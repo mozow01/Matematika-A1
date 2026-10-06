@@ -263,14 +263,14 @@
         s,
         84,
         upper ? 36 : 301,
-        upper ? "felső korlátok" : "alsó korlátok",
+        upper ? "K ≥ 2" : "k ≤ −1",
         "rl-svg-purple rl-svg-small"
       );
       txt(
         s,
         85,
         upper ? y(2) - 9 : y(-1) + 26,
-        upper ? "sup S = 2" : "inf S = −1",
+        upper ? "S = 2" : "I = −1",
         "rl-svg-purple rl-svg-small"
       );
     });

@@ -4,7 +4,38 @@ Valós számok és függvényhatárérték
 ===================================
 
 A valós számok teljességétől jutunk a függvényhatárértékekig.
-Az első, kétdimenziós ábra a környezetek képeinek alapgondolatát mutatja.
+DE előtte, egy általánosabb fogalom. Az első, kétdimenziós ábra a környezetek képeinek alapgondolatát mutatja.
+
+A bal oldali koordinátarendszerben :math:`(x_0,y_0)` egy pont. A rögzített :math:`f:\mathbb R^2\to\mathbb R^2` függvény képezi át a sík pontjait a
+jobb oldalon ábrázolt példányába a síknak. Az összetartozó színes pontok egy-egy pont képe f által, így mozognak. A köralakú környzet f általi képe az ,,amőba'' alakú halmaz. :math:`(A_1,A_2)` egy pont az érkezési síkon. Legyen adva ekörül egy :math:`ε` sugarú kör!
+
+.. raw:: html
+
+   <figure class="rl-figure rl-map" data-rl-map>
+     <div class="rl-map-panels">
+       <div class="rl-map-panel">
+         <h3>1. koordinátarendszer: kiinduló pontok</h3>
+         <svg viewBox="0 0 440 360" role="img" aria-label="Az (x0, y0) pont delta sugarú környezete" data-rl-source></svg>
+       </div>
+       <span class="rl-map-arrow" aria-hidden="true">⟶ <i>f</i> ⟶</span>
+       <div class="rl-map-panel">
+         <h3>2. koordinátarendszer: képpontok</h3>
+         <svg viewBox="0 0 440 360" role="img" aria-label="Az amőba alakú képhalmaz az (A1, A2) pont epszilon sugarú környezetében" data-rl-target></svg>
+       </div>
+     </div>
+     <figcaption>
+       <label for="rl-epsilon">ε sugár <output data-rl-epsilon-value>1,20</output>
+         <input id="rl-epsilon" type="range" min="0.25" max="1.8" step="0.01" value="1.2" data-rl-epsilon>
+       </label>
+       <button type="button" data-rl-play>Lejátszás</button>
+       <span data-rl-delta-value>δ = 0,80</span>
+     </figcaption>
+   </figure>
+
+
+.. math::
+
+   \forall \varepsilon>0 \exists \delta>0 \forall x\in B_\delta(x_0,y_0)\setminus\{(x_0,y_0)\}\;f(x)\in B_\varepsilon(A_1,A_2).
 
 .. topic:: A két 90 perces rész
 
@@ -17,112 +48,69 @@ Az első, kétdimenziós ábra a környezetek képeinek alapgondolatát mutatja.
 
 .. rubric:: Első előadás — 90 perc
 
-Egy környezet képe
-------------------
 
-A bal oldali koordinátarendszerben :math:`p=(x_0,y_0)` körül :math:`δ` sugarú környezet
-van. A rögzített :math:`f:\mathbb R^2\to\mathbb R^2` függvény képezi át pontjait a
-jobb oldalra. Az összetartozó színes pontok együtt mozognak. A kép amőba
-alakú, és belefér az :math:`A=(A_1,A_2)` körüli :math:`ε` sugarú körbe.
+Rendezett test, alsó és felső korlátok
+--------------------------------------
 
-.. raw:: html
-
-   <figure class="rl-figure rl-map" data-rl-map>
-     <div class="rl-map-panels">
-       <div class="rl-map-panel">
-         <h3>1. koordinátarendszer: kiinduló pontok</h3>
-         <svg viewBox="0 0 440 360" role="img" aria-label="A p pont deltás környezete" data-rl-source></svg>
-       </div>
-       <span class="rl-map-arrow" aria-hidden="true">⟶ <i>f</i> ⟶</span>
-       <div class="rl-map-panel">
-         <h3>2. koordinátarendszer: képpontok</h3>
-         <svg viewBox="0 0 440 360" role="img" aria-label="Az amőba alakú képhalmaz az A pont epszilonos környezetében" data-rl-target></svg>
-       </div>
-     </div>
-     <figcaption>
-       <label for="rl-epsilon">ε sugár <output data-rl-epsilon-value>1,20</output>
-         <input id="rl-epsilon" type="range" min="0.25" max="1.8" step="0.01" value="1.2" data-rl-epsilon>
-       </label>
-       <button type="button" data-rl-play>Lejátszás</button>
-       <span data-rl-delta-value>δ = 0,80</span>
-     </figcaption>
-   </figure>
-
-A rajzban használt torzítás rögzített. Ha
-:math:`h=\rho(\cos\theta,\sin\theta)`, akkor
-
-.. math::
-
-   f(p+h)=A+\rho\left(1+\tfrac14\cos3\theta+
-   \tfrac18\sin5\theta\right)(\cos\theta,\sin\theta),
-   \qquad f(p)=A.
-
-A zárójeles szorzó legfeljebb :math:`11/8`. A rajzon :math:`δ=2ε/3`, tehát
-:math:`0<|h|<δ` esetén :math:`|f(p+h)-A|<11ε/12<ε`.
-Az :math:`ε` csökkentésekor mindig ugyanannak a függvénynek egy kisebb
-környezeten vett képe látható.
-
-Rendezett test és korlátok
---------------------------
-
-A :math:`K` test **rendezett**, ha teljes rendezése összefér a műveletekkel:
+A :math:`T` test **rendezett**, ha láncszerűen rendezezett és a rendezése kompatibilis a műveletekkel:
 
 .. math::
 
    a\leq b\Longrightarrow a+c\leq b+c,\qquad
-   0\leq a,\ 0\leq b\Longrightarrow 0\leq ab.
+   a\leq b,\ 0\leq c\Longrightarrow a\cdot c\leq b\cdot c.
 
-A racionális és a valós számok rendezett testek. Legyen
-:math:`S\subseteq K` nemüres. A két hasáb ugyanannak az :math:`S` halmaznak
-a felső és az alsó oldalát írja le. Közöttük két függőleges számegyenesen
-az :math:`S=(-1,2)` példa szerepel: itt sem maximum, sem minimum nincs.
+A racionális számok köre pl. rendezett test, de a komplex számok köre nem.
+
+Nagyon fontos fogalom a korlát.
 
 .. raw:: html
 
    <figure class="rl-bounds" data-rl-bounds>
      <div class="rl-bounds-grid">
        <div class="rl-bound-text">
-         <h3>Felső oldal</h3>
-         <p><strong>Felső korlát:</strong> <span>\(M\in K\)</span>, ha \(s\leq M\) minden \(s\in S\)-re.</p>
-         <p><strong>Maximum:</strong> olyan felső korlát, amely eleme \(S\)-nek.</p>
-         <p><strong>Szuprémum:</strong> a felső korlátok legkisebbike: \(\sup S\).</p>
+         <h3>Felülről</h3>
+         <p><strong><span>\(K\in T\)</span> felső korlátja a \(H\subseteq T\) halmaznak,</strong> ha minden \(x\in H\)-ra \(x\leq K\).</p>
+         <p><strong>Maximum:</strong> \(M\in H\) felső korlát; ekkor \(M=\max H\).</p>
+         <p><strong>Szuprémum:</strong> \(S\in T\) a felső korlátok legkisebbike; ekkor \(S=\sup H\).</p>
        </div>
        <svg viewBox="0 0 160 330" role="img" aria-label="A felső korlátok és a szuprémum függőleges számegyenesen" data-rl-upper></svg>
        <svg viewBox="0 0 160 330" role="img" aria-label="Az alsó korlátok és az infimum függőleges számegyenesen" data-rl-lower></svg>
        <div class="rl-bound-text">
-         <h3>Alsó oldal</h3>
-         <p><strong>Alsó korlát:</strong> \(m\in K\), ha \(m\leq s\) minden \(s\in S\)-re.</p>
-         <p><strong>Minimum:</strong> olyan alsó korlát, amely eleme \(S\)-nek.</p>
-         <p><strong>Infimum:</strong> az alsó korlátok legnagyobbika: \(\inf S\).</p>
+         <h3>Alulról</h3>
+         <p><strong><span>\(k\in T\)</span> alsó korlátja a \(H\subseteq T\) halmaznak,</strong> ha minden \(x\in H\)-ra \(k\leq x\).</p>
+         <p><strong>Minimum:</strong> \(m\in H\) alsó korlát; ekkor \(m=\min H\).</p>
+         <p><strong>Infimum:</strong> \(I\in T\) az alsó korlátok legnagyobbika; ekkor \(I=\inf H\).</p>
        </div>
      </div>
-     <figcaption>A kék S intervallum végpontjai nyitottak; a lila korlátok közé a szuprémum és az infimum is beletartozik.</figcaption>
+     <figcaption>A rajzon \(T=\mathbb R\), \(H=(-1,2)\), \(S=2\) és \(I=-1\). A kék \(H\) végpontjai nyitottak, ezért \(M\) és \(m\) nincs.</figcaption>
    </figure>
 
-Ha :math:`\sup S\in S`, akkor :math:`\max S=\sup S`; hasonlóan
-:math:`\inf S\in S` esetén :math:`\min S=\inf S`.
+Ha a szuprémum :math:`S` létezik és :math:`S\in H`, akkor :math:`M=S`;
+hasonlóan, ha az infimum :math:`I` létezik és :math:`I\in H`, akkor
+:math:`m=I`.
 
 A racionális számokból hiányzó felső határ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Legyen
+Most legyen :math:`T=\mathbb Q`, és
 
 .. math::
 
-   S=\{q\in\mathbb Q:q\geq0,\ q^2<2\}.
+   H=\{q\in T:q\geq0,\ q^2<2\}.
 
-:math:`S` nemüres és felülről korlátos :math:`\mathbb Q`-ban, mégsincs
-:math:`\sup_{\mathbb Q}S`: a keresett határ :math:`\sqrt2`, amely irracionális.
-Pozitív racionális :math:`r` esetén ha :math:`r^2<2`, egy kissé nagyobb racionális
-szám is :math:`S`-ben van; ha :math:`r^2>2`, van kisebb racionális felső korlát.
-Az :math:`r^2=2` eset racionális :math:`r`-re lehetetlen.
+:math:`H` nemüres és felülről korlátos :math:`T`-ben, még sincs ott szuprémuma.
+A valós számok között :math:`S=\sup_{\mathbb R}H=\sqrt2`, de
+:math:`S\notin T`.
+Pozitív :math:`r\in T` esetén ha :math:`r^2<2`, egy kissé nagyobb racionális
+szám is :math:`H`-ban van; ha :math:`r^2>2`, van kisebb racionális felső korlát.
+Az :math:`r^2=2` eset :math:`T`-ben lehetetlen.
 
 Teljesség, Arkhimédész és Cantor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Felsőhatár-axióma:** :math:`\mathbb R` minden nemüres, felülről korlátos
-részhalmazának van valós szuprémuma. Az infimum létezése az :math:`-S`
-halmaz alkalmazásával következik.
+**Felsőhatár-axióma:** :math:`T=\mathbb R` esetén minden nemüres, felülről
+korlátos :math:`H\subseteq T` halmaznak van :math:`S\in T` szuprémuma.
+Az :math:`I\in T` infimum létezése a :math:`-H` halmaz alkalmazásával következik.
 
 Rendezett testekben ez az axióma ekvivalens az alábbi **két állítás
 együttesével**:
