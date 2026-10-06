@@ -1,0 +1,204 @@
+/* Interactive figures for lecture 05. */
+.rl-figure,
+.rl-bounds {
+  --ink: #243044;
+  --muted: #627084;
+  --teal: #0b8f87;
+  --purple: #7138aa;
+  --orange: #cf642e;
+  color: var(--ink);
+  margin: 1.6rem 0 2rem;
+  padding: 1rem 0 0.65rem;
+  border-top: 1px solid #dce4ec;
+  border-bottom: 1px solid #dce4ec;
+  background: linear-gradient(#fbfcfe, #fff);
+}
+.rl-figure svg,
+.rl-bounds svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: "DejaVu Sans", sans-serif;
+}
+.rl-figure svg text,
+.rl-bounds svg text {
+  fill: var(--ink);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+.rl-figure svg .rl-svg-muted,
+.rl-bounds svg .rl-svg-muted {
+  fill: var(--muted);
+  font-size: 13px;
+}
+.rl-figure svg .rl-svg-small,
+.rl-bounds svg .rl-svg-small {
+  font-size: 12px;
+}
+.rl-figure svg .rl-svg-teal,
+.rl-bounds svg .rl-svg-teal {
+  fill: var(--teal);
+}
+.rl-figure svg .rl-svg-purple,
+.rl-bounds svg .rl-svg-purple {
+  fill: var(--purple);
+}
+.rl-figure svg .rl-svg-orange,
+.rl-bounds svg .rl-svg-orange {
+  fill: var(--orange);
+}
+.rl-figure figcaption,
+.rl-bounds figcaption {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.15rem;
+  padding: 0.5rem 1rem 0;
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+.rl-figure figcaption label {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+.rl-figure input[type="range"] {
+  width: clamp(125px, 20vw, 210px);
+  accent-color: var(--purple);
+  cursor: pointer;
+}
+.rl-figure output {
+  min-width: 3.4em;
+  color: var(--purple);
+  font-variant-numeric: tabular-nums;
+}
+.rl-figure button {
+  appearance: none;
+  border: 1px solid var(--purple);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--purple);
+  padding: 0.33rem 0.85rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.rl-figure button:hover,
+.rl-figure button:focus-visible {
+  background: #eee5f8;
+}
+.rl-figure button:focus-visible,
+.rl-figure input:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+.rl-map-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem;
+}
+.rl-map-panel {
+  min-width: 0;
+}
+.rl-map-panel h3,
+.rl-bound-text h3 {
+  margin: 0.25rem 0 0.2rem;
+  color: var(--ink);
+  font-size: 0.97rem;
+  font-weight: 650;
+  text-align: center;
+}
+.rl-map-arrow {
+  color: var(--purple);
+  font-size: 1.1rem;
+  text-align: center;
+  white-space: nowrap;
+}
+.rl-bounds-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) 120px 120px minmax(0, 1.15fr);
+  gap: 0.5rem;
+  align-items: start;
+}
+.rl-bound-text {
+  padding: 0.35rem 0.5rem;
+}
+.rl-bound-text h3 {
+  text-align: left;
+}
+.rl-bound-text p {
+  margin: 0.7rem 0;
+  font-size: 0.93rem;
+}
+.rl-bounds-grid svg {
+  max-width: 160px;
+  justify-self: center;
+}
+.lecture-boundary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 0 2rem;
+  color: #552681;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+.lecture-boundary::before,
+.lecture-boundary::after {
+  content: "";
+  height: 2px;
+  flex: 1;
+  background: linear-gradient(90deg, #d8c4ed, #7138aa);
+}
+.lecture-boundary::after {
+  transform: scaleX(-1);
+}
+@media (max-width: 700px) {
+  .rl-map-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rl-map-arrow {
+    transform: rotate(90deg);
+    margin: -0.7rem 0;
+  }
+  .rl-bounds-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .rl-bound-text:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .rl-bounds-grid svg:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .rl-bounds-grid svg:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .rl-bound-text:last-child {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .rl-figure figcaption,
+  .rl-bounds figcaption {
+    padding: 0.55rem 0.55rem 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rl-figure *,
+  .rl-bounds * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

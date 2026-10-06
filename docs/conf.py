@@ -27,12 +27,14 @@ html_css_files = [
     "css/custom.css",
     "css/vector-algebra.css",
     "css/complex-numbers.css",
+    "css/real-limits.css",
 ]
 html_js_files = [
     "js/interactive-frames.js",
     "js/vector-algebra.js",
     "js/vector-coordinates.js",
     "js/complex-numbers.js",
+    "js/real-limits.js",
 ]
 
 mathjax3_config = {
