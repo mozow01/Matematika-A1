@@ -159,15 +159,24 @@ végtelen környezete (:math:`δ>0`, :math:`M\in\mathbb R`):
 A **lyukas környezetből** a középpontot kihagyjuk:
 :math:`\dot U(u)=U(u)\setminus\{u\}`.
 
-Egy :math:`D\subseteq\mathbb R` halmaz **torlódási pontja**
-:math:`u\in\overline{\mathbb R}`, ha minden :math:`u` körüli lyukas környezetben
-van :math:`D`-beli pont.
+Legyen :math:`H\subseteq\mathbb R`, és jelölje :math:`\mathcal U(u)` az
+:math:`u\in\overline{\mathbb R}` környezeteinek családját.
+Az :math:`u` a :math:`H` **torlódási pontja**, ha minden környezetében van
+tőle különböző :math:`H`-beli pont. A torlódási pontok halmazának jele
+:math:`H'`; pontosan
 
-* A :math:`D=(0,1)` halmaz torlódási pontjai :math:`[0,1]` elemei.
-  :math:`0` és :math:`1` nem elemei :math:`D`-nek; :math:`2` nem torlódási pont.
-* :math:`D=\{1/n:n\geq1\}` egyetlen valós torlódási pontja :math:`0`.
+.. math::
+
+   H'=\left\{u\in\overline{\mathbb R}:
+   \forall U\in\mathcal U(u),\quad
+   (U\setminus\{u\})\cap H\ne\varnothing\right\}.
+
+* Ha :math:`H=(0,1)`, akkor :math:`H'=[0,1]`.
+  :math:`0` és :math:`1` nem elemei :math:`H`-nak; :math:`2` nem torlódási pont.
+* Ha :math:`H=\{1/n:n\geq1\}`, akkor :math:`H'=\{0\}`.
   Az egyes :math:`1/n` pontok izoláltak.
-* :math:`\mathbb N` torlódik :math:`+\infty`-ben, véges pontban nem.
+* A kibővített valós számok között :math:`H=\mathbb N` esetén
+  :math:`H'=\{+\infty\}`; véges torlódási pont nincs.
 
 .. raw:: html
 
@@ -180,7 +189,7 @@ Függvényhatárérték
 ------------------
 
 Legyen :math:`f:D\to\mathbb R`, ahol :math:`D\subseteq\mathbb R`, és
-:math:`u\in\overline{\mathbb R}` a :math:`D` torlódási pontja.
+:math:`u\in D'`.
 Azt mondjuk, hogy :math:`f(x)` határértéke :math:`A\in\overline{\mathbb R}`,
 ha :math:`A` minden :math:`V` környezetéhez van :math:`u` olyan :math:`U` környezete,
 amelyre
@@ -202,26 +211,32 @@ A :math:`u`-ban felvett függvényérték ebben nem szerepel.
 Határérték és műveletek — HIA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ha :math:`f(x)\to A` és :math:`g(x)\to B`, ahol :math:`A,B\in\mathbb R`, akkor
+Jelölje :math:`\ast` a négy alapművelet
+(:math:`+,-,\cdot,/`) egyikét. Ha :math:`u\in D'`,
+:math:`\lim_{x\to u}f(x)=A` és :math:`\lim_{x\to u}g(x)=B`,
+ahol :math:`A,B\in\overline{\mathbb R}`, és :math:`A\ast B` értelmezett,
+akkor
 
 .. math::
 
-   \lim(f+g)=A+B,\quad \lim(fg)=AB,\quad
-   \lim(\lambda f)=\lambda A,\quad
-   \lim\frac fg=\frac AB\quad(B\ne0).
+   \lim_{x\to u}(f\ast g)(x)=A\ast B.
 
-A hányados nevezője a vizsgált lyukas környezetben sem lehet nulla.
-Végtelen határértékekhez külön feltételek kellenek.
+Az :math:`f\ast g` műveletet pontonként értjük. Hányados esetén a
+nevező a vizsgált lyukas környezetben nem lehet nulla.
+Például :math:`+\infty-(+\infty)` és :math:`0\cdot(+\infty)`
+nem értelmezett, ezért ezekre az állítás nem alkalmazható.
 
 Határérték és rendezés
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Ha :math:`f(x)\leq g(x)` egy lyukas környezetben, és véges határértékeik
-léteznek, akkor :math:`\lim f\leq\lim g`. Szigorú egyenlőtlenségre ez
+Ha :math:`f(x)\leq g(x)` az :math:`u` körüli lyukas környezetben,
+és véges határértékeik léteznek, akkor
+:math:`\lim_{x\to u}f(x)\leq\lim_{x\to u}g(x)`. Szigorú egyenlőtlenségre ez
 általában nem igaz.
 
 A **rendőrelv** szerint ha :math:`h(x)\leq g(x)\leq f(x)` és
-:math:`\lim h=\lim f=A`, akkor :math:`\lim g=A`. Következmény: korlátos
+:math:`\lim_{x\to u}h(x)=\lim_{x\to u}f(x)=A`, akkor
+:math:`\lim_{x\to u}g(x)=A`. Következmény: korlátos
 :math:`b(x)` és nullához tartó :math:`v(x)` esetén :math:`b(x)v(x)\to0`;
 :math:`b`-nek nem kell határértékkel rendelkeznie.
 
