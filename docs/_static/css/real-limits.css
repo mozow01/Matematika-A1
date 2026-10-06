@@ -1,17 +1,17 @@
 /* Interactive figures for lecture 05. */
 .rl-figure,
 .rl-bounds {
-  --ink: #243044;
-  --muted: #627084;
-  --teal: #0b8f87;
-  --purple: #7138aa;
-  --orange: #cf642e;
+  --ink: #3e4a56;
+  --muted: #65727d;
+  --teal: #597f7d;
+  --purple: #7f718c;
+  --orange: #9d755e;
   color: var(--ink);
   margin: 1.6rem 0 2rem;
   padding: 1rem 0 0.65rem;
-  border-top: 1px solid #dce4ec;
-  border-bottom: 1px solid #dce4ec;
-  background: linear-gradient(#fbfcfe, #fff);
+  border-top: 1px solid #e5e9ed;
+  border-bottom: 1px solid #e5e9ed;
+  background: #fff;
 }
 .rl-figure svg,
 .rl-bounds svg {
@@ -21,13 +21,20 @@
   overflow: visible;
   font-family: "DejaVu Sans", sans-serif;
 }
+.rl-figure > svg {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.rl-figure[data-rl-squeeze] > svg {
+  max-width: 680px;
+}
 .rl-figure svg text,
 .rl-bounds svg text {
   fill: var(--ink);
-  font-size: 15px;
+  font-size: 14px;
   paint-order: stroke;
   stroke: #fff;
-  stroke-width: 3px;
+  stroke-width: 1.5px;
   stroke-linejoin: round;
 }
 .rl-figure svg .rl-svg-muted,
@@ -93,7 +100,7 @@
 }
 .rl-figure button:hover,
 .rl-figure button:focus-visible {
-  background: #eee5f8;
+  background: #f3f0f5;
 }
 .rl-figure button:focus-visible,
 .rl-figure input:focus-visible {

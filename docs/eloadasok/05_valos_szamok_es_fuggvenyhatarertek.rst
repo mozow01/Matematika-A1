@@ -228,7 +228,7 @@ A **rendőrelv** szerint ha :math:`h(x)\leq g(x)\leq f(x)` és
 .. raw:: html
 
    <figure class="rl-figure" data-rl-squeeze>
-     <svg viewBox="0 0 760 340" role="img" aria-label="Az alsó h és a felső f görbe között hullámzó g görbe ugyanahhoz az A értékhez tart"></svg>
+     <svg viewBox="0 0 760 280" role="img" aria-label="Az alsó h és a felső f görbe között hullámzó g görbe ugyanahhoz az A értékhez tart"></svg>
      <figcaption>A felső f és az alsó h az (u,A) pontban ér össze; a közrezárt g hullámzása is eltűnik.</figcaption>
    </figure>
 

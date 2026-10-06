@@ -3,16 +3,17 @@
   "use strict";
   const NS = "http://www.w3.org/2000/svg";
   const C = {
-    ink: "#243044",
-    muted: "#9aa7b6",
-    teal: "#0b8f87",
-    purple: "#7138aa",
-    orange: "#cf642e",
-    blue: "#4477bc",
-    paleTeal: "#dcf4ef",
-    palePurple: "#eee5f8",
+    ink: "#3e4a56",
+    muted: "#aeb8c0",
+    teal: "#668f8c",
+    purple: "#9687a0",
+    orange: "#ba9276",
+    blue: "#8398aa",
+    paleTeal: "#eef5f3",
+    palePurple: "#f3f0f5",
   };
   const fmt = (n) => Number(n).toFixed(2).replace(".", ",");
+  const strokeWidth = (width) => Math.min(2.3, width * 0.72);
   const clear = (node) => {
     while (node.firstChild) node.removeChild(node.firstChild);
   };
@@ -31,17 +32,17 @@
       x2,
       y2,
       stroke: color,
-      "stroke-width": width,
+      "stroke-width": strokeWidth(width),
       ...(dash ? { "stroke-dasharray": dash } : {}),
     });
   const dot = (p, x, y, r, color, open = false) =>
     e(p, "circle", {
       cx: x,
       cy: y,
-      r,
+      r: r * 0.85,
       fill: open ? "white" : color,
       stroke: color,
-      "stroke-width": open ? 2.5 : 1,
+      "stroke-width": open ? 1.4 : 0.75,
     });
   const txt = (p, x, y, value, cls = "", anchor = "start") =>
     e(p, "text", { x, y, class: cls, "text-anchor": anchor }, value);
@@ -55,7 +56,7 @@
       d,
       fill,
       stroke: color,
-      "stroke-width": width,
+      "stroke-width": strokeWidth(width),
       "stroke-linecap": "round",
       "stroke-linejoin": "round",
       ...(dash ? { "stroke-dasharray": dash } : {}),
@@ -75,7 +76,7 @@
         " 18 l-4 8 m4 -8 l4 8",
       fill: "none",
       stroke: C.muted,
-      "stroke-width": 1.3,
+      "stroke-width": 0.95,
     });
     txt(p, w - 29, oy - 10, xLabel, "rl-svg-muted");
     txt(p, ox + 9, 29, yLabel, "rl-svg-muted");
@@ -103,10 +104,10 @@
       C.orange,
       C.blue,
       C.purple,
-      "#bb5690",
-      "#4f9b62",
-      "#c18b28",
-      "#267b98",
+      "#a1939d",
+      "#8ea492",
+      "#b3a481",
+      "#7f9da0",
     ];
     const factor = (a) => 1 + 0.25 * Math.cos(3 * a) + 0.125 * Math.sin(5 * a);
     function render() {
@@ -135,7 +136,7 @@
         fill: C.paleTeal,
         "fill-opacity": 0.78,
         stroke: C.teal,
-        "stroke-width": 2.5,
+        "stroke-width": 1.55,
       });
       e(right, "circle", {
         cx: ox,
@@ -143,8 +144,8 @@
         r: eps * scale,
         fill: "none",
         stroke: C.purple,
-        "stroke-width": 2.4,
-        "stroke-dasharray": "7 6",
+        "stroke-width": 1.5,
+        "stroke-dasharray": "6 6",
       });
       const pts = samples(
         (a) => {
@@ -229,7 +230,7 @@
       e(s, "path", {
         d: "M72 15 l-5 9 m5 -9 l5 9 M72 311 l-5 -9 m5 9 l5 -9",
         stroke: C.muted,
-        "stroke-width": 1.5,
+        "stroke-width": 1.0,
         fill: "none",
       });
       e(s, "rect", {
@@ -292,7 +293,7 @@
       d: "M" + x(0.22) + " 74 v-10 H" + x(0) + " v10",
       fill: "none",
       stroke: C.purple,
-      "stroke-width": 2,
+      "stroke-width": 1.25,
     });
     txt(
       s,
@@ -307,14 +308,24 @@
     const s = q(root, "svg");
     clear(s);
     const ox = 380,
-      oy = 172,
-      px = 165,
-      py = 91;
-    axes(s, 760, 340, ox, oy, "x", "y");
+      oy = 140,
+      px = 140,
+      py = 78;
+    axes(s, 760, 280, ox, oy, "x", "y");
     const top = (x) => 0.28 * x * x,
       bot = (x) => -0.28 * x * x;
-    const upper = samples((x) => [ox + px * x, oy - py * top(x)], -2, 2, 240);
-    const lower = samples((x) => [ox + px * x, oy - py * bot(x)], 2, -2, 240);
+    const upper = samples(
+      (x) => [ox + px * x, oy - py * top(x)],
+      -1.6,
+      1.6,
+      240
+    );
+    const lower = samples(
+      (x) => [ox + px * x, oy - py * bot(x)],
+      1.6,
+      -1.6,
+      240
+    );
     e(s, "path", {
       d:
         upper
@@ -329,8 +340,8 @@
     curve(s, upper, C.blue, 2.8);
     curve(s, lower, C.purple, 2.8);
     for (const [a, b] of [
-      [-2, -0.025],
-      [0.025, 2],
+      [-1.6, -0.065],
+      [0.065, 1.6],
     ])
       curve(
         s,
@@ -338,16 +349,16 @@
           (x) => [ox + px * x, oy - py * (0.28 * x * x * Math.sin(8 / x))],
           a,
           b,
-          500
+          700
         ),
         C.orange,
         2.2
       );
     dot(s, ox, oy, 5, C.ink);
     txt(s, ox + 10, oy + 23, "(u, A)", "rl-svg-small");
-    txt(s, 637, 80, "f", "rl-svg-teal");
-    txt(s, 638, 252, "h", "rl-svg-purple");
-    txt(s, 614, 145, "g", "rl-svg-orange");
+    txt(s, 620, 76, "f", "rl-svg-teal");
+    txt(s, 620, 210, "h", "rl-svg-purple");
+    txt(s, 585, 135, "g", "rl-svg-orange");
   }
   function unitFigure(root) {
     const s = q(root, "svg"),
@@ -380,17 +391,17 @@
         undefined,
         C.paleTeal
       );
-      curve(s, inner, C.blue, 2.4, undefined, "#e7eef9");
+      curve(s, inner, C.blue, 2.4, undefined, "#f0f3f6");
       e(s, "path", {
         d: "M" + P[0] + " " + P[1] + " V" + T[1],
         stroke: C.purple,
-        "stroke-width": 2.5,
+        "stroke-width": 1.6,
         fill: "none",
       });
       e(s, "path", {
         d: "M" + ox + " " + oy + " L" + T[0] + " " + T[1],
         stroke: C.purple,
-        "stroke-width": 1.7,
+        "stroke-width": 1.1,
         fill: "none",
       });
       dot(s, ox, oy, 4, C.ink);
