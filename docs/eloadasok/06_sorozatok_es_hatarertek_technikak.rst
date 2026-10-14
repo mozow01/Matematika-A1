@@ -8,31 +8,34 @@ Sorozatok és határérték-technikák
 A sorozat mint függvény
 -----------------------
 
-Egy **valós számsorozat** függvény: :math:`a:\mathbb N\to\mathbb R,\ n\mapsto a_n`,
-ahol :math:`\mathbb N=\{1,2,\ldots\}`. A kibővített valós számokban
-:math:`\mathbb N'=\{+\infty\}`: véges pont körül csak véges sok természetes
-szám van. Ez az **argumentum** egyetlen torlódási pontja, nem a sorozat
-lehetséges határértékeinek korlátozása.
+Definíció: Egy **valós számsorozat** egy függvény: :math:`a:\mathbb N\setminus\{0\}\to\mathbb R,\ n\mapsto a_n`,
+ahol :math:`\mathbb N\setminus\{0\}=\{1,2,\ldots\}`. A kibővített valós számok halmazán ennek a halmaznek egyetelen torlódási pontja van, a végtelen
+.. math::
+
+   \mathbb N'=\{+\infty\}
+
+véges pont körül csak véges sok természetes
+szám van. Sorozatnak nevezzük még a véges sok kivétellel az :math:`\mathbb N\setminus\{0\}`-nen értelmezett függvényeket, sőt, mindne olyan részhalmazát :math:`\mathbb N`-nek, amelyik nek a torlódási pontja a végtelen, így sorozat
+
+.. math::
+
+   a_n=\frac{1}{n-8};\quad b_n=\frac{1}{log_2(n-4)};\quad c_{2k}=(2k)^2
+
+is.
+
+Mivel a sorozat függvény, és van az értelmezési tartományának torlódási pontja, ezért értelmes a határérték fogalom is rá. Eszerint :math:`(a_n)`-nek pontosan akkor határértéke az :math:`A` valós szám, ha
 
 .. math::
 
    \lim_{n\to+\infty}a_n=A
    \quad\Longleftrightarrow\quad
    \forall\varepsilon>0\ \exists N\in\mathbb N\
-   \forall n\geq N:\ |a_n-A|<\varepsilon
-   \qquad(A\in\mathbb R).
+   \forall n\geq N:\ |a_n-A|<\varepsilon.
 
-Ez az előző előadás függvényhatárérték-definíciója :math:`n\to+\infty` esetén.
+Ekkor azt mondjuk, hogy az :math:`(a_n)` sorozat konvergens. Ellenkező esetben divergens. Ha :math:`\lim_{n\to+\infty}a_n=\pm\infty`, akkor azt mondjuk, hogy a sorozat divergál a végtelenbe.
 
-Monoton, korlátos sorozat
+Példák
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ha :math:`a_n\leq a_{n+1}` és a sorozat felülről korlátos, akkor
-:math:`\lim_{n\to+\infty}a_n=S=\sup\{a_n:n\in\mathbb N\}`.
-Minden :math:`\varepsilon>0`-hoz van :math:`a_N>S-\varepsilon`;
-így :math:`n\geq N` esetén
-:math:`S-\varepsilon<a_N\leq a_n\leq S`.
-Csökkenő, alulról korlátos sorozatra az infimum adja a határértéket.
 
 .. raw:: html
 
@@ -46,11 +49,6 @@ Csökkenő, alulról korlátos sorozatra az infimum adja a határértéket.
      </figcaption>
    </figure>
 
-Váltakozás és részsorozati határértékek
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A :math:`b_n=(-1)^n/n^p` sorozat :math:`p>0` esetén nullához tart, mert
-:math:`|b_n|=1/n^p\to0`. **Ennek csak egy részsorozati határértéke van: 0.**
 
 .. raw:: html
 
@@ -63,7 +61,6 @@ A :math:`b_n=(-1)^n/n^p` sorozat :math:`p>0` esetén nullához tart, mert
      </figcaption>
    </figure>
 
-Két különböző részsorozati határértékhez változtassuk a paramétereket:
 
 .. math::
 
@@ -75,9 +72,6 @@ Két különböző részsorozati határértékhez változtassuk a paramétereket
    \lim_{k\to+\infty}c_{2k}&=\mu+d,\\
    \lim_{k\to+\infty}c_{2k+1}&=\mu-d.
    \end{aligned}
-
-Ha :math:`d>0`, a két határérték különböző, ezért :math:`(c_n)` nem konvergens.
-Ha :math:`\mu=d=0,\ p=1`, a :math:`(-1)^n/n` példát kapjuk vissza.
 
 .. raw:: html
 
@@ -92,11 +86,16 @@ Ha :math:`\mu=d=0,\ p=1`, a :math:`(-1)^n/n` példát kapjuk vissza.
      </figcaption>
    </figure>
 
-Határozatlan alakok
--------------------
+Határozatt éshatározatlan alakok
+--------------------------------
 
-A :math:`0/0`, :math:`\infty/\infty` és :math:`\infty-\infty`
-**nem számok**: a részek határértéke önmagában nem dönti el az egészét.
+A kibővített valós számok halmazán nem értelmetük még a műveleteket. Ez nem nagyon nehéz, pl. :math:`+\infty + (+\infty)=+\infty`. De vannak nem értelmezett műveletek.
+
+Az alábbi határérték alakok határozatlanok:
+
+.. math::
+
+   \dfrac{\infty}{\infty};\quad \infty-\infty;\quad 0\cdot\infty;\quad 1^\infty;\quad \infty^0
 
 .. list-table:: Ugyanaz az alak, eltérő eredmény
    :header-rows: 1
@@ -115,8 +114,7 @@ A :math:`0/0`, :math:`\infty/\infty` és :math:`\infty-\infty`
      - :math:`\lim_{n\to+\infty}(n-n)=0`
      - :math:`\lim_{n\to+\infty}((n+1)-n)=1`
 
-A :math:`0\cdot\infty`, :math:`1^\infty` és :math:`\infty^0` is
-határozatlan alak. Mindig az adott kifejezést alakítjuk át.
+
 
 Racionális törtek a végtelenben
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
