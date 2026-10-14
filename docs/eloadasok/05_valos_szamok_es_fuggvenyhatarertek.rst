@@ -389,7 +389,11 @@ Mindegyikben :math:`x\to0`:
 Határérték és kompozíció
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Legyen :math:`f,g :\mathbb R\to \mathbb R`. Legyen :math:`u\in \mathrm{Dom}(f\circ g)'`. Ha létezik a :math:`\lim\limits_{x\to u}g(x)'=v`, létezik a :math:`\lim\limits_{y\to v}f(y)'`, továbbá :math:`g` invertálható, akkor létezik az alábbi határtérték és fennáll a következő egyenlőség:
+Legyen :math:`f,g:\mathbb R\to\mathbb R` és
+:math:`u\in\mathrm{Dom}(f\circ g)'`. Ha létezik a
+:math:`\lim_{x\to u}g(x)=v` és a
+:math:`\lim_{y\to v}f(y)` határérték, továbbá :math:`g`
+invertálható, akkor az alábbi összetett határérték is létezik:
 
 .. math::
 
@@ -397,20 +401,20 @@ Legyen :math:`f,g :\mathbb R\to \mathbb R`. Legyen :math:`u\in \mathrm{Dom}(f\ci
 
 Vagyis összetett függvény határértéke szintén a határértékek egymás utánja, csak arra kell figyelni, hogy a belső függvény invertálható legyen.
 
-Külföldön a belső függvény néha :math:`\vartheta`
+A belső függvény értékét jelölhetjük :math:`\vartheta`-val:
 
 .. math::
 
     \lim\limits_{x\to u}f(g(x))  =\lim\limits_{\vartheta\to v}f(\vartheta)
 
-ahol :math:`\lim\limits_{x\to u}g(x)'=v` és :math:`\vartheta:=g(x)`
+ahol :math:`v=\lim_{x\to u}g(x)` és :math:`\vartheta=g(x)`.
 
-Példa:
+Példa a :math:`\vartheta=2x` helyettesítéssel:
+
 .. math::
 
-    \lim\limits_{x\to 0}\frac{\sin 2x}{x}  =  \lim\limits_{x\to 0}\frac{\sin 2x}{2x}\cdot 2 = 1\cdot 2
-
-ahol  :math:`\vartheta:=2x`.
+   \lim_{x\to0}\frac{\sin(2x)}{x}
+   =2\lim_{\vartheta\to0}\frac{\sin\vartheta}{\vartheta}=2.
 
 Logaritmus
 ----------
