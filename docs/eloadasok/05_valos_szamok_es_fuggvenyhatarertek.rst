@@ -365,32 +365,6 @@ Az ábrán :math:`f(x)=2x+1` és :math:`f^{-1}(x)=(x-1)/2` szerepel.
      </figcaption>
    </figure>
 
-Logaritmus és a negyedik nevezetes határérték
----------------------------------------------
-
-Az :math:`e^x:\mathbb R\to(0,+\infty)` inverze
-:math:`\ln:(0,+\infty)\to\mathbb R`. Ha :math:`t=\ln(1+x)`,
-akkor :math:`x=e^t-1`, és :math:`x\to0` esetén :math:`t\to0`. Ezért
-
-.. math::
-
-   \boxed{\lim_{x\to0}\frac{\ln(1+x)}x
-   =\lim_{t\to0}\frac{t}{e^t-1}=1}.
-
-Az ábrán a :math:`\ln(1+x)` görbéje az origóban az :math:`y=x`
-egyenest érinti.
-
-.. raw:: html
-
-   <figure class="rl-figure" data-rl-log>
-     <svg viewBox="0 0 760 340" role="img" aria-label="A logaritmus görbéjének szelője és az y egyenlő x érintő"></svg>
-     <figcaption>
-       <label for="rl-log-x">Szelőpont x-értéke <output data-rl-log-value>0,80</output>
-         <input id="rl-log-x" type="range" min="-0.75" max="1.4" step="0.01" value="0.8" data-rl-log-x>
-       </label>
-       <span data-rl-log-slope></span>
-     </figcaption>
-   </figure>
 
 A négy nevezetes határérték
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -415,81 +389,52 @@ Mindegyikben :math:`x\to0`:
 Határérték és kompozíció
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ha :math:`f(x)\to b` és :math:`g` folytonos :math:`b`-ben, akkor
-:math:`g(f(x))\to g(b)`. Ha csak :math:`g(y)\to c` ismert
-:math:`y\to b` mellett, akkor :math:`g(f(x))\to c` biztosan akkor
-következik, ha :math:`f(x)\ne b` a vizsgált lyukas környezetben,
-vagy :math:`g(b)=c`. A :math:`g` határértéke önmagában nem ír elő
-semmit :math:`g(b)`-ről.
+Legyen :math:`f,g :\mathbb R\to \mathbb R`. Legyen :math:`u\in \mathrm{Dom}(f\circ g)'`. Ha létezik a :math:`\lim\limits_{x\to u}g(x)'=v`, létezik a :math:`\lim\limits_{y\to v}f(y)'`, továbbá :math:`g` invertálható, akkor létezik az alábbi határtérték és fennáll a következő egyenlőség:
 
-Egyoldali határérték és szakadás
---------------------------------
+.. math::
 
-A :math:`\lim_{x\to u-}f(x)` csak :math:`x<u`, a
-:math:`\lim_{x\to u+}f(x)` csak :math:`x>u` pontokat vizsgál.
-Ha a tartomány mindkét oldalról torlódik :math:`u`-ban,
-a kétoldali véges határérték akkor és csak akkor létezik,
-ha az egyoldaliak végesek és egyenlők.
+    \lim\limits_{x\to u}f(g(x))  =\lim\limits_{y\to \lim\limits_{x\to u}g(x)}f(y)
+
+Vagyis összetett függvény határértéke szintén a határértékek egymás utánja, csak arra kell figyelni, hogy a belső függvény invertálható legyen.
+
+Külföldön a belső függvény néha :math:`\vartheta`
+
+.. math::
+
+    \lim\limits_{x\to u}f(g(x))  =\lim\limits_{\vartheta\to v}f(\vartheta)
+
+ahol :math:`\lim\limits_{x\to u}g(x)'=v` és :math:`\vartheta:=g(x)`
+
+Példa:
+.. math::
+
+    \lim\limits_{x\to 0}\frac{\sin 2x}{x}  =  \lim\limits_{x\to 0}\frac{\sin 2x}{2x}\cdot 2 = 1\cdot 2
+
+ahol  :math:`\vartheta:=2x`.
+
+Logaritmus
+----------
+
+Az :math:`e^x:\mathbb R\to(0,+\infty)` inverze
+:math:`\ln:(0,+\infty)\to\mathbb R`. Ha :math:`\vartheta=\ln(1+x)`,
+akkor :math:`x=e^\vartheta-1`, és :math:`x\to 0` esetén :math:`\vartheta\to 0`. Ezért
+
+.. math::
+
+   \boxed{\lim_{x\to 0}\frac{\ln(1+x)}x
+   =\lim_{\vartheta \to 0}\frac{\vartheta}{e^\vartheta-1}=1}.
+
+Az ábrán a :math:`\ln(1+x)` görbéje az origóban az :math:`y=x`
+egyenest érinti.
 
 .. raw:: html
 
-   <figure class="rl-figure" data-rl-one-sided>
-     <svg viewBox="0 0 760 320" role="img" aria-label="Ugrás: a bal és jobb oldali határérték különbözik"></svg>
-     <figcaption>Balról 1, jobbról 2 felé tart a görbe. A pontbeli érték külön jelölve látható.</figcaption>
-   </figure>
-
-Véges, két oldalról torlódási pontban **szakadás** van,
-ha a függvény nincs ott értelmezve, vagy a határértéke
-nem létezik, vagy eltér a pontbeli értéktől.
-
-* **Elsőfajú:** mindkét egyoldali határérték véges.
-  Ha egyenlők, de a pont hiányzik vagy más értéke van,
-  a szakadás **megszüntethető**. Ha eltérnek, **ugrás**.
-* **Másodfajú:** legalább az egyik egyoldali határérték
-  nem létezik véges számként.
-
-Tartomány végpontján a hiányzó másik oldalt nem tekintjük szakadásnak:
-a tartomány felőli közelítés számít.
-
-Folytonosság
-------------
-
-Ha :math:`u\in D` és a :math:`D` torlódási pontja, akkor
-:math:`f` **folytonos** :math:`u`-ban pontosan akkor, ha
-
-.. math::
-
-   \lim_{\substack{x\to u\\x\in D}}f(x)=f(u).
-
-Az epszilonos megfogalmazás minden :math:`u\in D`-re használható,
-és csak tartománybeli pontokat vizsgál:
-
-.. math::
-
-   \forall\varepsilon>0\ \exists\delta>0\ \forall x\in D:
-   \quad |x-u|<\delta\Longrightarrow |f(x)-f(u)|<\varepsilon.
-
-Izolált tartománybeli pontban a folytonosság automatikus.
-A határértékes alakot csak torlódási pontban használjuk.
-
-Oszcilláló ellenpélda
-~~~~~~~~~~~~~~~~~~~~~
-
-Az :math:`f(x)=\sin(1/x)`, :math:`x\ne0` függvénynek nincs
-határértéke :math:`0`-ban, mert
-
-.. math::
-
-   x_n=\frac1{\pi/2+2n\pi}\to0,\quad f(x_n)=1,
-   \qquad
-   y_n=\frac1{3\pi/2+2n\pi}\to0,\quad f(y_n)=-1.
-
-A két értéksorozat eltérő. Az ábrán a hozzájuk
-tartozó pontok külön színnel láthatók.
-
-.. raw:: html
-
-   <figure class="rl-figure" data-rl-wild>
-     <svg viewBox="0 0 760 330" role="img" aria-label="A sin egy per x oszcillációi, két eltérő értékhez tartó pontsorozattal"></svg>
-     <figcaption>Az 1-et és −1-et adó pontok egyaránt a 0 felé sűrűsödnek.</figcaption>
+   <figure class="rl-figure" data-rl-log>
+     <svg viewBox="0 0 760 340" role="img" aria-label="A logaritmus görbéjének szelője és az y egyenlő x érintő"></svg>
+     <figcaption>
+       <label for="rl-log-x">Szelőpont x-értéke <output data-rl-log-value>0,80</output>
+         <input id="rl-log-x" type="range" min="-0.75" max="1.4" step="0.01" value="0.8" data-rl-log-x>
+       </label>
+       <span data-rl-log-slope></span>
+     </figcaption>
    </figure>
