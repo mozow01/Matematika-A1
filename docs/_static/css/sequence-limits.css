@@ -1,0 +1,101 @@
+/* Lecture 06: quiet, responsive diagrams, scoped to this lecture. */
+.sl-figure {
+  --sl-ink: #414d58;
+  --sl-muted: #72808a;
+  --sl-blue: #61869a;
+  --sl-plum: #907b99;
+  margin: 1.5rem 0 2rem;
+  padding: .8rem .45rem .6rem;
+  border-top: 1px solid #e5e9ed;
+  border-bottom: 1px solid #e5e9ed;
+  color: var(--sl-ink);
+  background: #fff;
+}
+.sl-figure > svg {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin-inline: auto;
+}
+.sl-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: "DejaVu Sans", sans-serif;
+}
+.sl-figure svg text {
+  fill: var(--sl-ink);
+  font-size: 13px;
+  paint-order: stroke;
+  stroke: white;
+  stroke-width: 2px;
+  stroke-linejoin: round;
+}
+.sl-figure figcaption {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .45rem 1rem;
+  padding: .55rem .5rem 0;
+  font-size: .91rem;
+  color: var(--sl-muted);
+  line-height: 1.55;
+}
+.sl-figure figcaption > span {
+  margin-right: .3rem;
+  color: var(--sl-ink);
+}
+.sl-figure label {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .36rem;
+  font-weight: 600;
+  color: var(--sl-ink);
+}
+.sl-figure output {
+  color: var(--sl-plum);
+  min-width: 2.5em;
+  font-variant-numeric: tabular-nums;
+}
+.sl-figure input[type="range"] {
+  width: clamp(92px, 13vw, 150px);
+  accent-color: var(--sl-plum);
+  cursor: pointer;
+}
+.sl-figure input:focus-visible {
+  outline: 2px solid var(--sl-plum);
+  outline-offset: 3px;
+}
+.sl-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: .65rem;
+  max-width: 760px;
+  margin-inline: auto;
+}
+.sl-cards > div {
+  min-width: 0;
+  padding: .35rem .6rem .55rem;
+  border: 1px solid #e7ebee;
+  border-radius: 4px;
+  background: #fdfefe;
+}
+.sl-cards h3 {
+  margin: .25rem 0 .15rem;
+  font-size: .95rem;
+  font-weight: 650;
+  color: var(--sl-ink);
+  text-align: center;
+}
+.sl-cards p {
+  margin: .25rem 0 0;
+  color: var(--sl-muted);
+  font-size: .86rem;
+  text-align: center;
+}
+@media (max-width: 620px) {
+  .sl-cards { grid-template-columns: 1fr; }
+  .sl-figure input[type="range"] { width: 140px; }
+}

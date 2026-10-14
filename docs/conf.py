@@ -28,6 +28,7 @@ html_css_files = [
     "css/vector-algebra.css",
     "css/complex-numbers.css",
     "css/real-limits.css",
+    "css/sequence-limits.css",
 ]
 html_js_files = [
     "js/interactive-frames.js",
@@ -35,6 +36,7 @@ html_js_files = [
     "js/vector-coordinates.js",
     "js/complex-numbers.js",
     "js/real-limits.js",
+    "js/sequence-limits.js",
 ]
 
 mathjax3_config = {
