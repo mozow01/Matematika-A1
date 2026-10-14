@@ -415,6 +415,17 @@ ahol  :math:`\vartheta:=2x`.
 Logaritmus
 ----------
 
+Legyen :math:`a>0,\ a\ne1` és :math:`b>0`. A :math:`b` szám
+:math:`a` alapú logaritmusa az az egyértelmű :math:`y\in\mathbb R`,
+amelyre :math:`a^y=b`. Jelölése:
+
+.. math::
+
+   \log_a b=y\quad\Longleftrightarrow\quad a^y=b.
+
+A **természetes logaritmus** az :math:`e` alapú logaritmus:
+:math:`\ln b=\log_e b`.
+
 Az :math:`e^x:\mathbb R\to(0,+\infty)` inverze
 :math:`\ln:(0,+\infty)\to\mathbb R`. Ha :math:`\vartheta=\ln(1+x)`,
 akkor :math:`x=e^\vartheta-1`, és :math:`x\to 0` esetén :math:`\vartheta\to 0`. Ezért
