@@ -1,5 +1,3 @@
-:orphan:
-
 .. _eloadas-07:
 
 7. előadás
