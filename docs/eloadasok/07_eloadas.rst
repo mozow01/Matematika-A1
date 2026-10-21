@@ -178,7 +178,7 @@ Tehát még a jobboldali határérték sem létezik, és a
      <figcaption>A két, jobbról nullához tartó sorozat képe végig két különböző érték: +1 és −1.</figcaption>
    </figure>
 
-**3. példa: a sorozatok rendőrelve.** Ha minden elég nagy
+**3. példa: a sorozatok rendőrelve mint motiváció.** Ha minden elég nagy
 :math:`n`-re :math:`\alpha_n\leq\beta_n\leq\gamma_n` és
 
 .. math::
@@ -208,3 +208,79 @@ tehát :math:`\lim_{n\to+\infty}\frac{\sin n}{n}=0`.
    Az ok az, hogy :math:`1/(2\pi)` irracionális,
    ezért az :math:`n\bmod 2\pi` szögek sűrűek a körön;
    a szinusz folytonos, és a kör képe rajta :math:`[-1,1]`.
+
+   Mivel minden farokrész is sűrű, különösen választható
+   :math:`\sin n_k\to1` és :math:`\sin m_k\to-1`: a
+   :math:`(\sin n)` sorozat nem konvergens, bár a
+   :math:`(\sin n/n)` sorozat igen. Az indexek kiválogatása
+   vezet a **részsorozat** fogalmához.
+
+Részsorozatok
+-------------
+
+Legyen :math:`(a_n)` valós sorozat, és legyen
+:math:`n_1<n_2<\cdots` szigorúan növekvő pozitív egész
+indexsorozat. Az :math:`(a_{n_k})` sorozatot az eredeti sorozat
+**részsorozatának** nevezzük. Például :math:`(a_{2k})`,
+:math:`(a_{2k+1})` és :math:`(a_{k^2})` részsorozatok;
+az :math:`((a_k)^2)` viszont a tagok négyzetre emelése, nem
+indexek kiválogatása.
+
+**Ellenpélda.** Legyen
+
+.. math::
+
+   a_n=\begin{cases}
+   0, & n=m^2\text{ valamely }m\in\mathbb N\setminus\{0\}\text{ esetén},\\
+   1, & \text{egyébként}.
+   \end{cases}
+
+Ekkor :math:`a_{k^2}=0`, de :math:`a_{k^2+1}=1` minden
+:math:`k\geq1` esetén. Tehát az :math:`(a_{k^2})` részsorozat
+konvergenciájából nem következik az :math:`(a_k)` sorozat
+konvergenciája. A másik fajta megfordítás sem igaz:
+:math:`b_k=(-1)^k` nem konvergens, noha :math:`(b_k)^2=1`
+minden :math:`k`-ra.
+
+.. admonition:: Feladat — mely következtetések igazak?
+
+   Döntsék el, mely nyilak igazak minden valós sorozatra.
+   Az igazakat bizonyítsák, a hamisakat cáfolják ellenpéldával:
+
+   .. math::
+
+      \begin{array}{ll}
+      a_k\to A\ \Longrightarrow\ a_{k^2}\to A,
+      & a_{k^2}\to A\ \Longrightarrow\ a_k\to A,\\[3pt]
+      a_k\to A\ \Longrightarrow\ (a_k)^2\to A^2,
+      & (a_k)^2\text{ konvergens}\ \Longrightarrow\ a_k\text{ konvergens}.
+      \end{array}
+
+Bolzano–Weierstrass tétele
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Tétel.** Minden korlátos valós sorozatnak van konvergens
+részsorozata.
+
+**Bizonyítás.** Foglaljuk a sorozat minden tagját egy zárt
+:math:`I_0=[p,q]` intervallumba. Felezzük meg :math:`I_0`-t,
+és válasszuk azt a félintervallumot, amelyben végtelen sok
+sorozatindexhez tartozó tag van; legalább az egyik ilyen.
+Ezt ismételve egymásba skatulyázott zárt intervallumokat kapunk:
+
+.. math::
+
+   I_0\supseteq I_1\supseteq I_2\supseteq\cdots,
+   \qquad |I_j|=\frac{q-p}{2^j}\longrightarrow0.
+
+A **Cantor-féle közösrészállítás** szerint a metszetük egyetlen
+:math:`L` pontból áll. Mivel minden :math:`I_j`-ben végtelen sok
+indexű tag van, egymás után választhatók
+:math:`n_1<n_2<\cdots` indexek úgy, hogy
+:math:`a_{n_j}\in I_j`. Ekkor :math:`L\in I_j` is, így
+
+.. math::
+
+   |a_{n_j}-L|\leq |I_j|=\frac{q-p}{2^j}\longrightarrow0.
+
+Ezért :math:`a_{n_j}\to L`, amint állítottuk.
