@@ -284,3 +284,89 @@ indexű tag van, egymás után választhatók
    |a_{n_j}-L|\leq |I_j|=\frac{q-p}{2^j}\longrightarrow0.
 
 Ezért :math:`a_{n_j}\to L`, amint állítottuk.
+
+Kompakt halmazok
+----------------
+
+.. admonition:: Definíció — topológiai kompaktság
+
+   A :math:`K\subseteq\mathbb R` halmaz **kompakt**, ha
+   minden nyílt halmazokból álló, :math:`K`-t lefedő
+   családból kiválasztható véges részfedés. Vagyis ha
+   :math:`K\subseteq\bigcup_{i\in J}U_i` és minden
+   :math:`U_i` nyílt, akkor már véges sok
+   :math:`U_{i_1},\ldots,U_{i_m}` is lefedi :math:`K`-t.
+
+**Példák.**
+
+* **Véges halmaz** kompakt: minden pontjához válasszunk egy
+  őt tartalmazó fedő halmazt.
+* :math:`\mathbb N` **nem kompakt**: az
+  :math:`U_m=(-m,m)` nyílt halmazok
+  (:math:`m\in\mathbb N\setminus\{0\}`) lefedik,
+  de véges sok ilyen halmaz nem fedi le az összes természetes számot.
+* :math:`S=\{1/n:n\in\mathbb N\setminus\{0\}\}` **nem kompakt**:
+  az :math:`U_m=(1/(m+1),2)` halmazok lefedik :math:`S`-t,
+  viszont ha :math:`M` a kiválasztott indexek legnagyobbika,
+  :math:`1/(M+1)\in S` egyik kiválasztott halmazban sincs benne.
+* :math:`S\cup\{0\}` **kompakt**: bármely nyílt fedésben
+  van egy :math:`0`-t tartalmazó halmaz. Ez :math:`0`
+  egy környezetét, tehát :math:`1/n` pontok közül
+  az összes elég nagy indexűt is tartalmazza. A véges sok
+  fennmaradó ponthoz egy-egy fedő halmazt választunk.
+
+A :math:`\mathbb N` zárt, de nem korlátos; :math:`S`
+korlátos, de nem zárt. Ezek jelzik a következő tétel két
+feltételének szerepét.
+
+Heine–Borel-tétel
+~~~~~~~~~~~~~~~~~
+
+**Tétel.** Egy :math:`K\subseteq\mathbb R` halmaz pontosan
+akkor kompakt, ha **zárt és korlátos**. Különösen minden
+:math:`[a,b]` zárt, korlátos intervallum kompakt.
+
+**Bizonyítás: az intervallum.** Legyen
+:math:`\mathcal U` az :math:`[a,b]` egy nyílt fedése.
+Tegyük fel, hogy nincs véges részfedése. Felezzük az
+:math:`I_0=[a,b]` intervallumot: legalább az egyik zárt
+félintervallumot sem lehet véges sok :math:`\mathcal U`-beli
+halmazzal lefedni, különben mindkét fél véges részfedéséből
+:math:`I_0` véges részfedése adódna. Válasszuk ezt
+:math:`I_1`-nek, és ismételjük a felezést. Így
+
+.. math::
+
+   I_0\supseteq I_1\supseteq I_2\supseteq\cdots,
+   \qquad |I_j|=\frac{b-a}{2^j}\longrightarrow0,
+
+és egyik :math:`I_j`-nek sincs véges részfedése.
+A Cantor-féle közösrészállítás szerint van közös pontjuk,
+:math:`c`. Valamely :math:`U\in\mathcal U` tartalmazza
+:math:`c`-t; mivel :math:`U` nyílt, van
+:math:`\delta>0`, amelyre :math:`B_\delta(c)\subseteq U`.
+Elég nagy :math:`j` esetén :math:`c\in I_j` és
+:math:`|I_j|<\delta`, ezért
+:math:`I_j\subseteq B_\delta(c)\subseteq U`.
+Ez ellentmond annak, hogy :math:`I_j` nem fedhető le
+véges sok halmazzal.
+
+**Általános zárt, korlátos halmaz.** Ha
+:math:`K\subseteq[a,b]` zárt, akkor egy :math:`K`-t fedő
+nyílt családhoz hozzáadva a nyílt
+:math:`\mathbb R\setminus K` halmazt, :math:`[a,b]` nyílt
+fedését kapjuk. Ennek van véges részfedése; abból
+:math:`\mathbb R\setminus K` elhagyásával :math:`K` véges
+részfedése marad.
+
+**A megfordítás.** Ha :math:`K` kompakt, az
+:math:`\{(-m,m):m\in\mathbb N\setminus\{0\}\}` fedésből
+kiválasztott véges részfedés mutatja, hogy :math:`K`
+korlátos. Ha :math:`x\notin K`, minden :math:`y\in K`
+körül választhatunk olyan nyílt :math:`U_y` környezetet,
+amely :math:`x` valamely nyílt :math:`V_y` környezetétől
+diszjunkt. A :math:`U_y`-ok közül véges sok lefedi
+:math:`K`-t; a hozzájuk tartozó :math:`V_y`-ok metszete
+:math:`x` olyan környezete, amely nem metszi :math:`K`-t.
+Így :math:`\mathbb R\setminus K` nyílt, tehát :math:`K`
+zárt.
