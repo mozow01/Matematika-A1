@@ -70,11 +70,11 @@ ez a sorozatos feltételnek mond ellent.
 Mire használjuk a sorozatos jellemzést?
 ---------------------------------------
 
-Az itt használt **átviteli elv**: ha
+Az  **átviteli elv** határrétékre is igaz: ha
 :math:`\lim_{x\to u}h(x)=L` és
 :math:`t_n\in\operatorname{Dom}(h)\setminus\{u\}`,
 :math:`t_n\to u`, akkor :math:`h(t_n)\to L`.
-Ez a függvényhatárérték sorozatos jellemzése; ha
+Ez a függvényhatárérték sorozatos jellemzése, ha
 :math:`h(u)=L` folytonos kiterjesztést ad, a Heine-féle
 jellemzés is pontosan ugyanezt mondja.
 
@@ -110,6 +110,74 @@ Ezután az exponenciális függvény folytonossága
    b_n=\exp\bigl(n\ln(1+1/n)\bigr)
    \xrightarrow[n\to+\infty]{}\exp(1)=e.
 
+Szakadás és cáfoló sorozatok
+----------------------------
+
+.. admonition:: Definíció — szakadási hely
+
+   Legyen :math:`D=\operatorname{Dom}(f)` és
+   :math:`u\in D'\cap\mathbb R`. Azt mondjuk, hogy
+   :math:`f` **szakad** :math:`u`-ban, ha
+   :math:`u\notin D`, vagy :math:`u\in D`, de
+   :math:`f\notin C(u)`.
+
+Ha :math:`u\in D`, a sorozatos jellemzés tagadása pontosan ezt adja:
+
+.. math::
+
+   f\notin C(u)
+   \quad\Longleftrightarrow\quad
+   \exists (x_n)\in D^{\mathbb N\setminus\{0\}}:
+   \quad x_n\to u,\qquad f(x_n)\not\to f(u).
+
+Az ilyen :math:`(x_n)` **cáfoló sorozat**. Ha :math:`u\notin D`,
+a szakadás már a hiányzó függvényértékből következik; cáfoló
+sorozattal külön azt mutathatjuk meg, hogy a függvény
+**folytonosan sem terjeszthető ki** :math:`u`-ra. Ehhez elég
+két, :math:`u`-hoz tartó sorozat, amelyek mentén a függvényértékek
+határértéke különbözik.
+
+**A szignumfüggvény szakadása.** Legyen
+:math:`\operatorname{sgn}(x)=-1` negatív :math:`x`-re,
+:math:`\operatorname{sgn}(0)=0`, és
+:math:`\operatorname{sgn}(x)=1` pozitív :math:`x`-re.
+Az :math:`x_n=1/n\to0` és :math:`y_n=-1/n\to0` sorozatokra
+
+.. math::
+
+   \operatorname{sgn}(x_n)=1,\qquad
+   \operatorname{sgn}(y_n)=-1
+   \quad(n\geq1).
+
+Mindkettő cáfolja a :math:`0`-beli folytonosságot, mert
+:math:`\operatorname{sgn}(0)=0`; eltérő határértékeik miatt
+a :math:`\lim_{x\to0}\operatorname{sgn}(x)` sem létezik.
+
+.. raw:: html
+
+   <figure class="sl-figure sl-discontinuity" data-sl-counterexample="sign">
+     <svg viewBox="0 0 700 270" role="img" aria-label="A szignumfüggvény és a nullához jobbról, illetve balról tartó két cáfoló sorozat"></svg>
+     <figcaption>A jobb és a bal oldali sorozat is a nullához tart, de a függvényértékek rendre +1-hez és −1-hez.</figcaption>
+   </figure>
+
+**A** :math:`\sin(1/x)` **szakadása.** Legyen
+:math:`f(x)=\sin(1/x)` a :math:`D=\mathbb R\setminus\{0\}`
+tartományon. A :math:`0\in D'\setminus D` pontban a függvény
+definíció szerint szakad. Ráadásul
+:math:`x_n=1/(\pi/2+2\pi n)` és
+:math:`y_n=1/(3\pi/2+2\pi n)` esetén
+:math:`x_n\to0^+`, :math:`y_n\to0^+`, de
+:math:`f(x_n)=1`, :math:`f(y_n)=-1` minden :math:`n\geq0`-ra.
+Tehát még a jobboldali határérték sem létezik, és a
+:math:`0`-beli folytonos kiterjesztés lehetetlen.
+
+.. raw:: html
+
+   <figure class="sl-figure sl-discontinuity" data-sl-counterexample="sin">
+     <svg viewBox="0 0 700 270" role="img" aria-label="A sin(1/x) oszcillációja és két nullához jobbról tartó sorozat plusz egy, illetve mínusz egy függvényértékekkel"></svg>
+     <figcaption>A két, jobbról nullához tartó sorozat képe végig két különböző érték: +1 és −1.</figcaption>
+   </figure>
+
 **3. példa: a sorozatok rendőrelve.** Ha minden elég nagy
 :math:`n`-re :math:`\alpha_n\leq\beta_n\leq\gamma_n` és
 
@@ -131,18 +199,12 @@ halmazon értelmezett függvénynek tekintjük, és
    \lim_{n\to+\infty}\left(-\frac1n\right)
    =\lim_{n\to+\infty}\frac1n=0,
 
-tehát :math:`\lim_{n\to+\infty}\sin n/n=0`.
+tehát :math:`\lim_{n\to+\infty}\frac{\sin n}{n}=0`.
 
 .. note::
 
-   Valóban **minden** :math:`c\in[-1,1]` részsorozati
-   határértéke :math:`(\sin n)`-nek: van növekvő
+   Valóban **minden** :math:`c\in[-1,1]` van olyan szigorúan monoton növekvő
    :math:`(n_k)`, amelyre :math:`\sin n_k\to c`.
    Az ok az, hogy :math:`1/(2\pi)` irracionális,
-   ezért az :math:`n\bmod 2\pi` szögek sűrűek a körön
-   (az irracionális forgás sűrűségi tétele);
-   a szinusz folytonos, és a kör képe alatta :math:`[-1,1]`.
-   A forgási pálya minden farokrésze is sűrű, ezért a
-   közelítő indexek növekvőre választhatók.
-   Ez nem mond ellent az előző határértéknek:
-   az :math:`1/n` tényező minden ingadozást nullára szorít.
+   ezért az :math:`n\bmod 2\pi` szögek sűrűek a körön;
+   a szinusz folytonos, és a kör képe rajta :math:`[-1,1]`.

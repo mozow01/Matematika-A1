@@ -166,10 +166,58 @@
     get=controls(root,draw);
     draw();
   }
+  function counterexample(root) {
+    const svg=root.querySelector("svg");
+    const kind=root.dataset.slCounterexample;
+    clear(svg);
+    const ymap=y=>130-76*y;
+    const xmap=kind==="sign" ? x=>350+260*x : x=>90+560*x/.7;
+    const xzero=xmap(0);
+    line(svg,65,ymap(0),650,ymap(0),C.axis,1.1);
+    line(svg,xzero,27,xzero,235,C.axis,1.1);
+    for(const y of [-1,1]) {
+      line(svg,65,ymap(y),650,ymap(y),C.grid,1,"4 5");
+      label(svg,xzero+8,ymap(y)-6,y===1?"+1":"−1");
+    }
+    label(svg,650,ymap(0)+18,"x","end");
+    label(svg,xzero+7,33,"f(x)");
+    label(svg,xzero-7,ymap(0)+18,"0","end");
+    if(kind==="sign") {
+      line(svg,65,ymap(-1),xzero,ymap(-1),C.plum,1.8);
+      line(svg,xzero,ymap(1),650,ymap(1),C.blue,1.8);
+      dot(svg,xzero,ymap(-1),C.plum,true,4);
+      dot(svg,xzero,ymap(1),C.blue,true,4);
+      dot(svg,xzero,ymap(0),C.ink,false,3.5);
+      for(let n=1;n<=8;n++) {
+        dot(svg,xmap(1/n),ymap(1),C.blue,false,3.7);
+        dot(svg,xmap(-1/n),ymap(-1),C.plum,false,3.7);
+      }
+      label(svg,500,42,"xₙ = 1/n");
+      label(svg,115,222,"yₙ = −1/n");
+    } else {
+      const points=[];
+      const start=1/.69, end=1/.008;
+      for(let i=0;i<=2600;i++) {
+        const t=start+(end-start)*i/2600;
+        points.push([xmap(1/t),ymap(Math.sin(t))]);
+      }
+      path(svg,points,C.ink,1.35);
+      for(let n=0;n<=5;n++) {
+        const a=1/(Math.PI/2+2*Math.PI*n);
+        const b=1/(3*Math.PI/2+2*Math.PI*n);
+        dot(svg,xmap(a),ymap(1),C.blue,false,4);
+        dot(svg,xmap(b),ymap(-1),C.plum,false,4);
+      }
+      label(svg,490,42,"f(xₙ) = +1");
+      label(svg,425,223,"f(yₙ) = −1");
+      label(svg,145,249,"xₙ, yₙ → 0⁺");
+    }
+  }
   document.addEventListener("DOMContentLoaded",()=>{
     document.querySelectorAll("[data-sl-monotone]").forEach(r=>sequence(r,"monotone"));
     document.querySelectorAll("[data-sl-alternating]").forEach(r=>sequence(r,"alternating"));
     document.querySelectorAll("[data-sl-clusters]").forEach(r=>sequence(r,"clusters"));
     document.querySelectorAll("[data-sl-one-sided]").forEach(oneSided);
+    document.querySelectorAll("[data-sl-counterexample]").forEach(counterexample);
   });
 })();
