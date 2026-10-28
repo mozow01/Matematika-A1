@@ -78,6 +78,13 @@ Másképpen: egyetlen közbülső értéket sem ugorhat át.
    intervallumon nem létezik.** Ezt éppen a
    Bolzano–Darboux-tétel mondja ki.
 
+Az intervallumfeltétel lényeges. Ha :math:`\operatorname{Dom}(f)`
+nem intervallum, a folytonosságból a közbülsőérték-feltétel már
+nem következik. Az :math:`f(x)=1/x` függvénynél
+:math:`\operatorname{Dom}(f)=\mathbb R\setminus\{0\}`, és
+:math:`f` folytonos. Mégsem teljesíti a feltételt: :math:`f(-1)=-1`
+és :math:`f(1)=1`, de a közbülső :math:`0` értéket nem veszi fel.
+
 **Nem Darboux-példa.** A szignumfüggvény nem folytonos
 :math:`0`-ban, és például a :math:`1/2` értéket átugorja,
 ezért nem Darboux-tulajdonságú.
@@ -98,6 +105,24 @@ Darboux-tulajdonságú: ha egy részintervallum nem tartalmazza
 :math:`0`-t, ott a függvény folytonos; ha tartalmazza,
 akkor a :math:`0` minden egyoldali környezetében felveszi
 a teljes :math:`[-1,1]` intervallum minden értékét.
+
+.. note:: Miért nem jó az egyszerűbb darabos példa?
+
+   Az
+
+   .. math::
+
+      p(x)=
+      \begin{cases}
+         x,&0\leq x\leq1,\\
+         x-1,&1<x\leq2
+      \end{cases}
+
+   függvény valóban nem folytonos :math:`1`-ben, de nem is
+   Darboux-tulajdonságú. Például
+   :math:`p([0{,}9,1{,}1])=[0{,}9,1]\cup(0,0{,}1]`, ezért az
+   :math:`1/2` közbülső értéket ezen az intervallumon nem veszi
+   fel.
 
 .. raw:: html
 
@@ -192,19 +217,21 @@ Kompakt halmazok
      <figcaption>A hiányzó torlódási pontot üres, a halmazhoz tartozó pontot kitöltött kör jelöli.</figcaption>
    </figure>
 
-Heine–Borel- és Borel–Lebesgue-tétel
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Heine–Borel-tétel (Borel–Lebesgue befedési tétele)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A valós egyenesen a következő két megfogalmazás ugyanazt fejezi ki.
+A valós egyenesen a **Heine–Borel-tétel** és a
+**Borel–Lebesgue befedési tétel** elnevezést itt szinonimaként
+használjuk.
 
 .. admonition:: Tétel
 
-   **Heine–Borel:** :math:`K\subseteq\mathbb R` pontosan akkor
-   kompakt, ha zárt és korlátos.
+   A :math:`K\subseteq\mathbb R` halmaz pontosan akkor kompakt,
+   ha zárt és korlátos; vagyis minden zárt és korlátos valós
+   halmaz minden nyílt fedéséből kiválasztható véges részfedés.
 
-   **Borel–Lebesgue befedési tétel:** minden zárt és korlátos
-   valós halmaz minden nyílt fedéséből kiválasztható véges
-   részfedés.
+Itt csak a zárt és korlátos intervallum, azaz
+:math:`K=[a,b]` esetét bizonyítjuk.
 
 **A lényegi lépés: :math:`[a,b]` kompakt.**
 Tegyük fel indirekten, hogy egy nyílt fedéséből nem választható
@@ -228,18 +255,6 @@ Elég nagy :math:`n`-re
 :math:`I_n`-nek még egyetlen halmazból álló véges részfedése is
 van. Ez ellentmondás.
 
-Ha :math:`K\subseteq[a,b]` zárt, akkor egy :math:`K`-t fedő
-nyílt családhoz hozzávéve a nyílt
-:math:`\mathbb R\setminus K` halmazt, :math:`[a,b]` fedését
-kapjuk. Ennek véges részfedéséből
-:math:`\mathbb R\setminus K` elhagyható. Így minden zárt és
-korlátos :math:`K` kompakt.
-
-Megfordítva, kompakt :math:`K` korlátossága az
-:math:`(-m,m)` fedésből következik. A kompaktság azt is adja,
-hogy :math:`K` zárt: minden :math:`x\notin K` pont elválasztható
-a :math:`K` pontjaitól diszjunkt környezetekkel, és a
-:math:`K`-t fedő környezetekből véges sok elegendő.
 
 Weierstrass tétele
 ------------------
@@ -295,19 +310,19 @@ alkalmazva kapjuk.
 Deriválhatóság
 --------------
 
-Legyen :math:`D=\operatorname{Dom}(f)\subseteq\mathbb R` és
-:math:`u\in D\cap D'`.
+Legyen :math:`\operatorname{Dom}(f)\subseteq\mathbb R` és
+:math:`u\in\operatorname{Dom}(f)\cap\operatorname{Dom}(f)'`.
 
 .. admonition:: Definíció — lineáris főrész és maradéktag
 
-   Az :math:`f:D\to\mathbb R` függvény **deriválható**
+   Az :math:`f:\operatorname{Dom}(f)\to\mathbb R` függvény **deriválható**
    :math:`u`-ban, ha van :math:`m\in\mathbb R` és
-   :math:`\varepsilon:D\to\mathbb R` függvény úgy, hogy
+   :math:`\varepsilon:\operatorname{Dom}(f)\to\mathbb R` függvény úgy, hogy
 
    .. math::
 
       f(x)=f(u)+m(x-u)+\varepsilon(x)(x-u)
-      \qquad(x\in D),
+      \qquad(x\in\operatorname{Dom}(f)),
 
    továbbá :math:`\varepsilon` folytonos :math:`u`-ban és
    :math:`\varepsilon(u)=0`. Ekkor :math:`m=f'(u)`.
@@ -340,7 +355,7 @@ határérték
    f'(u)=\lim_{x\to u}\frac{f(x)-f(u)}{x-u}
         =\lim_{h\to0}\frac{f(u+h)-f(u)}{h},
 
-ahol csak az értelmezési tartományba eső pontokat vesszük.
+ahol :math:`x\in\operatorname{Dom}(f)` és :math:`x\neq u`.
 
 .. admonition:: Következmény
 
@@ -358,12 +373,12 @@ Elméleti definíció: Carathéodory-függvény
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A deriválhatóság ekvivalens azzal, hogy létezik
-:math:`u`-ban folytonos :math:`C_u^f:D\to\mathbb R` függvény,
+:math:`u`-ban folytonos :math:`C_u^f:\operatorname{Dom}(f)\to\mathbb R` függvény,
 amelyre
 
 .. math::
 
-   f(x)-f(u)=C_u^f(x)(x-u)\qquad(x\in D).
+   f(x)-f(u)=C_u^f(x)(x-u)\qquad(x\in\operatorname{Dom}(f)).
 
 Ekkor :math:`f'(u)=C_u^f(u)`. Ha a derivált már ismert, a
 kanonikus Carathéodory-függvény
@@ -387,13 +402,14 @@ Legyen
 
 .. math::
 
-   D_{f'}=\{u\in D\cap D': f\text{ deriválható }u\text{-ban}\}.
+   \operatorname{Dom}(f')=\{u\in\operatorname{Dom}(f)\cap\operatorname{Dom}(f)':
+   f\text{ deriválható }u\text{-ban}\}.
 
 A **deriváltfüggvény** az
 
 .. math::
 
-   f':D_{f'}\to\mathbb R,\qquad u\longmapsto f'(u).
+   f':\operatorname{Dom}(f')\to\mathbb R,\qquad u\longmapsto f'(u).
 
 Deriválási szabályok
 --------------------
@@ -467,8 +483,10 @@ L’Hospital-szabály
 
 .. admonition:: Nulladik változat
 
-   Legyen :math:`f,g:D\to\mathbb R`, továbbá
-   :math:`u\in D\cap D'`. Tegyük fel, hogy :math:`f` és
+   Legyen :math:`f:\operatorname{Dom}(f)\to\mathbb R` és
+   :math:`g:\operatorname{Dom}(g)\to\mathbb R`, ahol
+   :math:`\operatorname{Dom}(f)=\operatorname{Dom}(g)`, továbbá
+   :math:`u\in\operatorname{Dom}(f)\cap\operatorname{Dom}(f)'`. Tegyük fel, hogy :math:`f` és
    :math:`g` deriválható :math:`u`-ban,
 
    .. math::
@@ -499,20 +517,29 @@ a nevező egy elég kicsi lyukas környezetben nem nulla. Ezért
    =\frac{C_u^f(u)}{C_u^g(u)}
    =\frac{f'(u)}{g'(u)}.
 
-.. admonition:: Magasabb rendű változat — kimondás
+.. admonition:: Általános L’Hospital-tétel — kimondás
 
-   Legyen :math:`f` és :math:`g` :math:`(n+1)`-szer
-   deriválható :math:`u` egy környezetében, és
+   Legyen :math:`f,g:(a,b)\to\mathbb R` :math:`(n+1)`-szer
+   deriválható, és legyen
 
    .. math::
 
-      f^{(k)}(u)=g^{(k)}(u)=0
-      \quad(k=0,1,\ldots,n),\qquad
-      g^{(n+1)}(u)\neq0.
+      \lim_{x\to a+}f^{(k)}(x)
+      =\lim_{x\to a+}g^{(k)}(x)=0
+      \qquad(k=0,1,\ldots,n).
+
+   Tegyük fel továbbá, hogy
+   :math:`g^{(k)}(x)\neq0` minden :math:`x\in(a,b)` és
+   :math:`k=1,\ldots,n+1` esetén, valamint létezik az
+
+   .. math::
+
+      A=\lim_{x\to a+}
+      \frac{f^{(n+1)}(x)}{g^{(n+1)}(x)}
+      \in\overline{\mathbb R}.
 
    Ekkor
 
    .. math::
 
-      \lim_{x\to u}\frac{f(x)}{g(x)}
-      =\frac{f^{(n+1)}(u)}{g^{(n+1)}(u)}.
+      \lim_{x\to a+}\frac{f(x)}{g(x)}=A.

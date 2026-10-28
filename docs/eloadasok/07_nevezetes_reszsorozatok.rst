@@ -1,7 +1,7 @@
 .. _eloadas-07:
 
-7. előadás
-==========
+7. előadás: Nevezetes részsorozatok
+===================================
 
 Határérték: emlékeztető
 -----------------------
