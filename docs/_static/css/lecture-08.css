@@ -1,0 +1,80 @@
+/* Lecture 08: restrained, responsive theorem diagrams. */
+.l8-figure {
+  --l8-ink: #414d58;
+  --l8-muted: #72808a;
+  --l8-axis: #b8c1c7;
+  --l8-grid: #e8ecef;
+  --l8-blue: #688b9c;
+  --l8-plum: #8f7c98;
+  --l8-pale-blue: #edf3f5;
+  --l8-pale-plum: #f2eff4;
+  margin: 1.45rem 0 2rem;
+  padding: .8rem .5rem .65rem;
+  border-top: 1px solid #e5e9ed;
+  border-bottom: 1px solid #e5e9ed;
+  color: var(--l8-ink);
+  background: #fff;
+}
+.l8-figure > svg {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin-inline: auto;
+}
+.l8-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: "DejaVu Sans", sans-serif;
+}
+.l8-figure svg text {
+  fill: var(--l8-ink);
+  font-size: 13px;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+}
+.l8-figure figcaption {
+  max-width: 800px;
+  margin: .25rem auto 0;
+  padding: .45rem .4rem 0;
+  color: var(--l8-muted);
+  font-size: .9rem;
+  line-height: 1.5;
+  text-align: center;
+}
+.l8-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+  max-width: 800px;
+  margin-inline: auto;
+}
+.l8-cards > div {
+  min-width: 0;
+  padding: .35rem .55rem .55rem;
+  border: 1px solid #e7ebee;
+  border-radius: 4px;
+  background: #fdfefe;
+}
+.l8-cards h3 {
+  margin: .2rem 0;
+  color: var(--l8-ink);
+  font-size: .96rem;
+  font-weight: 650;
+  text-align: center;
+}
+.l8-cards p {
+  margin: .25rem .3rem 0;
+  color: var(--l8-muted);
+  font-size: .84rem;
+  line-height: 1.4;
+  text-align: center;
+}
+@media (max-width: 680px) {
+  .l8-cards {
+    grid-template-columns: 1fr;
+  }
+}

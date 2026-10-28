@@ -11,3 +11,4 @@ Előadások
    05_valos_szamok_es_fuggvenyhatarertek
    06_sorozatok_es_hatarertek_technikak
    07_eloadas
+   08_folytonossag_kompaktsag_derivalhatosag
