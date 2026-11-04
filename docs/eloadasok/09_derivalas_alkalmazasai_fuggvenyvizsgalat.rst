@@ -382,11 +382,31 @@ Az első derivált előjelváltása
    Ha az előjelek fordítottak, akkor :math:`u` szigorú
    lokális maximumhely.
 
-**Bizonyítás.** Balról :math:`f` szigorúan csökken, jobbról
-szigorúan nő. A :math:`u`-beli folytonosság ezért minden
-elegendően közeli :math:`x\neq u` pontra
-:math:`f(x)>f(u)` egyenlőtlenséget ad. A maximum esete
-ugyanígy következik.
+**Bizonyítás.** Legyen először :math:`u-\delta<x<u`. A
+függvény folytonos :math:`[x,u]`-n és deriválható
+:math:`(x,u)`-n, ezért a Lagrange-féle középértéktétel szerint
+van olyan :math:`\xi\in(x,u)`, hogy
+
+.. math::
+
+   \frac{f(u)-f(x)}{u-x}=f'(\xi)<0.
+
+Mivel :math:`u-x>0`, ezért :math:`f(u)<f(x)`.
+
+Ha :math:`u<x<u+\delta`, akkor hasonlóan van olyan
+:math:`\eta\in(u,x)`, amelyre
+
+.. math::
+
+   \frac{f(x)-f(u)}{x-u}=f'(\eta)>0,
+
+tehát ismét :math:`f(x)>f(u)`. Így :math:`u` szigorú lokális
+minimumhely. A maximum esete ugyanígy következik, fordított
+előjelekkel.
+
+Az :math:`u`-beli folytonosságot pontosan a középértéktétel
+zárt intervallumán használjuk; :math:`u`-ban nem szükséges a
+deriválhatóság.
 
 .. important::
 
@@ -480,6 +500,255 @@ A feltételek szerepe:
      <figcaption>Az első derivált próba közvetlenül az előjelváltást figyeli; a második derivált próba ezt az előjelváltást kényszeríti ki a stacionárius pont körül.</figcaption>
    </figure>
 
+Konvexitás, konkávitás és inflexió
+----------------------------------
+
+.. admonition:: Definíció
+
+   Legyen :math:`I\subseteq\mathbb R` intervallum és
+   :math:`f:I\to\mathbb R`.
+
+   A függvény **konvex** az :math:`I` intervallumon, ha minden
+   :math:`x,y\in I` és :math:`\lambda\in[0,1]` esetén
+
+   .. math::
+
+      f\bigl((1-\lambda)x+\lambda y\bigr)
+      \leq
+      (1-\lambda)f(x)+\lambda f(y).
+
+   A függvény **konkáv**, ha az egyenlőtlenség fordított
+   irányú. Geometriailag a konvex függvény grafikonja a
+   húr alatt, a konkáv függvény grafikonja a húr felett
+   helyezkedik el.
+
+.. raw:: html
+
+   <figure class="l9-figure" data-l9-convexity>
+     <svg viewBox="0 0 820 330" role="img" aria-label="Konvex és konkáv függvény húrjának összehasonlítása a grafikonnal"></svg>
+     <figcaption>Konvex esetben a húr a grafikon fölött, konkáv esetben a grafikon alatt fut.</figcaption>
+   </figure>
+
+.. admonition:: Tétel — jellemzés deriváltakkal
+
+   Legyen :math:`f` kétszer deriválható az :math:`I`
+   intervallum belsejében és folytonos az esetleges
+   végpontokban. Ekkor
+
+   .. math::
+
+      f\text{ konvex }I\text{-n}
+      \quad\Longleftrightarrow\quad
+      f''(x)\geq0
+      \quad(x\in\operatorname{int}I),
+
+   és
+
+   .. math::
+
+      f\text{ konkáv }I\text{-n}
+      \quad\Longleftrightarrow\quad
+      f''(x)\leq0
+      \quad(x\in\operatorname{int}I).
+
+**Bizonyítási gondolat.** A :math:`f''\geq0` feltétel pontosan
+azt jelenti, hogy :math:`f'` monoton nő. Ha :math:`x<z<y`,
+a Lagrange-féle középértéktétel két alkalmazásával
+
+.. math::
+
+   \frac{f(z)-f(x)}{z-x}
+   \leq
+   \frac{f(y)-f(z)}{y-z}.
+
+Ez átrendezve éppen azt mondja, hogy a grafikon :math:`z`-hez
+tartozó pontja az :math:`x` és :math:`y` fölötti pontokat
+összekötő húr alatt van. A fordított irányban a húrok
+meredekségeinek rendezéséből :math:`f'` monotonitása, majd
+:math:`f''\geq0` következik. A konkáv esetet :math:`-f`
+konvexitására alkalmazva kapjuk.
+
+.. admonition:: Definíció — inflexiós pont
+
+   Az :math:`u\in\operatorname{int}I` pont **inflexiós pont**,
+   ha :math:`f` konvexitása :math:`u`-ban megváltozik:
+   az egyik oldalon konvex, a másikon konkáv.
+
+Ha :math:`f''` előjelet vált :math:`u`-ban, akkor :math:`u`
+inflexiós pont. A :math:`f''(u)=0` egyenlőség önmagában nem
+elegendő: :math:`x^3`-nak inflexiós pontja van :math:`0`-ban,
+:math:`x^4`-nek nincs.
+
+Három függvényvizsgálati példa
+------------------------------
+
+1. Nem triviális trigonometrikus példa
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Vizsgáljuk a
+
+.. math::
+
+   f(x)=\sin x+\frac12\sin 2x,
+   \qquad x\in[0,2\pi]
+
+függvényt. Az első derivált
+
+.. math::
+
+   f'(x)=\cos x+\cos2x
+        =2\cos^2x+\cos x-1
+        =(2\cos x-1)(\cos x+1).
+
+Ezért a stacionárius pontok
+
+.. math::
+
+   x=\frac{\pi}{3},\qquad x=\pi,\qquad
+   x=\frac{5\pi}{3}.
+
+A derivált pozitív :math:`(0,\pi/3)` és
+:math:`(5\pi/3,2\pi)` intervallumokon, negatív
+:math:`(\pi/3,\pi)` és :math:`(\pi,5\pi/3)` intervallumokon.
+Ezért :math:`f` szigorúan nő :math:`[0,\pi/3]`-on, szigorúan
+csökken :math:`[\pi/3,5\pi/3]`-on, majd ismét szigorúan nő
+:math:`[5\pi/3,2\pi]`-on. A :math:`\pi` pontban eltűnő
+derivált nem szakítja meg a csökkenést.
+Tehát
+
+.. math::
+
+   f\left(\frac{\pi}{3}\right)=\frac{3\sqrt3}{4}
+   \quad\text{maximum},\qquad
+   f\left(\frac{5\pi}{3}\right)=-\frac{3\sqrt3}{4}
+   \quad\text{minimum}.
+
+Az :math:`x=\pi` pontban az érintő vízszintes, de nincs
+szélsőérték, mert :math:`f'` nem vált előjelet.
+
+A második derivált
+
+.. math::
+
+   f''(x)=-\sin x-2\sin2x
+         =-\sin x(1+4\cos x).
+
+Ha :math:`\alpha=\arccos(-1/4)`, akkor az intervallum belső
+inflexiós pontjai
+
+.. math::
+
+   \alpha,\qquad \pi,\qquad 2\pi-\alpha.
+
+A függvény konkáv :math:`(0,\alpha)` és
+:math:`(\pi,2\pi-\alpha)` intervallumokon, konvex
+:math:`(\alpha,\pi)` és :math:`(2\pi-\alpha,2\pi)`
+intervallumokon.
+
+.. raw:: html
+
+   <figure class="l9-figure" data-l9-trig-example>
+     <svg viewBox="0 0 820 390" role="img" aria-label="A szinusz x plusz egyketted szinusz 2x függvény vizsgálata"></svg>
+     <figcaption>A π-beli vízszintes érintő nem jelent szélsőértéket; ugyanitt a konvexitás viszont megváltozik.</figcaption>
+   </figure>
+
+2. Exponenciális példa
+~~~~~~~~~~~~~~~~~~~~~~
+
+Legyen
+
+.. math::
+
+   f(x)=(x+2)e^x.
+
+Mivel :math:`e^x>0`,
+
+.. math::
+
+   f'(x)=(x+3)e^x
+
+előjelét kizárólag :math:`x+3` határozza meg. A függvény
+szigorúan csökken :math:`(-\infty,-3)`-on és szigorúan nő
+:math:`(-3,\infty)`-n, ezért
+
+.. math::
+
+   f(-3)=-e^{-3}
+
+az abszolút minimuma. Továbbá
+
+.. math::
+
+   f''(x)=(x+4)e^x.
+
+Így :math:`f` konkáv :math:`(-\infty,-4)`-en, konvex
+:math:`(-4,\infty)`-n, és
+
+.. math::
+
+   \left(-4,-2e^{-4}\right)
+
+inflexiós pont.
+
+.. raw:: html
+
+   <figure class="l9-figure" data-l9-exp-example>
+     <svg viewBox="0 0 820 350" role="img" aria-label="Az x plusz 2 szer e az x-ediken függvény vizsgálata"></svg>
+     <figcaption>Az inflexiós pont x-koordinátája −4, a minimumhelyé −3.</figcaption>
+   </figure>
+
+3. Polinom vízszintes érintővel és minimummal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Legyen
+
+.. math::
+
+   p(x)=3x^4-4x^3.
+
+Ekkor
+
+.. math::
+
+   p'(x)=12x^2(x-1).
+
+A derivált :math:`x<1` esetén negatív, kivéve, hogy
+:math:`p'(0)=0`; :math:`x>1` esetén pozitív. Ezért
+:math:`p` szigorúan csökken :math:`(-\infty,1)`-en és
+szigorúan nő :math:`(1,\infty)`-n. Következésképpen
+
+.. math::
+
+   p(1)=-1
+
+az abszolút minimum. Az :math:`x=0` pontban a minimumon
+kívül egy másik vízszintes érintőt kapunk, de ott nincs
+szélsőérték.
+
+A második derivált
+
+.. math::
+
+   p''(x)=12x(3x-2).
+
+Innen :math:`p` konvex :math:`(-\infty,0)`-n, konkáv
+:math:`(0,2/3)`-on, majd ismét konvex
+:math:`(2/3,\infty)`-n. Az inflexiós pontok:
+
+.. math::
+
+   (0,0),\qquad
+   \left(\frac23,-\frac{16}{27}\right).
+
+Az első közülük **vízszintes érintőjű inflexiós pont**.
+
+.. raw:: html
+
+   <figure class="l9-figure" data-l9-polynomial-example>
+     <svg viewBox="0 0 820 370" role="img" aria-label="A 3x a negyediken mínusz 4x a köbön polinom vizsgálata"></svg>
+     <figcaption>A 0-beli vízszintes érintő inflexiós pontot, az 1-beli vízszintes érintő abszolút minimumot jelez.</figcaption>
+   </figure>
+
 Függvényvizsgálati vázlat
 -------------------------
 
@@ -488,12 +757,11 @@ alábbi sorrendet követni:
 
 #. :math:`\operatorname{Dom}(f)`, szimmetriák, zérushelyek és
    előjel;
-#. határértékek az értelmezési tartomány határpontjaiban,
-   aszimptoták;
+#. határértékek az értelmezési tartomány határpontjaiban;
 #. :math:`f'` zérushelyei és előjele: monotonitási
    intervallumok, lokális szélsőértékek;
-#. :math:`f''` előjele: görbület és a stacionárius pontok
-   gyors osztályozása;
+#. :math:`f''` előjele: konvex és konkáv intervallumok,
+   inflexiós pontok;
 #. a kapott adatok egyeztetése és a grafikon vázlata.
 
 Az előadás eleji példánál
@@ -504,15 +772,11 @@ Az előadás eleji példánál
         =\frac{x^2-1}{x^2},
 
 így :math:`f'(x)=0` pontosan :math:`x=\pm1` esetén.
-Az előjel
-
-.. math::
-
-   \begin{array}{c|cccccc}
-   x&(-\infty,-1)&-1&(-1,0)&(0,1)&1&(1,\infty)\\ \hline
-   f'(x)&+&0&-&-&0&+
-   \end{array}
-
-szerint :math:`-1` lokális maximumhely,
+Az :math:`f'` pozitív :math:`(-\infty,-1)` és
+:math:`(1,\infty)` intervallumokon, negatív pedig
+:math:`(-1,0)` és :math:`(0,1)` intervallumokon. A függvény
+tehát :math:`(-\infty,-1]`-en nő, :math:`[-1,0)`-n csökken,
+:math:`(0,1]`-en csökken, végül :math:`[1,\infty)`-n nő.
+Így :math:`-1` lokális maximumhely,
 :math:`1` lokális minimumhely. Ugyanazt kaptuk, mint Descartes
 a kettős gyök keresésével.

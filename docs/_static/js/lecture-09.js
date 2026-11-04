@@ -402,6 +402,172 @@
     line(svg, 410, 20, 410, 372, C.grid, 1);
   }
 
+  function drawConvexity(root) {
+    const svg = root.querySelector("svg");
+
+    function panel(offset, kind) {
+      const left = offset + 34, right = offset + 374;
+      const top = 40, bottom = 282;
+      const px = x => left + (x + 2) / 4 * (right - left);
+      const py = y => bottom - (y + .25) / 2.8 * (bottom - top);
+      const convex = kind === "convex";
+      const fn = convex ? x => .55 * x * x : x => 2.15 - .55 * x * x;
+      const a = -1.55, b = 1.55, z = .35;
+      const chord = x => fn(a) + (fn(b) - fn(a)) * (x - a) / (b - a);
+      const color = convex ? C.blue : C.plum;
+
+      axes(svg, px(0), py(0), left, right, top, bottom);
+      samplePlot(svg, fn, -1.9, 1.9, px, py, 280, color, 1.9);
+      line(svg, px(a), py(chord(a)), px(b), py(chord(b)), C.sage, 1.55);
+      line(svg, px(z), py(fn(z)), px(z), py(chord(z)), C.muted, 1, "3 4");
+      circle(svg, px(a), py(fn(a)), 3.8, C.sage);
+      circle(svg, px(b), py(fn(b)), 3.8, C.sage);
+      circle(svg, px(z), py(fn(z)), 3.8, color);
+      circle(svg, px(z), py(chord(z)), 3.4, C.sage, true);
+      label(svg, (left + right) / 2, 23,
+        convex ? "konvex: grafikon a húr alatt" : "konkáv: grafikon a húr felett",
+        "middle", C.ink, 14);
+      label(svg, px(a), bottom + 18, "x", "middle", C.muted);
+      label(svg, px(z), bottom + 18, "(1−λ)x+λy", "middle", C.muted, 10);
+      label(svg, px(b), bottom + 18, "y", "middle", C.muted);
+    }
+
+    panel(0, "convex");
+    panel(410, "concave");
+    line(svg, 410, 25, 410, 305, C.grid, 1);
+  }
+
+  function drawTrigExample(root) {
+    const svg = root.querySelector("svg");
+    const left = 58, right = 770, top = 38, bottom = 326;
+    const xmin = 0, xmax = 2 * Math.PI, ymin = -1.6, ymax = 1.6;
+    const px = x => left + (x - xmin) / (xmax - xmin) * (right - left);
+    const py = y => bottom - (y - ymin) / (ymax - ymin) * (bottom - top);
+    const f = x => Math.sin(x) + .5 * Math.sin(2 * x);
+    const alpha = Math.acos(-.25);
+
+    [
+      [0, alpha, C.palePlum, "konkáv"],
+      [alpha, Math.PI, C.paleBlue, "konvex"],
+      [Math.PI, 2 * Math.PI - alpha, C.palePlum, "konkáv"],
+      [2 * Math.PI - alpha, 2 * Math.PI, C.paleBlue, "konvex"]
+    ].forEach(([a, b, color, textValue]) => {
+      el(svg, "rect", {
+        x: px(a), y: top, width: px(b) - px(a), height: bottom - top,
+        fill: color
+      });
+      label(svg, (px(a) + px(b)) / 2, top + 17, textValue, "middle", C.muted, 10);
+    });
+
+    axes(svg, px(0), py(0), left, right, top, bottom);
+    samplePlot(svg, f, xmin, xmax, px, py, 520, C.ink, 2);
+
+    const critical = [
+      [Math.PI / 3, C.plum, "maximum"],
+      [Math.PI, C.sage, "vízszintes érintő"],
+      [5 * Math.PI / 3, C.blue, "minimum"]
+    ];
+    critical.forEach(([x, color, textValue]) => {
+      circle(svg, px(x), py(f(x)), 4.2, color);
+      line(svg, px(x) - 26, py(f(x)), px(x) + 26, py(f(x)), color, 1.2);
+      label(svg, px(x), x === Math.PI / 3 ? py(f(x)) - 12 : py(f(x)) + 20,
+        textValue, "middle", color, 10);
+    });
+
+    [alpha, Math.PI, 2 * Math.PI - alpha].forEach(x => {
+      line(svg, px(x), top + 25, px(x), bottom, C.sage, .9, "3 5");
+      circle(svg, px(x), py(f(x)), 3.5, C.sage, true);
+    });
+
+    [
+      [0, "0"], [Math.PI / 3, "π/3"], [Math.PI, "π"],
+      [5 * Math.PI / 3, "5π/3"], [2 * Math.PI, "2π"]
+    ].forEach(([x, textValue]) => {
+      line(svg, px(x), py(0) - 4, px(x), py(0) + 4, C.axis, 1);
+      label(svg, px(x), bottom + 19, textValue, "middle", C.muted, 10);
+    });
+  }
+
+  function drawExpExample(root) {
+    const svg = root.querySelector("svg");
+    const left = 62, right = 765, top = 32, bottom = 292;
+    const xmin = -7, xmax = -.7, ymin = -.08, ymax = .72;
+    const px = x => left + (x - xmin) / (xmax - xmin) * (right - left);
+    const py = y => bottom - (y - ymin) / (ymax - ymin) * (bottom - top);
+    const f = x => (x + 2) * Math.exp(x);
+
+    el(svg, "rect", {
+      x: px(xmin), y: top, width: px(-4) - px(xmin), height: bottom - top,
+      fill: C.palePlum
+    });
+    el(svg, "rect", {
+      x: px(-4), y: top, width: px(xmax) - px(-4), height: bottom - top,
+      fill: C.paleBlue
+    });
+    label(svg, (left + px(-4)) / 2, top + 17, "konkáv", "middle", C.muted, 11);
+    label(svg, (px(-4) + right) / 2, top + 17, "konvex", "middle", C.muted, 11);
+    line(svg, left, py(0), right, py(0), C.axis, 1.05);
+    samplePlot(svg, f, xmin, xmax, px, py, 420, C.ink, 2);
+
+    const points = [
+      [-4, -2 * Math.exp(-4), C.sage, "inflexió"],
+      [-3, -Math.exp(-3), C.blue, "minimum"]
+    ];
+    points.forEach(([x, y, color, textValue]) => {
+      line(svg, px(x), top + 24, px(x), bottom, color, .9, "3 5");
+      circle(svg, px(x), py(y), 4.2, color);
+      label(svg, px(x), py(y) + (x === -4 ? -13 : 21), textValue,
+        "middle", color, 11);
+      label(svg, px(x), bottom + 19, String(x).replace("-", "−"),
+        "middle", C.muted, 11);
+    });
+    line(svg, px(-3) - 30, py(f(-3)), px(-3) + 30, py(f(-3)), C.blue, 1.2);
+    label(svg, right - 4, py(0) - 8, "y=0", "end", C.muted, 10);
+  }
+
+  function drawPolynomialExample(root) {
+    const svg = root.querySelector("svg");
+    const left = 60, right = 765, top = 32, bottom = 308;
+    const xmin = -.55, xmax = 1.45, ymin = -1.18, ymax = .82;
+    const px = x => left + (x - xmin) / (xmax - xmin) * (right - left);
+    const py = y => bottom - (y - ymin) / (ymax - ymin) * (bottom - top);
+    const f = x => 3 * Math.pow(x, 4) - 4 * Math.pow(x, 3);
+
+    [
+      [xmin, 0, C.paleBlue, "konvex"],
+      [0, 2 / 3, C.palePlum, "konkáv"],
+      [2 / 3, xmax, C.paleBlue, "konvex"]
+    ].forEach(([a, b, color, textValue]) => {
+      el(svg, "rect", {
+        x: px(a), y: top, width: px(b) - px(a), height: bottom - top,
+        fill: color
+      });
+      label(svg, (px(a) + px(b)) / 2, top + 17, textValue, "middle", C.muted, 10);
+    });
+
+    axes(svg, px(0), py(0), left, right, top, bottom);
+    samplePlot(svg, f, xmin, xmax, px, py, 480, C.ink, 2);
+
+    const points = [
+      [0, 0, C.sage, "vízszintes inflexió"],
+      [2 / 3, -16 / 27, C.sage, "inflexió"],
+      [1, -1, C.blue, "minimum"]
+    ];
+    points.forEach(([x, y, color, textValue]) => {
+      circle(svg, px(x), py(y), 4.1, color);
+      line(svg, px(x), top + 24, px(x), bottom, color, .85, "3 5");
+      const dy = x === 0 ? -13 : 21;
+      label(svg, px(x), py(y) + dy, textValue, "middle", color, 10);
+    });
+    line(svg, px(0) - 34, py(0), px(0) + 34, py(0), C.sage, 1.2);
+    line(svg, px(1) - 34, py(-1), px(1) + 34, py(-1), C.blue, 1.2);
+    [
+      [0, "0"], [2 / 3, "2/3"], [1, "1"]
+    ].forEach(([x, textValue]) => {
+      label(svg, px(x), bottom + 20, textValue, "middle", C.muted, 10);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("[data-l9-descartes]").forEach(drawDescartes);
     document.querySelectorAll("[data-l9-extrema]").forEach(drawExtrema);
@@ -411,5 +577,9 @@
     document.querySelectorAll("[data-l9-monotonicity]").forEach(drawMonotonicity);
     document.querySelectorAll("[data-l9-strict]").forEach(drawStrict);
     document.querySelectorAll("[data-l9-extremum-tests]").forEach(drawExtremumTests);
+    document.querySelectorAll("[data-l9-convexity]").forEach(drawConvexity);
+    document.querySelectorAll("[data-l9-trig-example]").forEach(drawTrigExample);
+    document.querySelectorAll("[data-l9-exp-example]").forEach(drawExpExample);
+    document.querySelectorAll("[data-l9-polynomial-example]").forEach(drawPolynomialExample);
   });
 })();
