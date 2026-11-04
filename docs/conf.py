@@ -30,6 +30,7 @@ html_css_files = [
     "css/real-limits.css",
     "css/sequence-limits.css",
     "css/lecture-08.css",
+    "css/lecture-09.css",
 ]
 html_js_files = [
     "js/interactive-frames.js",
@@ -39,6 +40,7 @@ html_js_files = [
     "js/real-limits.js",
     "js/sequence-limits.js",
     "js/lecture-08.js",
+    "js/lecture-09.js",
 ]
 
 mathjax3_config = {
