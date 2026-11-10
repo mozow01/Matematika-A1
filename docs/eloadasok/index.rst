@@ -13,3 +13,4 @@ Előadások
    07_nevezetes_reszsorozatok
    08_folytonossag_kompaktsag_derivalhatosag
    09_derivalas_alkalmazasai_fuggvenyvizsgalat
+   10_derivaltfuggveny_tulajdonsagai
