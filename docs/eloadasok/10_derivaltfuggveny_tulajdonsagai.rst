@@ -538,8 +538,8 @@ A kapott :math:`\delta` csak :math:`\varepsilon`-tól függ,
    Heine-tétel miatt az eredeti függvény egyenletesen
    folytonos.
 
-Példa: :math:`\sin\sqrt[3]{x}`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Példa: a Heine-tétel és a Lipschitz-tulajdonság együtt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Legyen
 
@@ -549,31 +549,60 @@ Legyen
    \qquad x\in\mathbb R.
 
 A függvény az egész valós egyenesen egyenletesen folytonos,
-noha nem Lipschitz-folytonos. A szinusz
-:math:`1`-Lipschitz-folytonos, továbbá minden
-:math:`x,y\in\mathbb R` esetén
+noha :math:`0` egyetlen környezetében sem
+Lipschitz-folytonos. A bizonyításban külön kezeljük a
+középső kompakt részt és a két szélső félegyenest.
+
+A :math:`F` függvény folytonos a :math:`[-2,2]` kompakt
+intervallumon, ezért a **Heine-tétel** szerint ott
+egyenletesen folytonos. Tehát minden :math:`\varepsilon>0`
+számhoz van olyan :math:`\delta_0>0`, hogy
 
 .. math::
 
-   \left|\sqrt[3]{x}-\sqrt[3]{y}\right|
-   \leq
-   \sqrt[3]{4}\,|x-y|^{1/3}.
+   x,y\in[-2,2],\quad |x-y|<\delta_0
+   \quad\Longrightarrow\quad
+   |F(x)-F(y)|<\varepsilon.
 
-Ezért
-
-.. math::
-
-   |F(x)-F(y)|
-   \leq
-   \sqrt[3]{4}\,|x-y|^{1/3}.
-
-Az adott :math:`\varepsilon>0` számhoz például
+A szélső részeken :math:`F` deriváltja korlátos:
 
 .. math::
 
-   \delta=\frac{\varepsilon^3}{4}
+   F'(x)=\frac{\cos\sqrt[3]{x}}{3|x|^{2/3}},
+   \qquad x\neq0,
 
-megfelelő, tehát :math:`F` egyenletesen folytonos.
+ezért :math:`|F'(x)|\leq 1/3`, ha :math:`x\leq-1` vagy
+:math:`x\geq1`. A korlátos deriváltra vonatkozó tétel és a
+Lagrange-féle középértéktétel miatt :math:`F` mindkét
+félegyenesen :math:`1/3`-Lipschitz-folytonos. Így ha
+:math:`x,y` ugyanabba a szélső félegyenesbe esik, akkor
+
+.. math::
+
+   |F(x)-F(y)|\leq\frac13|x-y|.
+
+Válasszuk
+
+.. math::
+
+   \delta=\min\{\delta_0,\,3\varepsilon,\,1\}.
+
+Ha :math:`|x-y|<\delta`, akkor vagy mindkét pont a
+:math:`[-2,2]` intervallumba esik, és a Heine-tételből kapott
+becslést használjuk; vagy valamelyik pont kívül esik ezen az
+intervallumon. Az utóbbi esetben :math:`\delta\leq1` miatt a
+másik pont is ugyanabba a szélső félegyenesbe esik:
+:math:`(-\infty,-1]`-be vagy :math:`[1,\infty)`-be. Ekkor a
+Lipschitz-becslés adja, hogy
+
+.. math::
+
+   |F(x)-F(y)|\leq\frac13|x-y|<\varepsilon.
+
+Tehát :math:`F` az egész :math:`\mathbb R` halmazon
+egyenletesen folytonos. A két módszer szerepe különböző:
+a Heine-tétel kezeli a :math:`0` körüli kompakt részt, a
+Lipschitz-tulajdonság pedig a két nem korlátos szélső részt.
 
 Ugyanakkor :math:`F` nem Lipschitz-folytonos :math:`0`
 egyetlen környezetében sem. Ha :math:`h=t^3`, akkor
@@ -593,6 +622,6 @@ Lipschitz-folytonosságnál.
 
    <figure class="l10-figure" data-l10-cuberoot>
      <svg viewBox="0 0 820 360" role="img" aria-label="A szinusz köbgyök x függvény grafikonja és a nullához közeli meredek viselkedése"></svg>
-     <figcaption>A függvény 0 közelében túl meredek a Lipschitz-tulajdonsághoz, de a köbgyökös Hölder-becslés egyetlen globális δ-t ad.</figcaption>
+     <figcaption>A középső kompakt részt a Heine-tétel, a két szélső félegyenest a Lipschitz-becslés kezeli.</figcaption>
    </figure>
 

@@ -329,7 +329,7 @@
     label(svg, px(h) + 10, py(Math.sin(t)) - 8, "h=t³", "start", C.plum, 11);
     label(svg, px(.65), py(.9), "a szelők meredeksége → ∞", "start", C.plum, 11);
     label(svg, 410, 333,
-      "|F(x)−F(y)| ≤ ∛4 · |x−y|^(1/3)",
+      "Heine: [−2,2]   •   Lipschitz: (−∞,−1] és [1,∞)",
       "middle", C.muted, 14);
   }
 
