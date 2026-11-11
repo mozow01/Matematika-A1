@@ -322,306 +322,305 @@ a jobb oldal :math:`A`-hoz tart. A bal oldal definíció szerint
 ebben az esetben folytonos volna :math:`u`-ban.
 
 
-Heine–Borel és Heine tétele
----------------------------
+Lipschitz-folytonosság és folytonos kiterjesztés
+-----------------------------------------------------
 
-Miért kell egyenletes folytonosság?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+A továbbiakban a három folytonossági fogalom közül elsősorban
+a **Lipschitz-folytonosságot** használjuk.
 
-A folytonosság pontonkénti tulajdonság. Egy nyílt intervallumon
-folytonos függvény nem feltétlenül terjeszthető ki folytonosan
-az intervallum lezártjára. Például
+.. admonition:: Tétel — :math:`\operatorname{Lip}(I)\subseteq C(I)`
 
-.. math::
+   Legyen :math:`I\subseteq\mathbb R` intervallum. Minden
+   :math:`I`-n Lipschitz-folytonos függvény folytonos
+   :math:`I`-n.
 
-   f(x)=\sin\frac1x,\qquad x\in(0,1]
-
-folytonos a saját értelmezési tartományán, de :math:`0`-ban
-nincs határértéke, ezért nem egészíthető ki folytonosan
-:math:`[0,1]`-re.
-
-A problémát az okozza, hogy a folytonosság definíciójában a
-megfelelő :math:`\delta` függhet a vizsgált ponttól. Olyan
-globális tulajdonságot keresünk, amelyben ugyanaz a
-:math:`\delta` az értelmezési tartomány minden pontpárjára
-működik.
-
-.. admonition:: Definíció — egyenletes folytonosság
-
-   Az :math:`f:H\to\mathbb R` függvény **egyenletesen
-   folytonos** a :math:`H\subseteq\mathbb R` halmazon, ha
-
-   .. math::
-
-      \forall\varepsilon>0\ \exists\delta>0\
-      \forall x,y\in H:
-      \quad
-      |x-y|<\delta
-      \Longrightarrow
-      |f(x)-f(y)|<\varepsilon.
-
-A kvantorok sorrendje a lényeg: :math:`\delta` függhet
-:math:`\varepsilon`-tól, de nem függhet sem :math:`x`-től,
-sem :math:`y`-tól.
-
-A :math:`\sin(1/x)` nem egyenletesen folytonos
-:math:`(0,1]`-en. Valóban, válasszuk
+**Bizonyítás.** Tegyük fel, hogy
 
 .. math::
 
-   x_n=\frac{1}{\frac{\pi}{2}+2\pi n},
-   \qquad
-   y_n=\frac{1}{\frac{3\pi}{2}+2\pi n}.
+   |f(x)-f(y)|\leq L|x-y|
+   \qquad(x,y\in I).
 
-Ekkor :math:`|x_n-y_n|\to0`, miközben
-:math:`f(x_n)=1` és :math:`f(y_n)=-1`.
-
-.. raw:: html
-
-   <figure class="l10-figure" data-l10-uniform>
-     <svg viewBox="0 0 820 380" role="img" aria-label="Pontbeli és egyenletes folytonosság összehasonlítása"></svg>
-     <figcaption>Pontbeli folytonosságnál a megengedett vízszintes eltérés pontról pontra változhat; egyenletes folytonosságnál egyetlen δ működik mindenütt.</figcaption>
-   </figure>
-
-.. admonition:: Elégséges feltétel
-
-   Minden Lipschitz-folytonos függvény egyenletesen folytonos.
-
-Ha :math:`|f(x)-f(y)|\leq L|x-y|` és :math:`L>0`, akkor az
-adott :math:`\varepsilon>0` számhoz válasszuk
+Ha :math:`L=0`, akkor :math:`f` konstans, tehát folytonos.
+Ha :math:`L>0`, rögzítsünk egy :math:`u\in I` pontot és
+egy :math:`\varepsilon>0` számot, majd válasszuk
 
 .. math::
 
    \delta=\frac{\varepsilon}{L}.
 
-Ekkor :math:`|x-y|<\delta` esetén
+Ha :math:`x\in I` és :math:`|x-u|<\delta`, akkor
 
 .. math::
 
-   |f(x)-f(y)|
-   \leq L|x-y|
+   |f(x)-f(u)|
+   \leq L|x-u|
    <L\delta
    =\varepsilon.
 
-Ha :math:`L=0`, akkor :math:`f` konstans, és az állítás
-azonnali.
+Tehát :math:`f` minden :math:`u\in I` pontban folytonos.
 
+.. admonition:: Tétel — kiterjesztés a véges intervallumvégpontra
 
-Heine–Borel-tétel
-~~~~~~~~~~~~~~~~~
+   Legyen :math:`a\in\mathbb R` az :math:`I` intervallum
+   egy véges, :math:`I`-hez nem tartozó végpontja. Ha
+   :math:`f:I\to\mathbb R` Lipschitz-folytonos, akkor
+   :math:`f` egyértelműen és folytonosan kiterjeszthető az
+   :math:`I\cup\{a\}` halmazra.
 
-A következő tételt most bizonyítjuk először; ez lesz a
-Heine-tétel kompaktsági alapja.
-
-.. admonition:: Tétel — Heine–Borel az intervallumra
-
-   Minden korlátos és zárt :math:`[a,b]` intervallum kompakt:
-   minden nyílt fedéséből kiválasztható véges részfedés.
-
-**Bizonyítás indirekten, intervallumfelezéssel.** Legyen
-:math:`\mathcal U` az :math:`[a,b]` egy nyílt fedése. Tegyük
-fel, hogy nem választható ki belőle véges részfedés. Felezzük
-meg az :math:`I_0=[a,b]` intervallumot. Legalább az egyik
-zárt félintervallum nem fedhető le véges sok
-:math:`\mathcal U`-beli halmazzal, különben a két véges
-részfedés együtt lefedné :math:`I_0`-t. Jelöljük ezt a felet
-:math:`I_1`-gyel, majd folytassuk ugyanígy.
-
-Így egymásba skatulyázott zárt intervallumokat kapunk:
+**Bizonyítás.** Az :math:`L=0` eset azonnali, ezért tegyük
+fel, hogy :math:`L>0`. Válasszunk egy tetszőleges
+:math:`x_n\in I` sorozatot úgy, hogy :math:`x_n\to a`.
+Ekkor :math:`f(x_n)` Cauchy-sorozat. Valóban, elég nagy
+:math:`m,n` indexekre
 
 .. math::
 
-   I_0\supseteq I_1\supseteq I_2\supseteq\cdots,
+   |f(x_n)-f(x_m)|
+   \leq L|x_n-x_m|
+   \leq L|x_n-a|+L|x_m-a|,
+
+és a jobb oldal nullához tart. A valós számok teljessége miatt
+létezik az
+
+.. math::
+
+   A=\lim_{n\to\infty}f(x_n)
+
+véges határérték. Definiáljuk
+
+.. math::
+
+   \overline f(x)=f(x)\quad(x\in I),
    \qquad
-   |I_n|=\frac{b-a}{2^n}\longrightarrow0,
+   \overline f(a)=A.
 
-és egyik :math:`I_n` sem fedhető le véges sok
-:math:`\mathcal U`-beli halmazzal. A Cantor-féle közösrész
-tétele szerint van egyetlen
-
-.. math::
-
-   c\in\bigcap_{n=0}^{\infty}I_n.
-
-Mivel :math:`\mathcal U` lefedi :math:`[a,b]`-t, van olyan
-:math:`U\in\mathcal U`, amelyre :math:`c\in U`. Az
-:math:`U` halmaz nyílt, ezért tartalmazza :math:`c` valamely
-teljes környezetét. Az :math:`I_n` intervallumok hossza
-nullához tart, így egy elég nagy :math:`n`-re
+Megmutatjuk, hogy az :math:`A` érték nem függ a választott
+:math:`(x_n)` sorozattól, és :math:`\overline f` folytonos
+:math:`a`-ban. Legyen :math:`y_n\in I` tetszőleges,
+:math:`a`-hoz tartó sorozat. Ekkor
 
 .. math::
 
-   I_n\subseteq U.
+   \begin{aligned}
+   |f(y_n)-A|
+   &\leq |f(y_n)-f(x_n)|+|f(x_n)-A|\\
+   &\leq L|y_n-x_n|+|f(x_n)-A|\\
+   &\leq L|y_n-a|+L|x_n-a|+|f(x_n)-A|.
+   \end{aligned}
 
-Ekkor :math:`I_n` már egyetlen fedő halmazzal lefedhető, ami
-ellentmond :math:`I_n` megválasztásának.
-
-.. raw:: html
-
-   <figure class="l10-figure" data-l10-heine-borel>
-     <svg viewBox="0 0 820 390" role="img" aria-label="A Heine–Borel-tétel intervallumfelezéses bizonyítása"></svg>
-     <figcaption>A mindig „rossz” félintervallumok egyetlen c pontra szűkülnek, de a c-t tartalmazó nyílt fedő halmaz végül az egész kis intervallumot elnyeli.</figcaption>
-   </figure>
-
-
-Heine tétele
-~~~~~~~~~~~~
-
-.. admonition:: Tétel — Heine
-
-   Korlátos és zárt intervallumon értelmezett folytonos
-   függvény egyenletesen folytonos.
-
-**Bizonyítás.** Legyen :math:`f:[a,b]\to\mathbb R` folytonos,
-és rögzítsünk egy :math:`\varepsilon>0` számot. Minden
-:math:`u\in[a,b]` ponthoz a folytonosság miatt választható
-olyan :math:`r_u>0`, hogy
+Adott :math:`\varepsilon>0` számhoz válasszunk olyan
+:math:`N` indexet, hogy :math:`n>N` esetén egyszerre
 
 .. math::
 
-   x\in[a,b],\quad |x-u|<r_u
-   \quad\Longrightarrow\quad
-   |f(x)-f(u)|<\frac{\varepsilon}{2}.
-
-A
-
-.. math::
-
-   B_{r_u/2}(u),
-   \qquad u\in[a,b],
-
-nyílt intervallumok lefedik :math:`[a,b]`-t. A
-Heine–Borel-tétel miatt véges sok is elegendő:
-
-.. math::
-
-   [a,b]\subseteq
-   B_{r_{u_1}/2}(u_1)\cup\cdots\cup
-   B_{r_{u_N}/2}(u_N).
-
-Legyen
-
-.. math::
-
-   \delta=\frac12\min_{1\leq j\leq N}r_{u_j}>0.
-
-Ha :math:`x,y\in[a,b]` és :math:`|x-y|<\delta`, akkor
-:math:`x` valamely :math:`B_{r_{u_j}/2}(u_j)` halmazba esik.
-Ekkor
-
-.. math::
-
-   |x-u_j|<\frac{r_{u_j}}2,
+   |y_n-a|<\frac{\varepsilon}{3L},
    \qquad
-   |y-u_j|
-   \leq |y-x|+|x-u_j|
-   <r_{u_j}.
+   |x_n-a|<\frac{\varepsilon}{3L},
+   \qquad
+   |f(x_n)-A|<\frac{\varepsilon}{3}.
 
-Ezért
+Ekkor :math:`|f(y_n)-A|<\varepsilon\), tehát
+:math:`f(y_n)\to A`. Az átviteli elv, vagyis a folytonosság
+sorozatos jellemzése alapján :math:`\overline f` folytonos
+:math:`a`-ban. Ugyanez azt is mutatja, hogy bármely más
+:math:`a`-hoz tartó sorozat ugyanazt az :math:`A` értéket
+adja, ezért a kiterjesztés egyértelmű.
 
-.. math::
+.. warning::
 
-   |f(x)-f(y)|
-   \leq |f(x)-f(u_j)|+|f(u_j)-f(y)|
-   <\frac{\varepsilon}{2}+\frac{\varepsilon}{2}
-   =\varepsilon.
+   Az állítás a **véges** intervallumvégpontokra vonatkozik.
+   Végtelenben egy Lipschitz-folytonos függvénynek nem kell
+   véges határértékkel rendelkeznie; például
+   :math:`f(x)=x` Lipschitz-folytonos :math:`\mathbb R`-en.
 
-A kapott :math:`\delta` csak :math:`\varepsilon`-tól függ,
-:math:`x`-től és :math:`y`-tól nem.
 
-.. note:: Kapcsolat a folytonos kiterjesztéssel
+.. note:: Megjegyzés — egyenletes folytonosság, Heine–Borel és Heine tétele
 
-   Egy intervallumon egyenletesen folytonos függvény
-   egyértelműen és folytonosan kiterjeszthető az intervallum
-   lezártjára. Fordítva, ha a lezártra van folytonos
-   kiterjesztése és a lezárt intervallum korlátos, akkor a
-   Heine-tétel miatt az eredeti függvény egyenletesen
-   folytonos.
+   Jelölje :math:`\operatorname{Lip}(I)` az :math:`I`-n
+   Lipschitz-folytonos, :math:`U(I)` az egyenletesen
+   folytonos, :math:`C(I)` pedig a folytonos függvények
+   osztályát. A helyes tartalmazási irány:
 
-Példa: a Heine-tétel és a Lipschitz-tulajdonság együtt
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   .. math::
 
-Legyen
+      \boxed{
+      \operatorname{Lip}(I)\subseteq U(I)\subseteq C(I).
+      }
 
-.. math::
+   Az első tartalmazásnál, ha
+   :math:`|f(x)-f(y)|\leq L|x-y|` és :math:`L>0`, akkor az
+   adott :math:`\varepsilon>0` számhoz ugyanaz a
 
-   F(x)=\sin\sqrt[3]{x},
-   \qquad x\in\mathbb R.
+   .. math::
 
-A függvény az egész valós egyenesen egyenletesen folytonos,
-noha :math:`0` egyetlen környezetében sem
-Lipschitz-folytonos. A bizonyításban külön kezeljük a
-középső kompakt részt és a két szélső félegyenest.
+      \delta=\frac{\varepsilon}{L}
 
-A :math:`F` függvény folytonos a :math:`[-2,2]` kompakt
-intervallumon, ezért a **Heine-tétel** szerint ott
-egyenletesen folytonos. Tehát minden :math:`\varepsilon>0`
-számhoz van olyan :math:`\delta_0>0`, hogy
+   működik az :math:`I` intervallum minden pontpárjára.
+   Ezért minden Lipschitz-folytonos függvény egyenletesen
+   folytonos. Az egyenletes folytonosságból pedig közvetlenül
+   következik a pontonkénti folytonosság.
 
-.. math::
+   Egy függvény egyenletesen folytonos :math:`I`-n, ha
 
-   x,y\in[-2,2],\quad |x-y|<\delta_0
-   \quad\Longrightarrow\quad
-   |F(x)-F(y)|<\varepsilon.
+   .. math::
 
-A szélső részeken :math:`F` deriváltja korlátos:
+      \forall\varepsilon>0\ \exists\delta>0\
+      \forall x,y\in I:
+      \quad
+      |x-y|<\delta
+      \Longrightarrow
+      |f(x)-f(y)|<\varepsilon.
 
-.. math::
+   A kvantorok sorrendje a lényeg: :math:`\delta` nem
+   függhet :math:`x` és :math:`y` megválasztásától.
 
-   F'(x)=\frac{\cos\sqrt[3]{x}}{3|x|^{2/3}},
-   \qquad x\neq0,
+   .. raw:: html
 
-ezért :math:`|F'(x)|\leq 1/3`, ha :math:`x\leq-1` vagy
-:math:`x\geq1`. A korlátos deriváltra vonatkozó tétel és a
-Lagrange-féle középértéktétel miatt :math:`F` mindkét
-félegyenesen :math:`1/3`-Lipschitz-folytonos. Így ha
-:math:`x,y` ugyanabba a szélső félegyenesbe esik, akkor
+      <figure class="l10-figure" data-l10-uniform>
+        <svg viewBox="0 0 820 380" role="img" aria-label="Pontbeli és egyenletes folytonosság összehasonlítása"></svg>
+        <figcaption>Pontbeli folytonosságnál a megengedett vízszintes eltérés pontról pontra változhat; egyenletes folytonosságnál egyetlen δ működik mindenütt.</figcaption>
+      </figure>
 
-.. math::
+   **Heine–Borel-tétel.** Minden korlátos és zárt
+   :math:`[a,b]` intervallum kompakt: minden nyílt
+   fedéséből kiválasztható véges részfedés.
 
-   |F(x)-F(y)|\leq\frac13|x-y|.
+   **Bizonyítás.** Tegyük fel indirekten, hogy az
+   :math:`[a,b]` intervallum valamely nyílt fedéséből nem
+   választható ki véges részfedés. Felezzük meg az
+   intervallumot, és válasszuk azt a zárt felet, amely szintén
+   nem fedhető le véges sok fedő halmazzal. Ezt ismételve
 
-Válasszuk
+   .. math::
 
-.. math::
+      I_0\supseteq I_1\supseteq I_2\supseteq\cdots,
+      \qquad
+      |I_n|=\frac{b-a}{2^n}\longrightarrow0
 
-   \delta=\min\{\delta_0,\,3\varepsilon,\,1\}.
+   egymásba skatulyázott intervallumokat kapunk. A Cantor-féle
+   közösrész-tétel szerint egyetlen
 
-Ha :math:`|x-y|<\delta`, akkor vagy mindkét pont a
-:math:`[-2,2]` intervallumba esik, és a Heine-tételből kapott
-becslést használjuk; vagy valamelyik pont kívül esik ezen az
-intervallumon. Az utóbbi esetben :math:`\delta\leq1` miatt a
-másik pont is ugyanabba a szélső félegyenesbe esik:
-:math:`(-\infty,-1]`-be vagy :math:`[1,\infty)`-be. Ekkor a
-Lipschitz-becslés adja, hogy
+   .. math::
 
-.. math::
+      c\in\bigcap_{n=0}^{\infty}I_n
 
-   |F(x)-F(y)|\leq\frac13|x-y|<\varepsilon.
+   pont marad. A fedés valamely :math:`U` nyílt halmaza
+   tartalmazza :math:`c`-t, ezért tartalmazza annak egy
+   teljes környezetét is. Elég nagy :math:`n` esetén már
+   :math:`I_n\subseteq U`, tehát :math:`I_n` egyetlen
+   fedő halmazzal lefedhető. Ez ellentmond
+   :math:`I_n` megválasztásának.
 
-Tehát :math:`F` az egész :math:`\mathbb R` halmazon
-egyenletesen folytonos. A két módszer szerepe különböző:
-a Heine-tétel kezeli a :math:`0` körüli kompakt részt, a
-Lipschitz-tulajdonság pedig a két nem korlátos szélső részt.
+   .. raw:: html
 
-Ugyanakkor :math:`F` nem Lipschitz-folytonos :math:`0`
-egyetlen környezetében sem. Ha :math:`h=t^3`, akkor
+      <figure class="l10-figure" data-l10-heine-borel>
+        <svg viewBox="0 0 820 390" role="img" aria-label="A Heine–Borel-tétel intervallumfelezéses bizonyítása"></svg>
+        <figcaption>A mindig „rossz” félintervallumok egyetlen c pontra szűkülnek, de a c-t tartalmazó nyílt fedő halmaz végül az egész kis intervallumot elnyeli.</figcaption>
+      </figure>
 
-.. math::
+   **Heine tétele.** Korlátos és zárt intervallumon
+   értelmezett folytonos függvény egyenletesen folytonos.
 
-   \frac{|F(h)-F(0)|}{|h|}
-   =
-   \frac{|\sin t|}{|t|^3}
-   \longrightarrow+\infty
-   \qquad(t\to0).
+   **Bizonyítás.** Legyen :math:`f:[a,b]\to\mathbb R`
+   folytonos, és rögzítsünk egy :math:`\varepsilon>0`
+   számot. Minden :math:`u\in[a,b]` ponthoz válasszunk
+   olyan :math:`r_u>0` sugarat, hogy
 
-Vagyis az egyenletes folytonosság gyengébb tulajdonság a
-Lipschitz-folytonosságnál.
+   .. math::
 
-.. raw:: html
+      x\in[a,b],\quad |x-u|<r_u
+      \quad\Longrightarrow\quad
+      |f(x)-f(u)|<\frac{\varepsilon}{2}.
 
-   <figure class="l10-figure" data-l10-cuberoot>
-     <svg viewBox="0 0 820 360" role="img" aria-label="A szinusz köbgyök x függvény grafikonja és a nullához közeli meredek viselkedése"></svg>
-     <figcaption>A középső kompakt részt a Heine-tétel, a két szélső félegyenest a Lipschitz-becslés kezeli.</figcaption>
-   </figure>
+   A :math:`B_{r_u/2}(u)` intervallumok lefedik
+   :math:`[a,b]`-t. A Heine–Borel-tétel szerint véges sok
+   is elegendő:
 
+   .. math::
+
+      [a,b]\subseteq
+      B_{r_{u_1}/2}(u_1)\cup\cdots\cup
+      B_{r_{u_N}/2}(u_N).
+
+   Legyen
+
+   .. math::
+
+      \delta=\frac12\min_{1\leq j\leq N}r_{u_j}>0.
+
+   Ha :math:`x,y\in[a,b]` és :math:`|x-y|<\delta`, akkor
+   :math:`x` valamely :math:`B_{r_{u_j}/2}(u_j)`
+   intervallumba esik, továbbá
+
+   .. math::
+
+      |y-u_j|
+      \leq |y-x|+|x-u_j|
+      <r_{u_j}.
+
+   Ezért
+
+   .. math::
+
+      |f(x)-f(y)|
+      \leq |f(x)-f(u_j)|+|f(u_j)-f(y)|
+      <\frac{\varepsilon}{2}+\frac{\varepsilon}{2}
+      =\varepsilon.
+
+   A kapott :math:`\delta` csak :math:`\varepsilon`-tól
+   függ, a pontpártól nem.
+
+   **Példa a két módszer együttes használatára.** Legyen
+
+   .. math::
+
+      F(x)=\sin\sqrt[3]{x},
+      \qquad x\in\mathbb R.
+
+   A :math:`F` függvény folytonos a :math:`[-2,2]`
+   intervallumon, ezért ott a Heine-tétel szerint egyenletesen
+   folytonos. A szélső részeken
+
+   .. math::
+
+      F'(x)=\frac{\cos\sqrt[3]{x}}{3|x|^{2/3}},
+      \qquad
+      |F'(x)|\leq\frac13
+      \quad\text{ha }x\leq-1\text{ vagy }x\geq1.
+
+   A korlátos deriváltra vonatkozó tétel miatt :math:`F`
+   :math:`1/3`-Lipschitz-folytonos mindkét szélső
+   félegyenesen. A középső és a szélső tartományok átfedése
+   miatt a Heine-tételből kapott :math:`\delta_0` mellett
+
+   .. math::
+
+      \delta=\min\{\delta_0,\,3\varepsilon,\,1\}
+
+   az egész valós egyenesen megfelelő. Tehát :math:`F`
+   egyenletesen folytonos :math:`\mathbb R`-en.
+
+   Ugyanakkor :math:`F` :math:`0` egyetlen környezetében
+   sem Lipschitz-folytonos, mert :math:`h=t^3` mellett
+
+   .. math::
+
+      \frac{|F(h)-F(0)|}{|h|}
+      =
+      \frac{|\sin t|}{|t|^3}
+      \longrightarrow+\infty
+      \qquad(t\to0).
+
+   Ez mutatja, hogy az első tartalmazás megfordítása általában
+   nem igaz.
+
+   .. raw:: html
+
+      <figure class="l10-figure" data-l10-cuberoot>
+        <svg viewBox="0 0 820 360" role="img" aria-label="A szinusz köbgyök x függvény grafikonja és a nullához közeli meredek viselkedése"></svg>
+        <figcaption>A középső kompakt részt a Heine-tétel, a két szélső félegyenest a Lipschitz-becslés kezeli.</figcaption>
+      </figure>
+
+   A továbbiakban ezek közül csak a
+   **Lipschitz-folytonosságot** használjuk.
